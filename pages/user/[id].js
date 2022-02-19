@@ -3,9 +3,19 @@ import { getSession, signOut } from "next-auth/react";
 import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
 import Router from "next/router";
+import { TRANSACTION_TYPE } from "../../vars/variables";
+import TransactionList from "../../components/Transaction/List/TransactionList";
 
-export default function User({ id, user, transactions }) {
-  console.log("props:", id);
+export default function User({ user, transactions }) {
+  if (!user) return <p>Unauthorized</p>;
+
+  const debit = transactions.filter(
+    (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
+  );
+  const credit = transactions.filter(
+    (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
+  );
+
   return (
     <>
       <Head>
@@ -17,14 +27,12 @@ export default function User({ id, user, transactions }) {
       </header>
       <div> budget: {user.budget} ₴</div>
       <section>
-        <h3>Transactions</h3>
-        <ul>
-          {transactions.map((x) => (
-            <li key={x._id}>
-              {x.description}:{x.amount} ₴
-            </li>
-          ))}
-        </ul>
+        <h3>Debit</h3>
+        <TransactionList transactions={debit} />
+      </section>
+      <section>
+        <h3>Credit</h3>
+        <TransactionList transactions={credit} />
       </section>
       <div>
         <button onClick={() => Router.push("/debit")}>debit</button>
