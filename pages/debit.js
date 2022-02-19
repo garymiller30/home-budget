@@ -5,7 +5,7 @@ import { TRANSACTION_TYPE } from "../vars/variables";
 
 import InputForm from "../components/inputForm/InputForm";
 
-export default function debit({ user }) {
+export default function Debit({ user }) {
   const { status } = useSession();
   console.log("status", status);
   if (!user) {
