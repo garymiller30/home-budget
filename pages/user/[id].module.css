@@ -76,6 +76,7 @@
 .btn_debit,
 .btn_credit {
   width: 50%;
+  border: none;
 }
 
 .arrow_debit {
