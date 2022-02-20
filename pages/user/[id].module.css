@@ -23,10 +23,6 @@
 }
 .main {
   display: grid;
-  min-width: 0;
-  min-height: 0;
-  width: 100%;
-  height: 100%;
   grid-template-rows: 50px 1fr;
   grid-template-columns: 50% 50%;
   justify-content: stretch;
@@ -36,7 +32,7 @@
     "debit credit";
   outline: 1px solid red;
   background-color: lightgoldenrodyellow;
-  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
+  grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
 }
 .budget {
