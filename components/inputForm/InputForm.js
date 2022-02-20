@@ -35,6 +35,7 @@ export default function InputForm({ type, userId }) {
           type="text"
           name="description"
           required
+          autofocus
         ></input>
         <label className={s.label} htmlFor="amount">
           Amount
