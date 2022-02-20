@@ -14,7 +14,7 @@ export default function SignOut({ user }) {
         onClick={() => signOut({ callbackUrl: "/" })}
       >
         <Image
-          src="/../public/power-off.svg"
+          src="/public/power-off.svg"
           width={32}
           height={32}
           fill={"darkgray"}
