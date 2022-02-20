@@ -54,7 +54,9 @@
 .sec_debit > h3,
 .sec_credit > h3 {
   text-align: center;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
+  padding: 0;
+  margin: 5px 0;
 }
 
 .sec_debit {

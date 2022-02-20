@@ -18,7 +18,7 @@ export default function TransactionList({ transactions }) {
       <thead>
         <tr>
           <th>description</th>
-          <th>amount</th>
+          <th>₴</th>
         </tr>
       </thead>
       <tbody>

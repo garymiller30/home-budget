@@ -9,6 +9,10 @@ import styles from "./[id].module.css";
 
 import SignOut from "../../components/SignOut/SignOut";
 
+function getSum(arr) {
+  return arr.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
+}
+
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
 
@@ -18,6 +22,9 @@ export default function User({ user, transactions }) {
   const credit = transactions.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
   );
+
+  const debitSum = getSum(debit);
+  const creditSum = getSum(credit);
 
   return (
     <>
@@ -34,11 +41,11 @@ export default function User({ user, transactions }) {
             budget: <span>{user.budget}</span> ₴
           </section>
           <section className={styles.sec_debit}>
-            <h3>Debit</h3>
+            <h3>Debit ({debitSum} ₴)</h3>
             <TransactionList transactions={debit} />
           </section>
           <section className={styles.sec_credit}>
-            <h3>Credit</h3>
+            <h3>Credit ({creditSum} ₴)</h3>
             <TransactionList transactions={credit} />
           </section>
           <div className={styles.btns}>
