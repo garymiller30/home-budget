@@ -1,0 +1,67 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 36px 1fr;
+  width: 100vw;
+  height: 100vh;
+  justify-content: stretch;
+  justify-items: stretch;
+  outline: 1px solid red;
+  background-color: lightblue;
+}
+
+.header {
+  display: flex;
+  outline: 1px solid red;
+}
+
+.btn_signout {
+  border-radius: 3px;
+}
+.main {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 50px 1fr 50px;
+  justify-content: stretch;
+  justify-items: stretch;
+  grid-template-areas:
+    "budget budget"
+    "debit credit"
+    "btns btns";
+  outline: 1px solid red;
+  background-color: lightgoldenrodyellow;
+}
+.budget {
+  grid-area: budget;
+  width: 100%;
+  outline: 1px solid red;
+  background-color: lightcyan;
+}
+
+.budget > span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sec_debit {
+  grid-area: debit;
+}
+.sec_credit {
+  grid-area: credit;
+}
+.btns {
+  grid-area: btns;
+  display: flex;
+
+  grid-template-areas: "btn_debit btn_credit";
+  outline: 1px solid red;
+}
+
+.btn_debit {
+  width: 50%;
+  grid-area: btn_debit;
+}
+.btn_credit {
+  width: 50%;
+  grid-area: btn_credit;
+}
