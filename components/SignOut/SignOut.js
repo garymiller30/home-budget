@@ -13,12 +13,7 @@ export default function SignOut({ user }) {
         className={s.btn_signout}
         onClick={() => signOut({ callbackUrl: "/" })}
       >
-        <Image
-          src="/public/power-off.svg"
-          width={32}
-          height={32}
-          fill={"darkgray"}
-        />
+        <Image src="/power-off.svg" width={32} height={32} fill={"darkgray"} />
       </button>
     </div>
   );
