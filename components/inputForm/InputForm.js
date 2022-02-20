@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from "react";
 import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
 import Router from "next/router";
@@ -22,6 +23,11 @@ export default function InputForm({ type, userId }) {
     Router.push("/");
   };
 
+  const focusInput = useRef(null);
+  useEffect(() => {
+    focusInput.current.focus();
+  }, []);
+
   return (
     <div className={s.container}>
       <h2>{type}</h2>
@@ -30,6 +36,7 @@ export default function InputForm({ type, userId }) {
           Description
         </label>
         <input
+          ref={focusInput}
           className={s.input}
           id="description"
           type="text"
