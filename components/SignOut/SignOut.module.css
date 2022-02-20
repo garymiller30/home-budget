@@ -4,14 +4,18 @@
   grid-template-columns: 1fr 40px;
   align-content: center;
   align-items: center;
+
+  background-image: linear-gradient(135deg, #3c8ce7 10%, #00eaff 100%);
 }
 
 .btn_signout {
   grid-column: 2/2;
+  display: grid;
+  align-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-
   padding: 0;
   margin: 0;
   border: none;
@@ -23,6 +27,8 @@
   align-items: center;
   padding: 0;
   margin: 0;
+  color: white;
+  font-weight: bold;
 }
 
 .user_name > span {

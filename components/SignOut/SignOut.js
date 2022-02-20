@@ -1,7 +1,7 @@
 import { signOut } from "next-auth/react";
 import s from "./SignOut.module.css";
-import ico_poweroff from "../../public/power-off.svg";
 import Image from "next/image";
+
 export default function SignOut({ user }) {
   return (
     <div className={s.container}>
@@ -13,7 +13,12 @@ export default function SignOut({ user }) {
         className={s.btn_signout}
         onClick={() => signOut({ callbackUrl: "/" })}
       >
-        <Image src={ico_poweroff} width={32} height={32} />
+        <Image
+          src="/../public/power-off.svg"
+          width={32}
+          height={32}
+          fill={"darkgray"}
+        />
       </button>
     </div>
   );

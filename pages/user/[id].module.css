@@ -6,12 +6,9 @@
   height: 100vh;
   justify-content: stretch;
   justify-items: stretch;
-  outline: 1px solid red;
-  background-color: lightblue;
 }
 
 .header {
-  outline: 1px solid red;
 }
 
 .btn_signout {
@@ -30,7 +27,7 @@
   grid-template-areas:
     "budget budget"
     "debit credit";
-  outline: 1px solid red;
+
   background-color: lightgoldenrodyellow;
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
@@ -41,7 +38,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  outline: 1px solid red;
+
   background-color: lightcyan;
 }
 
@@ -53,10 +50,17 @@
 
 .sec_debit > h3,
 .sec_credit > h3 {
-  text-align: center;
-  /* outline: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 5px 0;
+}
+
+.sec_debit p,
+.sec_credit p {
+  margin: 0;
+  padding: 0;
 }
 
 .sec_debit {
@@ -67,11 +71,67 @@
 }
 .btns {
   display: flex;
-
-  outline: 1px solid red;
 }
 
 .btn_debit,
 .btn_credit {
   width: 50%;
+}
+
+.arrow_debit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_debit {
+  width: 50%;
+  background-image: linear-gradient(
+    to right,
+    #134e5e 0%,
+    #71b280 51%,
+    #134e5e 100%
+  );
+}
+.btn_debit {
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
+
+.btn_debit:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn_credit {
+  background-image: linear-gradient(
+    to right,
+    #ff8008 0%,
+    #ffc837 51%,
+    #ff8008 100%
+  );
+}
+.btn_credit {
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn_credit:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }

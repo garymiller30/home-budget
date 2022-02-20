@@ -6,7 +6,8 @@ import Router from "next/router";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import TransactionList from "../../components/Transaction/List/TransactionList";
 import styles from "./[id].module.css";
-
+import Ico_up from "../../public/arrow-up-bold.svg";
+import Ico_down from "../../public/arrow-down-bold.svg";
 import SignOut from "../../components/SignOut/SignOut";
 
 function getSum(arr) {
@@ -41,11 +42,21 @@ export default function User({ user, transactions }) {
             budget: <span>{user.budget}</span> ₴
           </section>
           <section className={styles.sec_debit}>
-            <h3>Debit ({debitSum} ₴)</h3>
+            <h3>
+              <div className={styles.arrow_debit}>
+                <Ico_up width={32} height={32} fill={"green"} />
+              </div>
+              <p>({debitSum} ₴)</p>
+            </h3>
             <TransactionList transactions={debit} />
           </section>
           <section className={styles.sec_credit}>
-            <h3>Credit ({creditSum} ₴)</h3>
+            <h3>
+              <div className={styles.arrow_debit}>
+                <Ico_down width={32} height={32} fill={"red"} />
+              </div>
+              <p>({creditSum} ₴)</p>
+            </h3>
             <TransactionList transactions={credit} />
           </section>
         </main>
