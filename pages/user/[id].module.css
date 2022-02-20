@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 1fr;
+  grid-template-rows: 40px 1fr 60px;
   width: 100vw;
   height: 100vh;
   justify-content: stretch;
@@ -23,17 +23,21 @@
 }
 .main {
   display: grid;
+  min-width: 0;
+  min-height: 0;
   width: 100%;
-  grid-template-rows: 50px 1fr 60px;
+  height: 100%;
+  grid-template-rows: 50px 1fr;
   grid-template-columns: 50% 50%;
   justify-content: stretch;
   justify-items: stretch;
   grid-template-areas:
     "budget budget"
-    "debit credit"
-    "btns btns";
+    "debit credit";
   outline: 1px solid red;
   background-color: lightgoldenrodyellow;
+  grid-template-columns: minmax(250px, 1fr) minmax(250px, 1fr);
+  overflow-y: auto;
 }
 .budget {
   grid-area: budget;
@@ -66,7 +70,6 @@
   grid-area: credit;
 }
 .btns {
-  grid-area: btns;
   display: flex;
 
   outline: 1px solid red;
@@ -75,9 +78,4 @@
 .btn_debit,
 .btn_credit {
   width: 50%;
-}
-
-.btn_debit {
-}
-.btn_credit {
 }

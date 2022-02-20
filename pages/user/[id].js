@@ -48,21 +48,21 @@ export default function User({ user, transactions }) {
             <h3>Credit ({creditSum} ₴)</h3>
             <TransactionList transactions={credit} />
           </section>
-          <div className={styles.btns}>
-            <button
-              className={styles.btn_debit}
-              onClick={() => Router.push("/debit")}
-            >
-              add debit
-            </button>
-            <button
-              className={styles.btn_credit}
-              onClick={() => Router.push("/credit")}
-            >
-              add credit
-            </button>
-          </div>
         </main>
+        <div className={styles.btns}>
+          <button
+            className={styles.btn_debit}
+            onClick={() => Router.push("/debit")}
+          >
+            add debit
+          </button>
+          <button
+            className={styles.btn_credit}
+            onClick={() => Router.push("/credit")}
+          >
+            add credit
+          </button>
+        </div>
       </div>
     </>
   );
