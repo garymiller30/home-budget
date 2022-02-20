@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 36px 1fr;
+  grid-template-rows: 40px 1fr;
   width: 100vw;
   height: 100vh;
   justify-content: stretch;
@@ -11,17 +11,21 @@
 }
 
 .header {
-  display: flex;
   outline: 1px solid red;
 }
 
 .btn_signout {
-  border-radius: 3px;
+  border-radius: 50%;
+  background-color: none;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 .main {
   display: grid;
   width: 100%;
   grid-template-rows: 50px 1fr 60px;
+  grid-template-columns: 50% 50%;
   justify-content: stretch;
   justify-items: stretch;
   grid-template-areas:

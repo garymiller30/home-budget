@@ -1,12 +1,13 @@
 import Head from "next/head";
-import Image from "next/image";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
 import Router from "next/router";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import TransactionList from "../../components/Transaction/List/TransactionList";
 import styles from "./[id].module.css";
+
+import SignOut from "../../components/SignOut/SignOut";
 
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
@@ -26,14 +27,7 @@ export default function User({ user, transactions }) {
 
       <div className={styles.container}>
         <header className={styles.header}>
-          <img src={user.image} width={32} height={32} /> Signed in as
-          {user.name}
-          <button
-            className={styles.btn_signout}
-            onClick={() => signOut({ callbackUrl: "/" })}
-          >
-            Sign out
-          </button>
+          <SignOut user={user} />
         </header>
         <main className={styles.main}>
           <section className={styles.budget}>
