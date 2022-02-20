@@ -52,13 +52,13 @@ export default function User({ user, transactions }) {
               className={styles.btn_debit}
               onClick={() => Router.push("/debit")}
             >
-              debit
+              add debit
             </button>
             <button
               className={styles.btn_credit}
               onClick={() => Router.push("/credit")}
             >
-              credit
+              add credit
             </button>
           </div>
         </main>

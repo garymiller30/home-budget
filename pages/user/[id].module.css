@@ -21,7 +21,7 @@
 .main {
   display: grid;
   width: 100%;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 50px 1fr 60px;
   justify-content: stretch;
   justify-items: stretch;
   grid-template-areas:
@@ -33,6 +33,9 @@
 }
 .budget {
   grid-area: budget;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   outline: 1px solid red;
   background-color: lightcyan;
@@ -41,6 +44,13 @@
 .budget > span {
   font-size: 24px;
   font-weight: bold;
+  padding: 0 5px 0px 5px;
+}
+
+.sec_debit > h3,
+.sec_credit > h3 {
+  text-align: center;
+  outline: 1px solid red;
 }
 
 .sec_debit {
@@ -53,15 +63,15 @@
   grid-area: btns;
   display: flex;
 
-  grid-template-areas: "btn_debit btn_credit";
   outline: 1px solid red;
 }
 
-.btn_debit {
-  width: 50%;
-  grid-area: btn_debit;
-}
+.btn_debit,
 .btn_credit {
   width: 50%;
-  grid-area: btn_credit;
+}
+
+.btn_debit {
+}
+.btn_credit {
 }
