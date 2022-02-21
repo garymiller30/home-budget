@@ -1,7 +1,10 @@
+//import { useState } from "react";
 import TransactionItem from "../Item/TransactionItem";
 import s from "./TransactionList.module.css";
 
 export default function TransactionList({ transactions }) {
+  //const [trans, setTtans] = useState(transactions);
+
   return (
     <table className={s.table}>
       <thead>
