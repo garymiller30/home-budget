@@ -3,15 +3,15 @@ import Image from "next/image";
 import fetch from "isomorphic-unfetch";
 import Router from "next/router";
 
-export default function TransactionItem({ transaction }) {
+export default function TransactionItem({ transaction, onDelete }) {
   async function deleteHandler(id) {
     const response = await fetch("/api/transaction", {
       method: "DELETE",
       body: JSON.stringify(id),
     });
     await response.json();
-
-    Router.push("/");
+    onDelete(id);
+    //Router.push("/");
   }
 
   return (
