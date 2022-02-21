@@ -29,28 +29,6 @@
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
 }
-
-.sec_debit > h3,
-.sec_credit > h3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 5px 0;
-}
-
-.sec_debit p,
-.sec_credit p {
-  margin: 0;
-  padding: 0;
-}
-
-.sec_debit {
-  grid-area: debit;
-}
-.sec_credit {
-  grid-area: credit;
-}
 .btns {
   display: flex;
 }
@@ -59,12 +37,6 @@
 .btn_credit {
   width: 50%;
   border: none;
-}
-
-.arrow_debit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .btn_debit {

@@ -1,0 +1,21 @@
+.container {
+  grid-area: credit;
+}
+.container p {
+  margin: 0;
+  padding: 0;
+}
+
+.container > h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 5px 0;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

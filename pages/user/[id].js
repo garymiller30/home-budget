@@ -4,16 +4,13 @@ import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
 import Router from "next/router";
 import { TRANSACTION_TYPE } from "../../vars/variables";
-import TransactionList from "../../components/Transaction/List/TransactionList";
+
 import styles from "./[id].module.css";
-import Ico_up from "../../public/arrow-up-bold.svg";
-import Ico_down from "../../public/arrow-down-bold.svg";
+
 import SignOut from "../../components/SignOut/SignOut";
 import Budget from "../../components/Budget/Budget";
-
-function getSum(arr) {
-  return arr.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
-}
+import DebitTable from "../../components/DebitTable/DebitTable";
+import CreditTable from "../../components/CreditTable/CreditTable";
 
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
@@ -25,8 +22,8 @@ export default function User({ user, transactions }) {
     (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
   );
 
-  const debitSum = getSum(debit).toFixed(2);
-  const creditSum = getSum(credit).toFixed(2);
+  // const debitSum = getSum(debit).toFixed(2);
+  // const creditSum = getSum(credit).toFixed(2);
 
   return (
     <>
@@ -40,16 +37,9 @@ export default function User({ user, transactions }) {
         </header>
         <main className={styles.main}>
           <Budget budget={user.budget} />
-          <section className={styles.sec_debit}>
-            <h3>
-              <div className={styles.arrow_debit}>
-                <Ico_up width={32} height={32} fill={"green"} />
-              </div>
-              <p>({debitSum} ₴)</p>
-            </h3>
-            <TransactionList transactions={debit} />
-          </section>
-          <section className={styles.sec_credit}>
+          <DebitTable debitArr={debit} />
+          <CreditTable creditArr={credit} />
+          {/* <section className={styles.sec_credit}>
             <h3>
               <div className={styles.arrow_debit}>
                 <Ico_down width={32} height={32} fill={"red"} />
@@ -57,7 +47,7 @@ export default function User({ user, transactions }) {
               <p>({creditSum} ₴)</p>
             </h3>
             <TransactionList transactions={credit} />
-          </section>
+          </section> */}
         </main>
         <div className={styles.btns}>
           <button
