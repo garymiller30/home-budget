@@ -10,8 +10,8 @@ async function getUserCollection() {
 }
 
 export async function getUser(user) {
-  console.log("------- getUser start---------");
-  console.log("user:", user);
+  //console.log("------- getUser start---------");
+  //console.log("user:", user);
 
   const collection = await getUserCollection();
   let dbUser = await collection.findOne({ email: user.email });
@@ -27,8 +27,8 @@ export async function getUser(user) {
 
     dbUser = { ...userSchema, _id: doc.insertedId };
   }
-  console.log(" dbUser:", dbUser);
-  console.log("------- getUser end ---------");
+  //console.log(" dbUser:", dbUser);
+  //console.log("------- getUser end ---------");
   return { ...dbUser, _id: dbUser._id.toString() };
 }
 
@@ -39,19 +39,25 @@ async function findUserById(userId) {
   return doc;
 }
 
-export async function updateUserBalance(transaction) {
+export async function updateUserBalance(
+  transaction,
+  options = { delete: false }
+) {
   const doc = await findUserById(transaction.ownerId);
   let dbUser;
   if (doc) {
     let newBudget;
-
-    switch (transaction.type) {
-      case "debit":
-        newBudget = addToBalance(doc, transaction);
-        break;
-      case "credit":
-        newBudget = subFromBalance(doc, transaction);
-        break;
+    if (options.delete) {
+      newBudget = subFromBalance(doc, transaction);
+    } else {
+      switch (transaction.type) {
+        case "debit":
+          newBudget = addToBalance(doc, transaction);
+          break;
+        case "credit":
+          newBudget = subFromBalance(doc, transaction);
+          break;
+      }
     }
 
     const collection = await getUserCollection();

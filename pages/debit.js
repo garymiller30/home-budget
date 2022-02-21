@@ -7,7 +7,7 @@ import InputForm from "../components/inputForm/InputForm";
 
 export default function Debit({ user }) {
   const { status } = useSession();
-  console.log("status", status);
+  //console.log("status", status);
   if (!user) {
     return <p>Not authenticated</p>;
   }
@@ -17,7 +17,7 @@ export default function Debit({ user }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log("session:", session);
+  //console.log("session:", session);
   if (!session) {
     return { props: {} };
   }

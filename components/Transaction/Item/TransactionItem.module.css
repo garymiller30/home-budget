@@ -3,6 +3,24 @@
   background-color: burlywood;
 }
 
+.tr:hover .button,
+.tr:active .button {
+  display: block;
+}
+
 .amount {
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
 }

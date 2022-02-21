@@ -24,7 +24,7 @@ export default function InputForm({ type, userId }) {
 
       //console.log("created transaction:", trans);
 
-      Router.push("/");
+      Router.back();
     } catch (err) {
       //TODO: show error
       buttonRef.current.disabled = false;

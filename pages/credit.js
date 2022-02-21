@@ -7,7 +7,7 @@ import InputForm from "../components/inputForm/InputForm";
 
 export default function Credit({ user }) {
   const { status } = useSession();
-  console.log("status", status);
+  //console.log("status", status);
   if (!user) {
     return <p>Not authenticated</p>;
   }

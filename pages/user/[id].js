@@ -10,6 +10,7 @@ import Budget from "../../components/Budget/Budget";
 import DebitTable from "../../components/DebitTable/DebitTable";
 import CreditTable from "../../components/CreditTable/CreditTable";
 import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
+import { getSum } from "../../lib/transaction";
 
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
@@ -21,8 +22,7 @@ export default function User({ user, transactions }) {
     (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
   );
 
-  // const debitSum = getSum(debit).toFixed(2);
-  // const creditSum = getSum(credit).toFixed(2);
+  const budget = getSum(debit) - getSum(credit);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function User({ user, transactions }) {
           <SignOut user={user} />
         </header>
         <main className={styles.main}>
-          <Budget budget={user.budget} />
+          <Budget budget={budget} />
           <DebitTable debitArr={debit} />
           <CreditTable creditArr={credit} />
         </main>
@@ -50,7 +50,6 @@ export default function User({ user, transactions }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  //console.log("session:", session);
   if (!session) {
     return { props: {} };
   }
@@ -59,7 +58,6 @@ export async function getServerSideProps(context) {
   const user = await getUser(session.user);
   const transactions = await getTransactions(user);
   responce.transactions = transactions;
-  //console.log("index.js user", user);
   responce.user = user;
   responce.id = context.params.id;
   return {

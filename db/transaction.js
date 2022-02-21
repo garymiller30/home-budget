@@ -1,5 +1,12 @@
 import { getClient } from "../middleware/database";
-import Transaction from "../model/transaction";
+import { ObjectId } from "mongodb";
+
+async function getCollection() {
+  const client = await getClient();
+  const db = client.db("home-budget");
+  const collection = db.collection("transaction");
+  return collection;
+}
 
 export async function getTransactions(
   user,
@@ -8,10 +15,7 @@ export async function getTransactions(
     month: new Date().getMonth() + 1,
   }
 ) {
-  const client = await getClient();
-  const db = client.db("home-budget");
-  const collection = db.collection("transaction");
-  console.log("user._id:", user._id);
+  const collection = await getCollection();
 
   const filter = {
     ownerId: user._id,
@@ -19,19 +23,33 @@ export async function getTransactions(
     "date.month": options.month,
   };
 
-  console.log("filter:", filter);
   const transactions = collection.find(filter);
-
   const res = await transactions.toArray();
 
-  console.log("transactions:", res);
   return res.map((x) => ({ ...x, _id: x._id.toString() }));
 }
 
 export async function createTransaction(transaction) {
-  const client = await getClient();
-  const db = client.db("home-budget");
-  const collection = db.collection("transaction");
+  const collection = await getCollection();
   const doc = await collection.insertOne(transaction);
   return { ...transaction, _id: doc._id };
+}
+
+export async function deleteTransaction(id) {
+  const collection = await getCollection();
+  const transaction = await getTransactionById(id);
+  if (transaction) {
+    const result = await collection.deleteOne({ _id: transaction._id });
+    if (result.deletedCount === 1) {
+      return transaction;
+    }
+  }
+  return null;
+}
+
+export async function getTransactionById(id) {
+  //console.log("getTransactionById(id)", id);
+  const collection = await getCollection();
+  const doc = await collection.findOne({ _id: new ObjectId(id) });
+  return doc;
 }
