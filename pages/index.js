@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
 import { getUser } from "../db/user";
 import Image from "next/image";
-import googleLogo from "../public/google-logo.svg";
 import styles from "./index.module.css";
 
 import Router from "next/router";
@@ -21,7 +20,7 @@ export default function Home() {
       <div className={styles.container}>
         <button className={styles.button} onClick={() => Router.push("/login")}>
           <div className={styles.img}>
-            <Image src={googleLogo} width={32} height={32} />
+            <Image src="/google-logo.svg" width={32} height={32} />
           </div>
           Sign in with Google
         </button>
