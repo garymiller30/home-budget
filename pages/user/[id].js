@@ -12,7 +12,10 @@ import SignOut from "../../components/SignOut/SignOut";
 import Budget from "../../components/Budget/Budget";
 
 function getSum(arr) {
-  return arr.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
+  return arr.reduce(
+    (sum, transaction) => sum + Number(transaction.amount).toFixed(2),
+    0
+  );
 }
 
 export default function User({ user, transactions }) {
