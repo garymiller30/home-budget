@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { getUser } from "../db/user";
 import Image from "next/image";
 import s from "./index.module.css";
+
 import { Circles } from "react-loader-spinner";
 
 import Router from "next/router";

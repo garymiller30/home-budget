@@ -8,6 +8,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@emotion/react": "^11.8.1",
     "dayjs": "^1.10.7",
     "isomorphic-unfetch": "^3.1.0",
     "mongodb": "^4.3.1",

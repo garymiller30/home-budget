@@ -7,7 +7,7 @@ export default function TransactionItem({ transaction }) {
     // </li>
     <tr className={s.tr}>
       <td>{transaction.description}</td>
-      <td>{transaction.amount}</td>
+      <td className={s.amount}>{Number(transaction.amount).toFixed(2)}</td>
     </tr>
   );
 }
