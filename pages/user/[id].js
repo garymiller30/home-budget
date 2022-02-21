@@ -2,15 +2,14 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
-import Router from "next/router";
 import { TRANSACTION_TYPE } from "../../vars/variables";
-
+import AddDebitBtn from "../../components/AddDebitBtn/AddDebitBtn";
 import styles from "./[id].module.css";
-
 import SignOut from "../../components/SignOut/SignOut";
 import Budget from "../../components/Budget/Budget";
 import DebitTable from "../../components/DebitTable/DebitTable";
 import CreditTable from "../../components/CreditTable/CreditTable";
+import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
@@ -39,29 +38,10 @@ export default function User({ user, transactions }) {
           <Budget budget={user.budget} />
           <DebitTable debitArr={debit} />
           <CreditTable creditArr={credit} />
-          {/* <section className={styles.sec_credit}>
-            <h3>
-              <div className={styles.arrow_debit}>
-                <Ico_down width={32} height={32} fill={"red"} />
-              </div>
-              <p>({creditSum} ₴)</p>
-            </h3>
-            <TransactionList transactions={credit} />
-          </section> */}
         </main>
         <div className={styles.btns}>
-          <button
-            className={styles.btn_debit}
-            onClick={() => Router.push("/debit")}
-          >
-            add debit
-          </button>
-          <button
-            className={styles.btn_credit}
-            onClick={() => Router.push("/credit")}
-          >
-            add credit
-          </button>
+          <AddDebitBtn />
+          <AddCreditBtn />
         </div>
       </div>
     </>
