@@ -8,9 +8,6 @@
   justify-items: stretch;
 }
 
-.header {
-}
-
 .btn_signout {
   border-radius: 50%;
   background-color: none;
@@ -38,12 +35,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-
-  background-color: lightcyan;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #fbab7e;
+  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
 }
 
 .budget > span {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   padding: 0 5px 0px 5px;
 }
