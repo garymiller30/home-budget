@@ -2,7 +2,8 @@ import { useSession } from "next-auth/react";
 import { getSession } from "next-auth/react";
 import { getUser } from "../db/user";
 import Image from "next/image";
-import styles from "./index.module.css";
+import s from "./index.module.css";
+import { Circles } from "react-loader-spinner";
 
 import Router from "next/router";
 
@@ -11,15 +12,15 @@ export default function Home() {
 
   if (status === "loading") {
     return (
-      <>
-        <p>LOADING...</p>
-      </>
+      <div className={s.spinner}>
+        <Circles color="#00BFFF" height={80} width={80} />
+      </div>
     );
   } else {
     return (
-      <div className={styles.container}>
-        <button className={styles.button} onClick={() => Router.push("/login")}>
-          <div className={styles.img}>
+      <div className={s.container}>
+        <button className={s.button} onClick={() => Router.push("/login")}>
+          <div className={s.img}>
             <Image src="/google-logo.svg" width={32} height={32} />
           </div>
           Sign in with Google
