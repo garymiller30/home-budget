@@ -12,10 +12,7 @@ import SignOut from "../../components/SignOut/SignOut";
 import Budget from "../../components/Budget/Budget";
 
 function getSum(arr) {
-  return arr.reduce(
-    (sum, transaction) => sum + Number(transaction.amount).toFixed(2),
-    0
-  );
+  return arr.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
 }
 
 export default function User({ user, transactions }) {
@@ -28,8 +25,8 @@ export default function User({ user, transactions }) {
     (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
   );
 
-  const debitSum = getSum(debit);
-  const creditSum = getSum(credit);
+  const debitSum = getSum(debit).toFixed(2);
+  const creditSum = getSum(credit).toFixed(2);
 
   return (
     <>
