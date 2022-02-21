@@ -12,18 +12,27 @@ export default function InputForm({ type, userId }) {
     transaction.type = type;
     transaction.description = event.target.description.value;
     transaction.amount = event.target.amount.value;
-    const response = await fetch("/api/transaction", {
-      method: "POST",
-      body: JSON.stringify(transaction),
-    });
-    const trans = await response.json();
 
-    console.log("created transaction:", trans);
+    try {
+      buttonRef.current.disabled = true;
 
-    Router.push("/");
+      const response = await fetch("/api/transaction", {
+        method: "POST",
+        body: JSON.stringify(transaction),
+      });
+      await response.json();
+
+      //console.log("created transaction:", trans);
+
+      Router.push("/");
+    } catch (err) {
+      //TODO: show error
+      buttonRef.current.disabled = false;
+    }
   };
 
   const focusInput = useRef(null);
+  const buttonRef = useRef(null);
   useEffect(() => {
     focusInput.current.focus();
   }, []);
@@ -45,7 +54,7 @@ export default function InputForm({ type, userId }) {
           autoFocus
         ></input>
         <label className={s.label} htmlFor="amount">
-          Amount
+          ₴
         </label>
         <input
           className={s.input}
@@ -56,7 +65,7 @@ export default function InputForm({ type, userId }) {
           min="0"
           required
         ></input>
-        <button className={s.button} type="submit">
+        <button ref={buttonRef} className={s.button} type="submit">
           Add
         </button>
       </form>
