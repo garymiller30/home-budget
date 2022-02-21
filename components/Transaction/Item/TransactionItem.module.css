@@ -1,3 +1,4 @@
-.tr:hover {
+.tr:hover,
+.tr:active {
   background-color: burlywood;
 }

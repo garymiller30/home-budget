@@ -29,24 +29,6 @@
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
 }
-.budget {
-  grid-area: budget;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  left: 0;
-  background-color: #fbab7e;
-  background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
-}
-
-.budget > span {
-  font-size: 28px;
-  font-weight: bold;
-  padding: 0 5px 0px 5px;
-}
 
 .sec_debit > h3,
 .sec_credit > h3 {

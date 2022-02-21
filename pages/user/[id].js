@@ -9,6 +9,7 @@ import styles from "./[id].module.css";
 import Ico_up from "../../public/arrow-up-bold.svg";
 import Ico_down from "../../public/arrow-down-bold.svg";
 import SignOut from "../../components/SignOut/SignOut";
+import Budget from "../../components/Budget/Budget";
 
 function getSum(arr) {
   return arr.reduce((sum, transaction) => sum + Number(transaction.amount), 0);
@@ -38,9 +39,7 @@ export default function User({ user, transactions }) {
           <SignOut user={user} />
         </header>
         <main className={styles.main}>
-          <section className={styles.budget}>
-            budget: <span>{user.budget}</span> ₴
-          </section>
+          <Budget budget={user.budget} />
           <section className={styles.sec_debit}>
             <h3>
               <div className={styles.arrow_debit}>
