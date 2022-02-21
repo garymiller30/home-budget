@@ -80,7 +80,7 @@ export default function User({ user, transactions }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log("session:", session);
+  //console.log("session:", session);
   if (!session) {
     return { props: {} };
   }
@@ -89,7 +89,7 @@ export async function getServerSideProps(context) {
   const user = await getUser(session.user);
   const transactions = await getTransactions(user);
   responce.transactions = transactions;
-  console.log("index.js user", user);
+  //console.log("index.js user", user);
   responce.user = user;
   responce.id = context.params.id;
   return {
