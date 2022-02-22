@@ -6,7 +6,7 @@ import DesktopDatePicker from "@mui/lab/DatePicker";
 import Box from "@mui/material/Box";
 
 export default function DateNavigator({ date, onChangeDate }) {
-  const [value, setValue] = useState(new Date(`${date.year}-${date.month}-1`));
+  const [value, setValue] = useState(new Date(date.year, date.month - 1));
 
   function handleOnChange(d) {
     onChangeDate({ year: d.getFullYear(), month: d.getMonth() + 1 });
