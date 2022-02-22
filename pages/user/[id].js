@@ -77,7 +77,6 @@ export default function User({ user, transactions }) {
     </>
   );
 }
-
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (!session) {
