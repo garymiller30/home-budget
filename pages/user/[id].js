@@ -16,11 +16,11 @@ import { useState } from "react";
 import InputFrm from "../../components/InputForm/InputForm";
 
 export default function User({ user, transactions }) {
-  if (!user) return <p>Unauthorized</p>;
-
   const [trans, setTrans] = useState(transactions);
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
+
+  if (!user) return <p>Unauthorized</p>;
 
   function handleonDelete(id) {
     console.log(id);
