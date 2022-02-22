@@ -6,16 +6,19 @@ import Head from "next/head";
 import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
-import AddDebitBtn from "../../components/AddDebitBtn/AddDebitBtn";
+import {
+  AddCreditBtn,
+  AddDebitBtn,
+  InputForm,
+  SignOut,
+  Budget,
+} from "../../components";
 import s from "./[id].module.css";
-import SignOut from "../../components/SignOut/SignOut";
-import Budget from "../../components/Budget/Budget";
 import DebitTable from "../../components/DebitTable/DebitTable";
 import CreditTable from "../../components/CreditTable/CreditTable";
-import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 import { getSum } from "../../lib/transaction";
 import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
-import InputForm from "../../components/Forms/InputForm";
+//import InputForm from "../../components/Forms/InputForm";
 
 export default function User({ user, transactions }) {
   const [trans, setTrans] = useState(transactions);
