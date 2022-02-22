@@ -4,7 +4,7 @@ import Transaction from "../../model/transaction";
 import Router from "next/router";
 import s from "./InputForm.module.css";
 
-export default function InputForm({ type, userId }) {
+export default function InputForm({ type, userId, onClose }) {
   const onSubmit = async (event) => {
     event.preventDefault();
     const transaction = new Transaction();
@@ -20,11 +20,9 @@ export default function InputForm({ type, userId }) {
         method: "POST",
         body: JSON.stringify(transaction),
       });
-      await response.json();
-
-      //console.log("created transaction:", trans);
-
-      Router.back();
+      const t = await response.json();
+      console.log("t", t);
+      onClose(t);
     } catch (err) {
       //TODO: show error
       buttonRef.current.disabled = false;

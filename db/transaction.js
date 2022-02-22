@@ -32,7 +32,7 @@ export async function getTransactions(
 export async function createTransaction(transaction) {
   const collection = await getCollection();
   const doc = await collection.insertOne(transaction);
-  return { ...transaction, _id: doc._id };
+  return { ...transaction, _id: doc.insertedId };
 }
 
 export async function deleteTransaction(id) {

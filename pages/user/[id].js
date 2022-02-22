@@ -11,14 +11,40 @@ import DebitTable from "../../components/DebitTable/DebitTable";
 import CreditTable from "../../components/CreditTable/CreditTable";
 import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 import { getSum } from "../../lib/transaction";
+import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
+import { useState } from "react";
+import InputFrm from "../../components/InputForm/InputForm";
 
 export default function User({ user, transactions }) {
   if (!user) return <p>Unauthorized</p>;
 
-  const debit = transactions.filter(
+  const [trans, setTrans] = useState(transactions);
+  const [showModal, setShowModal] = useState(false);
+  const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
+
+  function handleonDelete(id) {
+    console.log(id);
+    setTrans(trans.filter((t) => t._id !== id));
+  }
+
+  function handleOnClickDebit(e) {
+    setInputType(TRANSACTION_TYPE.DEBIT);
+    setShowModal(true);
+  }
+
+  function handleOnClickCredit(e) {
+    setInputType(TRANSACTION_TYPE.CREDIT);
+    setShowModal(true);
+  }
+
+  function handleOnClose(transaction) {
+    setTrans([...trans, transaction]);
+    setShowModal(false);
+  }
+  const debit = trans.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
   );
-  const credit = transactions.filter(
+  const credit = trans.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
   );
 
@@ -36,14 +62,18 @@ export default function User({ user, transactions }) {
         </header>
         <main className={styles.main}>
           <Budget budget={budget} />
-          <DebitTable debitArr={debit} />
-          <CreditTable creditArr={credit} />
+          <DebitTable debitArr={debit} onDelete={handleonDelete} />
+          <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
         <div className={styles.btns}>
-          <AddDebitBtn />
-          <AddCreditBtn />
+          <AddDebitBtn onClick={handleOnClickDebit} />
+          <AddCreditBtn onClick={handleOnClickCredit} />
         </div>
       </div>
+      <ModalInputForm onClose={() => setShowModal(false)} show={showModal}>
+        <InputFrm type={inputType} userId={user._id} onClose={handleOnClose} />
+      </ModalInputForm>
+      <div id="modal-root"></div>
     </>
   );
 }

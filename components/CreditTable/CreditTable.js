@@ -3,7 +3,7 @@ import s from "./CreditTable.module.css";
 import TransactionList from "../../components/Transaction/List/TransactionList";
 import { getSum } from "../../lib/transaction";
 
-export default function CreditTable({ creditArr }) {
+export default function CreditTable({ creditArr, onDelete }) {
   const sum = getSum(creditArr).toFixed(2);
   return (
     <section className={s.container}>
@@ -13,7 +13,7 @@ export default function CreditTable({ creditArr }) {
         </div>
         <p>({sum} ₴)</p>
       </h3>
-      <TransactionList transactions={creditArr} />
+      <TransactionList transactions={creditArr} onDelete={onDelete} />
     </section>
   );
 }

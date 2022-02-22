@@ -1,7 +1,6 @@
 import s from "./TransactionItem.module.css";
 import Image from "next/image";
 import fetch from "isomorphic-unfetch";
-import Router from "next/router";
 
 export default function TransactionItem({ transaction, onDelete }) {
   async function deleteHandler(id) {
@@ -9,9 +8,9 @@ export default function TransactionItem({ transaction, onDelete }) {
       method: "DELETE",
       body: JSON.stringify(id),
     });
-    await response.json();
-    onDelete(id);
-    //Router.push("/");
+    const r = await response.json();
+    if (r) onDelete(r._id);
+    //TODO: show error
   }
 
   return (

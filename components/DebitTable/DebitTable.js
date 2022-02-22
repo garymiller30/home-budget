@@ -2,7 +2,7 @@ import s from "./DebitTable.module.css";
 import { getSum } from "../../lib/transaction";
 import Ico_up from "../../public/arrow-up-bold.svg";
 import TransactionList from "../../components/Transaction/List/TransactionList";
-export default function DebitTable({ debitArr }) {
+export default function DebitTable({ debitArr, onDelete }) {
   const sum = getSum(debitArr).toFixed(2);
 
   return (
@@ -13,7 +13,7 @@ export default function DebitTable({ debitArr }) {
         </div>
         <p>({sum} ₴)</p>
       </h3>
-      <TransactionList transactions={debitArr} />
+      <TransactionList transactions={debitArr} onDelete={onDelete} />
     </section>
   );
 }
