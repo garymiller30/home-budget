@@ -22,7 +22,12 @@ export default function Home() {
       <div className={s.container}>
         <button className={s.button} onClick={() => Router.push("/login")}>
           <div className={s.img}>
-            <Image src="/google-logo.svg" width={32} height={32} />
+            <Image
+              src="/google-logo.svg"
+              width={32}
+              height={32}
+              alt="google logo"
+            />
           </div>
           Sign in with Google
         </button>

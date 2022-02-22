@@ -22,7 +22,7 @@ export default function TransactionItem({ transaction, onDelete }) {
           className={s.button}
           onClick={() => deleteHandler(transaction._id)}
         >
-          <Image src="/delete.svg" width={18} height={18} />
+          <Image src="/delete.svg" width={18} height={18} alt="Delete" />
         </button>
       </td>
     </tr>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
-import Router from "next/router";
 import s from "./InputForm.module.css";
 
 export default function InputForm({ type, userId, onClose }) {
