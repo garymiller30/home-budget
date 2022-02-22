@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
+import DesktopDatePicker from "@mui/lab/DatePicker";
 import Box from "@mui/material/Box";
 
 export default function DateNavigator({ date, onChangeDate }) {
@@ -15,7 +15,7 @@ export default function DateNavigator({ date, onChangeDate }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box sx={{ width: 130 }}>
-        <DatePicker
+        <DesktopDatePicker
           inputFormat="yyyy-MM"
           views={["year", "month"]}
           maxDate={new Date()}
