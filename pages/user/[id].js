@@ -15,7 +15,7 @@ import CreditTable from "../../components/CreditTable/CreditTable";
 import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 import { getSum } from "../../lib/transaction";
 import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
-import InputForm from "../../components/InputForm/InputForm";
+import InputForm from "../../components/Forms/InputForm";
 
 export default function User({ user, transactions }) {
   const [trans, setTrans] = useState(transactions);
