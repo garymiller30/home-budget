@@ -13,7 +13,7 @@ import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 import { getSum } from "../../lib/transaction";
 import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
 import { useState } from "react";
-import InputFrm from "../../components/InputForm/InputForm";
+// import InputFrm from "../../components/InputForm/InputForm";
 
 export default function User({ user, transactions }) {
   const [trans, setTrans] = useState(transactions);
@@ -71,7 +71,7 @@ export default function User({ user, transactions }) {
         </div>
       </div>
       <ModalInputForm onClose={() => setShowModal(false)} show={showModal}>
-        <InputFrm type={inputType} userId={user._id} onClose={handleOnClose} />
+        {/* <InputFrm type={inputType} userId={user._id} onClose={handleOnClose} /> */}
       </ModalInputForm>
       <div id="modal-root"></div>
     </>
