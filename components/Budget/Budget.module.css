@@ -22,3 +22,28 @@
   font-weight: bold;
   padding: 0 5px 0px 5px;
 }
+
+.perDayContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.perDayTitle {
+  font-size: 12px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+}
+.perDayBox {
+  margin: 0;
+  padding: 0;
+}
+
+.perDayValue {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  color: darkgreen;
+}

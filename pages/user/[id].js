@@ -17,6 +17,7 @@ import {
   CreditTable,
   ModalInputForm,
 } from "../../components";
+import { daysInMonth } from "../../lib/dateLib";
 
 export default function User({ user }) {
   const [date, setDate] = useState({
@@ -71,6 +72,11 @@ export default function User({ user }) {
 
   const budget = getSum(debit) - getSum(credit);
 
+  const perDay = (
+    budget /
+    (daysInMonth(date.year, date.month) - new Date().getDate())
+  ).toFixed(2);
+
   return (
     <>
       <Head>
@@ -85,6 +91,7 @@ export default function User({ user }) {
           <Budget
             budget={budget}
             date={date}
+            perDay={perDay}
             onChangeDate={handleOnChangeDate}
           />
           <DebitTable debitArr={debit} onDelete={handleonDelete} />
