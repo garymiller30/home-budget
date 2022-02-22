@@ -18,7 +18,7 @@ export default function InputForm({ type, userId, onClose }) {
         body: JSON.stringify(transaction),
       });
       const t = await response.json();
-      console.log("t", t);
+      //console.log("t", t);
       onClose(t);
     } catch (err) {
       //TODO: show error

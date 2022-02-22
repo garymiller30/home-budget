@@ -1,8 +1,12 @@
 import s from "./Budget.module.css";
-export default function Budget({ budget }) {
+import { DateNavigator } from "../../components";
+export default function Budget({ budget, date, onChangeDate }) {
   return (
-    <section className={s.budget}>
-      budget: <span>{Number(budget.toFixed(2))}</span> ₴
+    <section className={s.section}>
+      <DateNavigator date={date} onChangeDate={onChangeDate} />
+      <p className={s.budget}>
+        budget: <span>{Number(budget.toFixed(2))}</span>₴
+      </p>
     </section>
   );
 }

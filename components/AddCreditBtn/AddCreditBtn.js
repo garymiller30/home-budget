@@ -1,5 +1,4 @@
 import s from "./AddCreditBtn.module.css";
-import Router from "next/router";
 
 export default function AddCreditBtn({ onClick }) {
   return (

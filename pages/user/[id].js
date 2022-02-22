@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import fetch from "isomorphic-unfetch";
 import { getSession } from "next-auth/react";
-
 import Head from "next/head";
-
+import s from "./[id].module.css";
+import { getSum } from "../../lib/transaction";
 import { getUser } from "../../db/user";
-import { getTransactions } from "../../db/transaction";
+//import { getTransactions } from "../../db/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import {
   AddCreditBtn,
@@ -12,23 +13,34 @@ import {
   InputForm,
   SignOut,
   Budget,
+  DebitTable,
+  CreditTable,
+  ModalInputForm,
 } from "../../components";
-import s from "./[id].module.css";
-import DebitTable from "../../components/DebitTable/DebitTable";
-import CreditTable from "../../components/CreditTable/CreditTable";
-import { getSum } from "../../lib/transaction";
-import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
-//import InputForm from "../../components/Forms/InputForm";
 
-export default function User({ user, transactions }) {
-  const [trans, setTrans] = useState(transactions);
+export default function User({ user }) {
+  const [date, setDate] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+  const [trans, setTrans] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
   if (!user) return <p>Unauthorized</p>;
 
+  useEffect(async () => {
+    const response = await fetch(
+      `/api/transaction?userId=${user._id}&year=${date.year}&month=${date.month}`,
+      {
+        method: "GET",
+      }
+    );
+    const t = await response.json();
+    setTrans(t);
+  }, [date]);
+
   function handleonDelete(id) {
-    console.log(id);
     setTrans(trans.filter((t) => t._id !== id));
   }
 
@@ -46,6 +58,12 @@ export default function User({ user, transactions }) {
     setTrans([...trans, transaction]);
     setShowModal(false);
   }
+
+  function handleOnChangeDate(date) {
+    console.log(date);
+    setDate(date);
+  }
+
   const debit = trans.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
   );
@@ -66,7 +84,11 @@ export default function User({ user, transactions }) {
           <SignOut user={user} />
         </header>
         <main className={s.main}>
-          <Budget budget={budget} />
+          <Budget
+            budget={budget}
+            date={date}
+            onChangeDate={handleOnChangeDate}
+          />
           <DebitTable debitArr={debit} onDelete={handleonDelete} />
           <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
@@ -90,8 +112,8 @@ export async function getServerSideProps(context) {
 
   const responce = { user: session.user };
   const user = await getUser(session.user);
-  const transactions = await getTransactions(user);
-  responce.transactions = transactions;
+  // const transactions = await getTransactions(user);
+  // responce.transactions = transactions;
   responce.user = user;
   responce.id = context.params.id;
   return {

@@ -1,14 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { createTransaction, deleteTransaction } from "../../db/transaction";
+import { createTransaction, deleteTransaction, getTransactions as getTrans } from "../../db/transaction";
 import { updateUserBalance } from "../../db/user";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
+    case 'GET': {
+      return await getTransactions(req, res);
+    }
     case "POST": {
       return await addTransaction(req, res);
     }
     case "DELETE": {
-      return delTransaction(req, res);
+      return await delTransaction(req, res);
     }
   }
 }
@@ -27,7 +30,14 @@ async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
     //await updateUserBalance(transaction, { delete: true });
     return res.json(transaction);
   }
-
-
 }
 
+async function getTransactions(req: NextApiRequest, res: NextApiResponse) {
+
+  const { userId, year, month } = req.query;
+  // const params = JSON.parse(req.);
+
+  const trans = await getTrans({ _id: userId }, { year: Number(year), month: Number(month) })
+
+  return res.json(trans);
+}
