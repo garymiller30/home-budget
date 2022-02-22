@@ -1,7 +1,3 @@
-import s from "./DateNavigator.module.css";
-import ArrowLeft from "../../public/arrow-left-drop-circle.svg";
-import ArrowRight from "../../public/arrow-right-drop-circle.svg";
-
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";

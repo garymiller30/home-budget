@@ -27,8 +27,6 @@ export default function User({ user }) {
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
-  if (!user) return <p>Unauthorized</p>;
-
   useEffect(async () => {
     const response = await fetch(
       `/api/transaction?userId=${user._id}&year=${date.year}&month=${date.month}`,
@@ -63,7 +61,7 @@ export default function User({ user }) {
     console.log(date);
     setDate(date);
   }
-
+  if (!user) return <p>Unauthorized</p>;
   const debit = trans.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
   );
