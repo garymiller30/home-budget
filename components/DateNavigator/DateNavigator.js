@@ -14,7 +14,7 @@ export default function DateNavigator({ date, onChangeDate }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ width: 130 }}>
+      <Box sx={{ width: 90 }}>
         <DesktopDatePicker
           inputFormat="yyyy-MM"
           views={["year", "month"]}
