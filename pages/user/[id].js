@@ -1,10 +1,13 @@
-import Head from "next/head";
+import { useState } from "react";
 import { getSession } from "next-auth/react";
+
+import Head from "next/head";
+
 import { getUser } from "../../db/user";
 import { getTransactions } from "../../db/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AddDebitBtn from "../../components/AddDebitBtn/AddDebitBtn";
-import styles from "./[id].module.css";
+import s from "./[id].module.css";
 import SignOut from "../../components/SignOut/SignOut";
 import Budget from "../../components/Budget/Budget";
 import DebitTable from "../../components/DebitTable/DebitTable";
@@ -12,8 +15,7 @@ import CreditTable from "../../components/CreditTable/CreditTable";
 import AddCreditBtn from "../../components/AddCreditBtn/AddCreditBtn";
 import { getSum } from "../../lib/transaction";
 import ModalInputForm from "../../components/ModalInputForm/ModalInputForm";
-import { useState } from "react";
-// import InputFrm from "../../components/InputForm/InputForm";
+import InputForm from "../../components/InputForm/InputForm";
 
 export default function User({ user, transactions }) {
   const [trans, setTrans] = useState(transactions);
@@ -56,22 +58,22 @@ export default function User({ user, transactions }) {
         <title>Home budget | {user.name}</title>
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header}>
+      <div className={s.container}>
+        <header className={s.header}>
           <SignOut user={user} />
         </header>
-        <main className={styles.main}>
+        <main className={s.main}>
           <Budget budget={budget} />
           <DebitTable debitArr={debit} onDelete={handleonDelete} />
           <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
-        <div className={styles.btns}>
+        <div className={s.btns}>
           <AddDebitBtn onClick={handleOnClickDebit} />
           <AddCreditBtn onClick={handleOnClickCredit} />
         </div>
       </div>
       <ModalInputForm onClose={() => setShowModal(false)} show={showModal}>
-        {/* <InputFrm type={inputType} userId={user._id} onClose={handleOnClose} /> */}
+        <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
       </ModalInputForm>
       <div id="modal-root"></div>
     </>

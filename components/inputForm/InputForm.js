@@ -11,10 +11,8 @@ export default function InputForm({ type, userId, onClose }) {
     transaction.type = type;
     transaction.description = event.target.description.value;
     transaction.amount = event.target.amount.value;
-
+    buttonRef.current.disabled = true;
     try {
-      buttonRef.current.disabled = true;
-
       const response = await fetch("/api/transaction", {
         method: "POST",
         body: JSON.stringify(transaction),
