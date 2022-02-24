@@ -29,6 +29,3 @@
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
 }
-.btns {
-  display: flex;
-}

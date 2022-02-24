@@ -8,7 +8,7 @@ import CreditTable from "./CreditTable/CreditTable";
 import ModalInputForm from "./ModalInputForm/ModalInputForm";
 import DateNavigator from "./DateNavigator/DateNavigator";
 import BottomNavigation from "./BottomNavigation/BottomNavigation";
-
+import ChartBtn from "./ChartBtn/ChartBtn";
 export {
   AddCreditBtn,
   AddDebitBtn,
@@ -20,4 +20,5 @@ export {
   ModalInputForm,
   DateNavigator,
   BottomNavigation,
+  ChartBtn,
 };
