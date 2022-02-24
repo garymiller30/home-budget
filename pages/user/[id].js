@@ -96,6 +96,7 @@ export default function User({ user }) {
           <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
         <BottomNavigation
+          date={date}
           OnClickDebit={handleOnClickDebit}
           OnClickCredit={handleOnClickCredit}
         />
