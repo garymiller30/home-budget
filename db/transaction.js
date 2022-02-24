@@ -19,8 +19,8 @@ export async function getTransactions(
 
   const filter = {
     ownerId: user._id,
-    "date.year": options.year,
-    "date.month": options.month,
+    "date.year": Number(options.year),
+    "date.month": Number(options.month),
   };
 
   const transactions = collection.find(filter);
