@@ -5,17 +5,15 @@ import Head from "next/head";
 import s from "./[id].module.css";
 import { getSum } from "../../lib/transaction";
 import { getUser } from "../../db/user";
-//import { getTransactions } from "../../db/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import {
-  AddCreditBtn,
-  AddDebitBtn,
   InputForm,
   SignOut,
   Budget,
   DebitTable,
   CreditTable,
   ModalInputForm,
+  BottomNavigation,
 } from "../../components";
 import { daysInMonth } from "../../lib/dateLib";
 
@@ -97,10 +95,10 @@ export default function User({ user }) {
           <DebitTable debitArr={debit} onDelete={handleonDelete} />
           <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
-        <div className={s.btns}>
-          <AddDebitBtn onClick={handleOnClickDebit} />
-          <AddCreditBtn onClick={handleOnClickCredit} />
-        </div>
+        <BottomNavigation
+          OnClickDebit={handleOnClickDebit}
+          OnClickCredit={handleOnClickCredit}
+        />
       </div>
       <ModalInputForm onClose={() => setShowModal(false)} show={showModal}>
         <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
