@@ -8,6 +8,8 @@ import { TRANSACTION_TYPE } from "../vars/variables";
 import { groupBy } from "../lib/utils";
 
 export default function statistic({ user, transactions = [] }) {
+  if (!user) return <p>Unauthorized</p>;
+
   const debit =
     transactions.filter(
       (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
