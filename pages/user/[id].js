@@ -70,10 +70,9 @@ export default function User({ user }) {
 
   const budget = getSum(debit) - getSum(credit);
 
-  const perDay = (
-    budget /
-    (daysInMonth(date.year, date.month) - new Date().getDate())
-  ).toFixed(2);
+  const days = daysInMonth(date.year, date.month) - new Date().getDate() + 1;
+
+  const perDay = (budget / days).toFixed(2);
 
   return (
     <>
