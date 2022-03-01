@@ -6,8 +6,9 @@ import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
 import { TRANSACTION_TYPE } from "../vars/variables";
 import { groupBy } from "../lib/utils";
+import s from "./statistic.module.css";
 
-export default function statistic({ user, transactions = [] }) {
+export default function statistic({ user, date, transactions = [] }) {
   if (!user) return <p>Unauthorized</p>;
 
   const debit =
@@ -54,8 +55,8 @@ export default function statistic({ user, transactions = [] }) {
       {
         label: "₴",
         data: debitData.map((x) => x.amount),
-        backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-        borderColor: ["rgba(255, 99, 132, 1)"],
+        backgroundColor: ["rgba(0, 255, 132, 0.2)"],
+        borderColor: ["rgba(0, 0, 0, 0.3)"],
         borderWidth: 1,
       },
     ],
@@ -75,10 +76,10 @@ export default function statistic({ user, transactions = [] }) {
   return (
     <>
       <div>
-        <h1>Statistics</h1>
-        <h2>Debit</h2>
+        <h1 className={s.header}>Statistics {` ${date.month}-${date.year}`}</h1>
+        <h2 className={s.subheader}>Debit</h2>
         <Bar data={dataD} />
-        <h2>Credit</h2>
+        <h2 className={s.subheader}>Credit</h2>
         <Bar data={dataC} />
       </div>
     </>
@@ -96,6 +97,7 @@ export async function getServerSideProps(context) {
   const trans = await getTransactions(user, { year, month });
   props.user = user;
   props.transactions = trans;
+  props.date = { year, month };
 
   return { props };
 }
