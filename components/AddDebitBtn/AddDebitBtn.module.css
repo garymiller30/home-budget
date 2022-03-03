@@ -1,6 +1,6 @@
 .btn {
   border: none;
-  width: 100%;
+  margin: 0 3px 0 0;
   background-image: linear-gradient(
     to right,
     #134e5e 0%,
@@ -10,7 +10,6 @@
 }
 
 .btn {
-  padding: 15px 45px;
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
