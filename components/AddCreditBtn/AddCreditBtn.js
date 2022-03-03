@@ -1,9 +1,10 @@
 import s from "./AddCreditBtn.module.css";
+import Button from "@mui/material/Button";
 
 export default function AddCreditBtn({ onClick }) {
   return (
-    <button className={s.btn} onClick={onClick}>
+    <Button variant="contained" className={s.btn} onClick={onClick}>
       add credit
-    </button>
+    </Button>
   );
 }

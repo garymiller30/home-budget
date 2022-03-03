@@ -1,26 +1,4 @@
 .btn {
-  border: none;
   margin: 0 3px 0 0;
-  background-image: linear-gradient(
-    to right,
-    #134e5e 0%,
-    #71b280 51%,
-    #134e5e 100%
-  );
-}
-
-.btn {
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
-}
-
-.btn:hover {
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
+  background-color: #71b280;
 }
