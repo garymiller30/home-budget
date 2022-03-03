@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 export default function AddCreditBtn({ onClick }) {
   return (
-    <Button variant="contained" className={s.btn} onClick={onClick}>
+    <Button variant="contained" color="secondary" onClick={onClick}>
       add credit
     </Button>
   );
