@@ -1,10 +1,13 @@
 import BarChartIcon from "@mui/icons-material/BarChart";
+import IconButton from "@mui/material/IconButton";
 import Router from "next/router";
+
 import s from "./ChartBtn.module.css";
 
 export default function ChartBtn({ date }) {
   return (
-    <button
+    <IconButton
+      color="primary"
       className={s.btn}
       onClick={() =>
         Router.push(`/statistic?year=${date.year}&month=${date.month}`)
@@ -17,6 +20,6 @@ export default function ChartBtn({ date }) {
           height: "100%",
         }}
       />
-    </button>
+    </IconButton>
   );
 }
