@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { getSession } from "next-auth/react";
@@ -16,8 +16,6 @@ import {
 import s from "./statistic.module.css";
 
 export default function statistic({ user, date, transactions = [] }) {
-  const router = useRouter();
-
   if (!user) return <p>Unauthorized</p>;
 
   const debit =
@@ -76,7 +74,7 @@ export default function statistic({ user, date, transactions = [] }) {
           Credit <span>₴ {creditTotal}</span>
         </Typography>
         <Bar data={dataC} />
-        <Button variant="contained" onClick={() => router.back()}>
+        <Button variant="contained" onClick={() => Router.back()}>
           back
         </Button>
       </div>
