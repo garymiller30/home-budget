@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { getSession } from "next-auth/react";
