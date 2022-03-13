@@ -4,6 +4,7 @@ import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { getSession } from "next-auth/react";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
 import { TRANSACTION_TYPE } from "../vars/variables";
@@ -13,7 +14,6 @@ import {
   getDataTotalAmount,
 } from "../lib/utils";
 import s from "./statistic.module.css";
-import Button from "@mui/material/Button";
 
 export default function statistic({ user, date, transactions = [] }) {
   const router = useRouter();
