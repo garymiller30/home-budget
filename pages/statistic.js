@@ -1,14 +1,23 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { getSession } from "next-auth/react";
+import Typography from "@mui/material/Typography";
 import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
 import { TRANSACTION_TYPE } from "../vars/variables";
-import { groupBy } from "../lib/utils";
+import {
+  groupBy,
+  getTransactionGroupData,
+  getDataTotalAmount,
+} from "../lib/utils";
 import s from "./statistic.module.css";
+import Button from "@mui/material/Button";
 
 export default function statistic({ user, date, transactions = [] }) {
+  const router = useRouter();
+
   if (!user) return <p>Unauthorized</p>;
 
   const debit =
@@ -22,32 +31,12 @@ export default function statistic({ user, date, transactions = [] }) {
     ) ?? [];
 
   const debitGroup = groupBy(debit, "description");
-
-  const debitData = Object.keys(debitGroup)
-    .map((x) => {
-      return {
-        description: x,
-        amount: debitGroup[x].reduce(
-          (prev, next) => prev + Number(next.amount),
-          0
-        ),
-      };
-    })
-    .sort((f, s) => f.amount < s.amount);
+  const debitData = getTransactionGroupData(debitGroup);
+  const debitTotal = getDataTotalAmount(debitData);
 
   const creditGroup = groupBy(credit, "description");
-
-  const creditData = Object.keys(creditGroup)
-    .map((x) => {
-      return {
-        description: x,
-        amount: creditGroup[x].reduce(
-          (prev, next) => prev + Number(next.amount),
-          0
-        ),
-      };
-    })
-    .sort((f, s) => f.amount < s.amount);
+  const creditData = getTransactionGroupData(creditGroup);
+  const creditTotal = getDataTotalAmount(creditData);
 
   const dataD = {
     labels: debitData.map((x) => x.description),
@@ -75,12 +64,21 @@ export default function statistic({ user, date, transactions = [] }) {
   };
   return (
     <>
-      <div>
-        <h1 className={s.header}>Statistics {` ${date.month}-${date.year}`}</h1>
-        <h2 className={s.subheader}>Debit</h2>
+      <div className={s.container}>
+        <Typography variant="h4" className={s.header}>
+          Statistics <span>{` ${date.month}-${date.year}`}</span>
+        </Typography>
+        <Typography variant="h5" className={s.subheader}>
+          Debit <span>₴ {debitTotal}</span>
+        </Typography>
         <Bar data={dataD} />
-        <h2 className={s.subheader}>Credit</h2>
+        <Typography variant="h5" className={s.subheader}>
+          Credit <span>₴ {creditTotal}</span>
+        </Typography>
         <Bar data={dataC} />
+        <Button variant="contained" onClick={() => router.back()}>
+          back
+        </Button>
       </div>
     </>
   );

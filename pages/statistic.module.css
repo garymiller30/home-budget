@@ -1,7 +1,21 @@
+.container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .header {
   text-align: center;
 }
-
+.header span {
+  font-weight: bold;
+}
 .subheader {
   text-align: center;
+}
+
+.subheader span {
+  font-weight: bold;
 }
