@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { getTransactions } from "../../db/transaction";
 import { fetchTransactions } from "../../db/fetchTransactions";
-//import fetch from "isomorphic-unfetch";
+import { transactionSplitByType } from "../../lib/transactionSplitByType";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import s from "./[id].module.css";
 import { getSum } from "../../lib/transaction";
 import { getUser } from "../../db/user";
+import { getBudget } from "../../lib/getBudget";
+import { getPerDay } from "../../lib/getPerDay";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import {
   InputForm,
@@ -19,12 +21,23 @@ import {
 } from "../../components";
 import { daysInMonth } from "../../lib/dateLib";
 
-export default function User({ user, transactions = [] }) {
-  const [date, setDate] = useState({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-  });
+export default function User({
+  user,
+  transactions = [],
+  initDebit = [],
+  initCredit = [],
+  initBudget = 0,
+  initPerDay = 0,
+  initDate,
+}) {
+  const [date, setDate] = useState(initDate);
+
   const [trans, setTrans] = useState(transactions);
+  const [debit, setDebit] = useState(initDebit);
+  const [credit, setCredit] = useState(initCredit);
+  const [budget, setBudget] = useState(initBudget);
+  const [perDay, setPerDay] = useState(initPerDay);
+
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
@@ -41,6 +54,20 @@ export default function User({ user, transactions = [] }) {
       setTrans(t);
     }
   }, [date]);
+
+  useEffect(async () => {
+    const { debit, credit } = transactionSplitByType(trans);
+    setDebit(debit);
+    setCredit(credit);
+  }, [trans]);
+
+  useEffect(async () => {
+    setBudget(getBudget(debit, credit));
+  }, [debit, credit]);
+
+  useEffect(async () => {
+    setPerDay(getPerDay(budget, date));
+  }, [budget]);
 
   function handleonDelete(id) {
     setTrans(trans.filter((t) => t._id !== id));
@@ -66,19 +93,6 @@ export default function User({ user, transactions = [] }) {
     setDate(date);
   }
   if (!user) return <p>Unauthorized</p>;
-
-  const debit = trans.filter(
-    (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
-  );
-  const credit = trans.filter(
-    (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
-  );
-
-  const budget = getSum(debit) - getSum(credit);
-
-  const days = daysInMonth(date.year, date.month) - new Date().getDate() + 1;
-
-  const perDay = (budget / days).toFixed(2);
 
   return (
     <>
@@ -122,7 +136,24 @@ export async function getServerSideProps(context) {
   const responce = { user: session.user };
   const user = await getUser(session.user);
   const transactions = await getTransactions(user);
+
+  const { debit: initDebit, credit: initCredit } =
+    transactionSplitByType(transactions);
+
+  const initBudget = getBudget(initDebit, initCredit);
+  const date = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  };
+
+  const initPerDay = getPerDay(initBudget, date);
+
   responce.transactions = transactions;
+  responce.initCredit = initCredit;
+  responce.initDebit = initDebit;
+  responce.initBudget = initBudget;
+  responce.initPerDay = initPerDay;
+  responce.initDate = date;
   responce.user = user;
   responce.id = context.params.id;
   return {
