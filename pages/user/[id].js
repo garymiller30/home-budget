@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import fetch from "isomorphic-unfetch";
+import { useState, useEffect, useRef } from "react";
+import { getTransactions } from "../../db/transaction";
+import { fetchTransactions } from "../../db/fetchTransactions";
+//import fetch from "isomorphic-unfetch";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import s from "./[id].module.css";
@@ -17,24 +19,27 @@ import {
 } from "../../components";
 import { daysInMonth } from "../../lib/dateLib";
 
-export default function User({ user }) {
+export default function User({ user, transactions = [] }) {
   const [date, setDate] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   });
-  const [trans, setTrans] = useState([]);
+  const [trans, setTrans] = useState(transactions);
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
+  const isFirstRun = useRef(true);
   useEffect(async () => {
-    const response = await fetch(
-      `/api/transaction?userId=${user._id}&year=${date.year}&month=${date.month}`,
-      {
-        method: "GET",
-      }
-    );
-    const t = await response.json();
-    setTrans(t);
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+    } else {
+      const t = await fetchTransactions({
+        userId: user._id,
+        year: date.year,
+        month: date.month,
+      });
+      setTrans(t);
+    }
   }, [date]);
 
   function handleonDelete(id) {
@@ -61,6 +66,7 @@ export default function User({ user }) {
     setDate(date);
   }
   if (!user) return <p>Unauthorized</p>;
+
   const debit = trans.filter(
     (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
   );
@@ -115,8 +121,8 @@ export async function getServerSideProps(context) {
 
   const responce = { user: session.user };
   const user = await getUser(session.user);
-  // const transactions = await getTransactions(user);
-  // responce.transactions = transactions;
+  const transactions = await getTransactions(user);
+  responce.transactions = transactions;
   responce.user = user;
   responce.id = context.params.id;
   return {

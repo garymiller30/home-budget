@@ -1,5 +1,6 @@
 import { getClient } from "../middleware/database";
 import { ObjectId } from "mongodb";
+import fetch from "isomorphic-unfetch";
 
 async function getCollection() {
   const client = await getClient();
@@ -48,7 +49,6 @@ export async function deleteTransaction(id) {
 }
 
 export async function getTransactionById(id) {
-  //console.log("getTransactionById(id)", id);
   const collection = await getCollection();
   const doc = await collection.findOne({ _id: new ObjectId(id) });
   return doc;
