@@ -17,7 +17,7 @@ export default function TransactionList({ transactions, onDelete }) {
       </thead>
       <tbody>
         {keys.map((key) => (
-          <TransactionGroup title={key}>
+          <TransactionGroup key={key} title={key}>
             {grouped[key].map((transaction) => (
               <TransactionItem
                 key={transaction._id}
