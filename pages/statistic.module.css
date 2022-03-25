@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .header {
