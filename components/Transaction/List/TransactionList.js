@@ -25,7 +25,7 @@ export default function TransactionList({ transactions = [], onDelete }) {
       <tbody>
         {keys.map((k) => (
           <Fragment key={k}>
-            <TransactionGroup title={k} />
+            <TransactionGroup title={k} transactions={grouped[k]} />
             {grouped[k].map((transaction) => (
               <TransactionItem
                 key={transaction._id}
