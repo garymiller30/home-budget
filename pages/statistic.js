@@ -7,26 +7,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
-import { TRANSACTION_TYPE } from "../vars/variables";
-import {
-  groupBy,
-  getTransactionGroupData,
-  getDataTotalAmount,
-} from "../lib/utils";
+import { transactionSplitByType } from "../lib/transactionSplitByType";
+import { groupBy } from "../lib/groupBy";
+import { getTransactionGroupData, getDataTotalAmount } from "../lib/utils";
 import s from "./statistic.module.css";
 
 export default function statistic({ user, date, transactions = [] }) {
   if (!user) return <p>Unauthorized</p>;
 
-  const debit =
-    transactions.filter(
-      (transaction) => transaction.type === TRANSACTION_TYPE.DEBIT
-    ) ?? [];
-
-  const credit =
-    transactions.filter(
-      (transaction) => transaction.type === TRANSACTION_TYPE.CREDIT
-    ) ?? [];
+  const { debit, credit } = transactionSplitByType(transactions);
 
   const debitGroup = groupBy(debit, "description");
   const debitData = getTransactionGroupData(debitGroup);

@@ -5,7 +5,6 @@ import { transactionSplitByType } from "../../lib/transactionSplitByType";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import s from "./[id].module.css";
-import { getSum } from "../../lib/transaction";
 import { getUser } from "../../db/user";
 import { getBudget } from "../../lib/getBudget";
 import { getPerDay } from "../../lib/getPerDay";

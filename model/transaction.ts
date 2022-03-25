@@ -1,15 +1,15 @@
-interface ITransactionDate{
+interface ITransactionDate {
   full: Date,
   year: number,
-   month: number,
-    day: number
+  month: number,
+  day: number
 }
 
 
 export default class Transaction {
-  
+
   constructor() {
-    //this.date.full = new Date();
+
     this.date.year = this.date.full.getFullYear();
     this.date.month = this.date.full.getMonth() + 1;
     this.date.day = this.date.full.getDate();
@@ -19,9 +19,9 @@ export default class Transaction {
   type: string = ""; //debit || credit
   amount: number = 0; //
   date: ITransactionDate = {
-    full :new Date(),
+    full: new Date(),
     year: 0,
     month: 0,
-    day:0,
+    day: 0,
   };
 }

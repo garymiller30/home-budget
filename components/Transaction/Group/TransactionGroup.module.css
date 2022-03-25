@@ -1,0 +1,18 @@
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0 !important;
+}
+.tr {
+  background: rgb(34, 193, 195);
+}
+/* .title::before {
+  content: "----- ";
+  font-weight: normal;
+}
+
+.title::after {
+  content: " -----";
+  font-weight: normal;
+} */
