@@ -8,6 +8,8 @@
   align-content: center;
   align-items: center;
   justify-items: center;
+  max-width: 500px;
+  margin: 0 auto;
 
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 }
