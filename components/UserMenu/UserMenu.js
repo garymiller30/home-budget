@@ -8,6 +8,7 @@ import Logout from "@mui/icons-material/Logout";
 import Settings from "@mui/icons-material/Settings";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import s from "./UserMenu.module.css";
+import { signOut } from "next-auth/react";
 
 export default function UserMenu({ user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,6 +18,10 @@ export default function UserMenu({ user }) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMenuItemLogOut = (e) => {
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -71,14 +76,14 @@ export default function UserMenu({ user }) {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem>
+          <MenuItem disabled={true}>
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
             Settings
           </MenuItem>
           <Divider />
-          <MenuItem>
+          <MenuItem onClick={handleMenuItemLogOut}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
