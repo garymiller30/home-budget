@@ -10,6 +10,7 @@ import { getBudget } from "../../lib/getBudget";
 import { getPerDay } from "../../lib/getPerDay";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
+
 import {
   InputForm,
   Budget,

@@ -18,9 +18,9 @@
 }
 
 .budget > span {
-  font-size: 28px;
+  font-size: 1.6em;
   font-weight: bold;
-  padding: 0 5px 0px 5px;
+  padding: 0 0.1em 0px 0.1em;
 }
 
 .perDayContainer {
