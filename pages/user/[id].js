@@ -9,9 +9,9 @@ import { getUser } from "../../db/user";
 import { getBudget } from "../../lib/getBudget";
 import { getPerDay } from "../../lib/getPerDay";
 import { TRANSACTION_TYPE } from "../../vars/variables";
+import AppBar from "@mui/material/AppBar";
 import {
   InputForm,
-  SignOut,
   Budget,
   DebitTable,
   CreditTable,
@@ -19,7 +19,6 @@ import {
   BottomNavigation,
   UserMenu,
 } from "../../components";
-//import { daysInMonth } from "../../lib/dateLib";
 
 export default function User({
   user,
@@ -101,10 +100,10 @@ export default function User({
       </Head>
 
       <div className={s.container}>
-        <header className={s.header}>
+        <AppBar position="static">
           <UserMenu user={user} />
-          {/* <SignOut user={user} /> */}
-        </header>
+        </AppBar>
+
         <main className={s.main}>
           <Budget
             budget={budget}

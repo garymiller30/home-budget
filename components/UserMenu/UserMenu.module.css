@@ -5,16 +5,21 @@
   align-content: center;
   align-items: center;
 
-  background-image: linear-gradient(135deg, #3c8ce7 10%, #00eaff 100%);
+  /* background-image: linear-gradient(135deg, #3c8ce7 10%, #00eaff 100%); */
 }
 .user_name {
   grid-column: 1/1;
   display: flex;
   align-items: center;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 5px;
   color: white;
   font-weight: bold;
+}
+
+.user_name > img {
+  display: block;
+  border-radius: 50px;
 }
 
 .user_name > span {
