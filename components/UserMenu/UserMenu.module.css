@@ -1,0 +1,26 @@
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  align-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(135deg, #3c8ce7 10%, #00eaff 100%);
+}
+.user_name {
+  grid-column: 1/1;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}
+
+.user_name > span {
+  padding-left: 5px;
+}
+
+.menu_button {
+  grid-column: 2/2;
+}

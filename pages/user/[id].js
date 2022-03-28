@@ -17,8 +17,9 @@ import {
   CreditTable,
   ModalInputForm,
   BottomNavigation,
+  UserMenu,
 } from "../../components";
-import { daysInMonth } from "../../lib/dateLib";
+//import { daysInMonth } from "../../lib/dateLib";
 
 export default function User({
   user,
@@ -101,7 +102,8 @@ export default function User({
 
       <div className={s.container}>
         <header className={s.header}>
-          <SignOut user={user} />
+          <UserMenu user={user} />
+          {/* <SignOut user={user} /> */}
         </header>
         <main className={s.main}>
           <Budget
