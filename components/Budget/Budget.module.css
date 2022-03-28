@@ -17,12 +17,6 @@
   justify-content: center;
 }
 
-.budget > span {
-  font-size: 1.6em;
-  font-weight: bold;
-  padding: 0 0.1em 0px 0.1em;
-}
-
 .perDayContainer {
   display: flex;
   flex-direction: column;
