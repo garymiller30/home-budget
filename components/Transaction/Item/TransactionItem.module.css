@@ -1,5 +1,8 @@
 .tr {
-  border-bottom: 1pt solid chocolate;
+  
+  outline: 1pt solid burlywood;
+  
+  
 }
 .tr:hover,
 .tr:active {
