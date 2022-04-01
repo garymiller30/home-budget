@@ -121,7 +121,11 @@ export default function User({
           OnClickCredit={handleOnClickCredit}
         />
       </div>
-      <ModalInputForm onClose={() => setShowModal(false)} show={showModal}>
+      <ModalInputForm
+        onClose={() => setShowModal(false)}
+        show={showModal}
+        title={`add ${inputType}`}
+      >
         <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
       </ModalInputForm>
       <div id="modal-root"></div>

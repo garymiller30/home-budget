@@ -34,7 +34,6 @@ export default function InputForm({ type, userId, onClose }) {
 
   return (
     <div className={s.container}>
-      <h2>{type}</h2>
       <form className={s.form} onSubmit={onSubmit}>
         <label className={s.label} htmlFor="description">
           Description
