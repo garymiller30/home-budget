@@ -26,7 +26,7 @@ export default function ModalInputForm({ show, onClose, children, title }) {
             {title}
           </Typography>
         )}
-        <div className={s.body}>{children}</div>
+        {children}
       </div>
     </div>
   ) : null;
