@@ -16,10 +16,10 @@ export default function Budget({ budget, date, perDay = 0, onChangeDate }) {
         </p>
       </div>
       <Tooltip title="budget">
-        <p className={s.budget}>
+        <div className={s.budget}>
           <CreditCardIcon />
           <BudgetNumber budget={budget} />
-        </p>
+        </div>
       </Tooltip>
     </section>
   );
