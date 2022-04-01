@@ -6,7 +6,7 @@
 }
 .tr {
   background: rgb(34, 193, 195);
-  outline: 1pt solid burlywood;
+  border: 1px solid burlywood;
 }
 
 .sum {
