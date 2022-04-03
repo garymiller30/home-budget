@@ -27,7 +27,7 @@
     "budget budget"
     "debit credit";
 
-  background-color: lightgoldenrodyellow;
+  background-color: var(--user-background);
   grid-template-columns: minmax(0px, 1fr) minmax(0px, 1fr);
   overflow-y: auto;
 }

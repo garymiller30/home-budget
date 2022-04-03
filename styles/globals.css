@@ -1,3 +1,11 @@
+:root{
+  --user-background:rgba(222, 184, 135, 0.2);
+  --table-item: rgb(222,
+  184,
+  135);
+  --table-item-background:rgba(222, 184, 135, 0.2);
+}
+
 html,
 body {
   padding: 0;

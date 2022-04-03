@@ -1,11 +1,11 @@
 .tr {
-  border: 1px solid burlywood;
-  
+  border: 1px solid var(--table-item);
+  background-color: var(--table-item-background);
   
 }
 .tr:hover,
 .tr:active {
-  background-color: burlywood;
+  background-color: var(--table-item);
 }
 
 .tr:hover .button,
