@@ -1,8 +1,8 @@
-import { Typography } from "@mui/material";
+import splitFloatNumber from "../../lib/splitFloatNumber";
 import s from "./BudgetNumber.module.css";
 export default function BudgetNumber({ budget }) {
-  const budgetMain = Math.trunc(budget);
-  const budgetKop = Math.trunc((budget % 1).toFixed(2) * 100);
+  const [budgetMain, budgetKop] = splitFloatNumber(budget);
+
   return (
     <p className={s.budgetMain}>
       {budgetMain}
