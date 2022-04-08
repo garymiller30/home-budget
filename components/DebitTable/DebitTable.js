@@ -1,9 +1,17 @@
+import { useState, useEffect } from "react";
 import s from "./DebitTable.module.css";
 import { getSum } from "../../lib/transaction";
 import Ico_up from "../../public/arrow-up-bold.svg";
 import TransactionList from "../../components/Transaction/List/TransactionList";
-export default function DebitTable({ debitArr, onDelete }) {
-  const sum = getSum(debitArr).toFixed(2);
+export default function DebitTable({ debitArr = [], onDelete }) {
+  const [debit, setDebit] = useState(debitArr);
+  const [sum, setSum] = useState(0);
+  //const sum = getSum(debitArr).toFixed(2);
+
+  useEffect(() => {
+    setDebit(debitArr);
+    setSum(getSum(debitArr).toFixed(2));
+  }, [debitArr]);
 
   return (
     <section className={s.container}>
@@ -13,7 +21,7 @@ export default function DebitTable({ debitArr, onDelete }) {
         </div>
         <p>({sum} ₴)</p>
       </h3>
-      <TransactionList transactions={debitArr} onDelete={onDelete} />
+      <TransactionList transactions={debit} onDelete={onDelete} />
     </section>
   );
 }

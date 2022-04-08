@@ -2,17 +2,18 @@ import TransactionGroup from "../Group/TransactionGroup";
 import groupTransactionsByDay from "../../../lib/groupTransactionsByDay";
 import s from "./TransactionList.module.css";
 import TransactionItem from "../Item/TransactionItem";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 export default function TransactionList({ transactions = [], onDelete }) {
-  const [grouped, setGrouped] = useState({});
-  const [keys, setKeys] = useState([]);
-  //const grouped = groupTransactionsByDay(transactions);
-  //const keys = Object.keys(grouped).sort((a, b) => Number(a) < Number(b));
+  // const [grouped, setGrouped] = useState({});
+  // const [keys, setKeys] = useState([]);
 
-  useEffect(() => {
-    setGrouped(groupTransactionsByDay(transactions));
-    setKeys(Object.keys(grouped).sort((a, b) => Number(a) < Number(b)));
-  }, [transactions]);
+  const grouped = groupTransactionsByDay(transactions);
+  const keys = Object.keys(grouped).sort((a, b) => Number(a) < Number(b));
+
+  // useEffect(() => {
+  //   setGrouped(groupTransactionsByDay(transactions));
+  //   setKeys(Object.keys(grouped).sort((a, b) => Number(a) < Number(b)));
+  // }, [transactions]);
 
   return (
     <table className={s.table}>

@@ -1,73 +1,48 @@
 import { useState, useEffect, useRef } from "react";
 import { getTransactions } from "../../db/transaction";
 import { fetchTransactions } from "../../db/fetchTransactions";
-import { transactionSplitByType } from "../../lib/transactionSplitByType";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import s from "./[id].module.css";
 import { getUser } from "../../db/user";
-import { getBudget } from "../../lib/getBudget";
-import { getPerDay } from "../../lib/getPerDay";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
 
 import {
   InputForm,
-  Budget,
-  DebitTable,
-  CreditTable,
   ModalInputForm,
   BottomNavigation,
   UserMenu,
+  TransactionContainer,
 } from "../../components";
 
-export default function User({
-  user,
-  transactions = [],
-  initDebit = [],
-  initCredit = [],
-  initBudget = 0,
-  initPerDay = 0,
-  initDate,
-}) {
+export default function User({ user, transactions = [], initDate }) {
   const [date, setDate] = useState(initDate);
-
   const [trans, setTrans] = useState(transactions);
-  const [debit, setDebit] = useState(initDebit);
-  const [credit, setCredit] = useState(initCredit);
-  const [budget, setBudget] = useState(initBudget);
-  const [perDay, setPerDay] = useState(initPerDay);
 
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
   const isFirstRun = useRef(true);
+
+  useEffect(() => {
+    setTrans(transactions);
+  }, [transactions]);
+
   useEffect(async () => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
     } else {
-      const t = await fetchTransactions({
-        userId: user._id,
-        year: date.year,
-        month: date.month,
-      });
-      setTrans(t);
+      try {
+        const t = await fetchTransactions({
+          userId: user._id,
+          year: date.year,
+          month: date.month,
+        });
+        setTrans(t);
+      } catch (error) {}
     }
   }, [date]);
-
-  useEffect(async () => {
-    const { debit, credit } = transactionSplitByType(trans);
-    setDebit(debit);
-    setCredit(credit);
-  }, [trans]);
-
-  useEffect(async () => {
-    setBudget(getBudget(debit, credit));
-  }, [debit, credit]);
-
-  useEffect(async () => {
-    setPerDay(getPerDay(budget, date));
-  }, [budget]);
 
   function handleonDelete(id) {
     setTrans(trans.filter((t) => t._id !== id));
@@ -89,7 +64,6 @@ export default function User({
   }
 
   function handleOnChangeDate(date) {
-    console.log(date);
     setDate(date);
   }
   if (!user) return <p>Unauthorized</p>;
@@ -106,14 +80,12 @@ export default function User({
         </AppBar>
 
         <main className={s.main}>
-          <Budget
-            budget={budget}
+          <TransactionContainer
+            transactions={trans}
             date={date}
-            perDay={perDay}
             onChangeDate={handleOnChangeDate}
+            onDelete={handleonDelete}
           />
-          <DebitTable debitArr={debit} onDelete={handleonDelete} />
-          <CreditTable creditArr={credit} onDelete={handleonDelete} />
         </main>
         <BottomNavigation
           date={date}
@@ -141,23 +113,12 @@ export async function getServerSideProps(context) {
   const responce = { user: session.user };
   const user = await getUser(session.user);
   const transactions = await getTransactions(user);
-
-  const { debit: initDebit, credit: initCredit } =
-    transactionSplitByType(transactions);
-
-  const initBudget = getBudget(initDebit, initCredit);
   const date = {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   };
 
-  const initPerDay = getPerDay(initBudget, date);
-
   responce.transactions = transactions;
-  responce.initCredit = initCredit;
-  responce.initDebit = initDebit;
-  responce.initBudget = initBudget;
-  responce.initPerDay = initPerDay;
   responce.initDate = date;
   responce.user = user;
   responce.id = context.params.id;
