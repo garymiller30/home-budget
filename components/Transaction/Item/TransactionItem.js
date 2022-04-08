@@ -1,5 +1,6 @@
 import s from "./TransactionItem.module.css";
-import Image from "next/image";
+import DeleteIcon from "@mui/icons-material/Delete";
+//import Image from "next/image";
 import fetch from "isomorphic-unfetch";
 
 export default function TransactionItem({ transaction, onDelete }) {
@@ -14,17 +15,24 @@ export default function TransactionItem({ transaction, onDelete }) {
   }
 
   return (
-    <tr className={s.tr}>
-      <td>{transaction.description}</td>
-      <td className={s.amount}>
-        {Number(transaction.amount).toFixed(2)}
+    <li className={s.tr}>
+      <p>{transaction.description}</p>
+      <div className={s.amount}>
+        <p>{Number(transaction.amount).toFixed(2)}</p>
         <button
+          width={18}
+          height={18}
           className={s.button}
           onClick={() => deleteHandler(transaction._id)}
         >
-          <Image src="/delete.svg" width={18} height={18} alt="Delete" />
+          <DeleteIcon
+            fontSize="small"
+            color="red"
+            sx={{ padding: 0, margin: 0 }}
+          />
+          {/* <Image src="/delete.svg" width={18} height={18} alt="Delete" /> */}
         </button>
-      </td>
-    </tr>
+      </div>
+    </li>
   );
 }

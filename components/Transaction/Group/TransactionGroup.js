@@ -6,9 +6,9 @@ export default function TransactionGroup({ title, transactions }) {
   const sum = useMemo(() => getDataTotalAmount(transactions), [transactions]);
 
   return (
-    <tr className={s.tr}>
-      <td className={s.title}>{title}</td>
-      <td className={s.sum}>{sum}</td>
-    </tr>
+    <li className={s.tr}>
+      <p className={s.title}>{title}</p>
+      <p className={s.sum}>{sum}</p>
+    </li>
   );
 }

@@ -16,27 +16,26 @@ export default function TransactionList({ transactions = [], onDelete }) {
   // }, [transactions]);
 
   return (
-    <table className={s.table}>
-      <thead>
+    <ul className={s.table}>
+      {/* <thead>
         <tr>
           <th>description</th>
           <th>₴</th>
         </tr>
-      </thead>
-      <tbody>
-        {keys.map((k) => (
-          <Fragment key={k}>
-            <TransactionGroup title={k} transactions={grouped[k]} />
-            {grouped[k].map((transaction) => (
-              <TransactionItem
-                key={transaction._id}
-                transaction={transaction}
-                onDelete={onDelete}
-              />
-            ))}
-          </Fragment>
-        ))}
-      </tbody>
-    </table>
+      </thead> */}
+
+      {keys.map((k) => (
+        <Fragment key={k}>
+          <TransactionGroup title={k} transactions={grouped[k]} />
+          {grouped[k].map((transaction) => (
+            <TransactionItem
+              key={transaction._id}
+              transaction={transaction}
+              onDelete={onDelete}
+            />
+          ))}
+        </Fragment>
+      ))}
+    </ul>
   );
 }

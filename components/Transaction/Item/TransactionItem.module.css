@@ -1,7 +1,13 @@
 .tr {
-  border: 1px solid var(--table-item);
-  background-color: var(--table-item-background);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 24px;
+  /* border: 1px solid var(--table-item); */
+  /* background-color: var(--table-item-background); */
   
+  margin: 1px 4px;
+  border-radius: 3px;
 }
 .tr:hover,
 .tr:active {
@@ -15,17 +21,15 @@
 
 .amount {
   text-align: right;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  grid-column: 2;
+display:flex;
+justify-content: flex-end;
+align-items: center;
 }
 
 .button {
   display: none;
-  width: 20px;
-  height: 20px;
-  border: none;
-  padding: 0;
+  border:none;
   background-color: transparent;
   cursor: pointer;
 }
