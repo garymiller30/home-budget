@@ -18,8 +18,9 @@ export default function TransactionContainer({
     const { debit, credit } = transactionSplitByType(transactions);
     setDebit(debit);
     setCredit(credit);
-    setBudget(getBudget(debit, credit));
-    setPerDay(getPerDay(budget, date));
+    const bdgt = getBudget(debit, credit);
+    setBudget(bdgt);
+    setPerDay(getPerDay(bdgt, date));
   }, [transactions]);
   return (
     <>
