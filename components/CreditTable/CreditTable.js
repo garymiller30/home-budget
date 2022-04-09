@@ -7,10 +7,10 @@ import { splitFloatNumber, getSum } from "../../lib";
 export default function CreditTable({ creditArr, onDelete }) {
   const [credit, setCebit] = useState(creditArr);
   const [sum, setSum] = useState([0, 0]);
-  //const sum = getSum(creditArr).toFixed(2);
+
   useEffect(() => {
     setCebit(creditArr);
-    const s = getSum(creditArr).toFixed(2);
+    const s = getSum(creditArr);
     const splitted = splitFloatNumber(s);
     setSum(splitted);
   }, [creditArr]);

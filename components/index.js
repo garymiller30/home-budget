@@ -11,6 +11,7 @@ import BottomNavigation from "./BottomNavigation/BottomNavigation";
 import ChartBtn from "./ChartBtn/ChartBtn";
 import UserMenu from "./UserMenu/UserMenu";
 import TransactionContainer from "./Transaction/Container/TransactionContainer";
+import TransactionTable from "./Transaction/Table/TransactionTable";
 export {
   AddCreditBtn,
   AddDebitBtn,
@@ -25,4 +26,5 @@ export {
   ChartBtn,
   UserMenu,
   TransactionContainer,
+  TransactionTable,
 };

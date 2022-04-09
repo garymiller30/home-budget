@@ -10,7 +10,7 @@ export default function DebitTable({ debitArr = [], onDelete }) {
 
   useEffect(() => {
     setDebit(debitArr);
-    const s = getSum(debitArr).toFixed(2);
+    const s = getSum(debitArr);
     const splitted = splitFloatNumber(s);
     setSum(splitted);
   }, [debitArr]);

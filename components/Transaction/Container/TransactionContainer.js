@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { getBudget, getPerDay, transactionSplitByType } from "../../../lib";
-import { Budget, DebitTable, CreditTable } from "../../";
+import { Budget, TransactionTable } from "../../";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+
 export default function TransactionContainer({
   transactions = [],
   date,
@@ -28,8 +31,18 @@ export default function TransactionContainer({
         date={date}
         onChangeDate={onChangeDate}
       />
-      <DebitTable debitArr={debit} onDelete={onDelete} />
-      <CreditTable creditArr={credit} onDelete={onDelete} />
+      <TransactionTable
+        icon={ArrowUpwardIcon}
+        color="success"
+        transactions={debit}
+        onDelete={onDelete}
+      />
+      <TransactionTable
+        icon={ArrowDownwardIcon}
+        color="secondary"
+        transactions={credit}
+        onDelete={onDelete}
+      />
     </>
   );
 }
