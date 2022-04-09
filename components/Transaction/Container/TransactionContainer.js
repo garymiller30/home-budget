@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { transactionSplitByType } from "../../../lib/transactionSplitByType";
-import { getBudget } from "../../../lib/getBudget";
-import { getPerDay } from "../../../lib/getPerDay";
+import { getBudget, getPerDay, transactionSplitByType } from "../../../lib";
 import { Budget, DebitTable, CreditTable } from "../../";
 export default function TransactionContainer({
   transactions = [],

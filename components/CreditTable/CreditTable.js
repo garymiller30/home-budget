@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import Ico_down from "../../public/arrow-down-bold.svg";
 import s from "./CreditTable.module.css";
 import TransactionList from "../../components/Transaction/List/TransactionList";
-import { getSum } from "../../lib/transaction";
-import splitFloatNumber from "../../lib/splitFloatNumber";
+import { splitFloatNumber, getSum } from "../../lib";
 
 export default function CreditTable({ creditArr, onDelete }) {
   const [credit, setCebit] = useState(creditArr);

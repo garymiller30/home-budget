@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import splitFloatNumber from "../../lib/splitFloatNumber";
+import { splitFloatNumber, getSum } from "../../lib";
 import s from "./DebitTable.module.css";
-import { getSum } from "../../lib/transaction";
 import Ico_up from "../../public/arrow-up-bold.svg";
 import TransactionList from "../../components/Transaction/List/TransactionList";
+
 export default function DebitTable({ debitArr = [], onDelete }) {
   const [debit, setDebit] = useState(debitArr);
   const [sum, setSum] = useState([0, 0]);

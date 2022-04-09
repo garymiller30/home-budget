@@ -7,9 +7,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
-import { transactionSplitByType } from "../lib/transactionSplitByType";
-import { groupBy } from "../lib/groupBy";
-import { getTransactionGroupData, getDataTotalAmount } from "../lib/utils";
+import {
+  getTransactionGroupData,
+  getDataTotalAmount,
+  transactionSplitByType,
+  groupBy,
+} from "../lib";
 import s from "./statistic.module.css";
 
 export default function statistic({ user, date, transactions = [] }) {

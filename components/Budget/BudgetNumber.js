@@ -1,4 +1,4 @@
-import splitFloatNumber from "../../lib/splitFloatNumber";
+import { splitFloatNumber } from "../../lib";
 import s from "./BudgetNumber.module.css";
 export default function BudgetNumber({ budget }) {
   const [budgetMain, budgetKop] = splitFloatNumber(budget);

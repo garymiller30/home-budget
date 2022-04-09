@@ -1,5 +1,5 @@
 import TransactionGroup from "../Group/TransactionGroup";
-import groupTransactionsByDay from "../../../lib/groupTransactionsByDay";
+import { groupTransactionsByDay } from "../../../lib";
 import s from "./TransactionList.module.css";
 import TransactionItem from "../Item/TransactionItem";
 import { Fragment, useState, useEffect, useRef } from "react";

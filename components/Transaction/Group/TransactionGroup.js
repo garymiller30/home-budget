@@ -1,6 +1,6 @@
 import s from "./TransactionGroup.module.css";
 import { useMemo } from "react";
-import { getDataTotalAmount } from "../../../lib/utils";
+import { getDataTotalAmount } from "../../../lib";
 
 export default function TransactionGroup({ title, transactions }) {
   const sum = useMemo(() => getDataTotalAmount(transactions), [transactions]);
