@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { getTransactions } from "../../db/transaction";
 import { fetchTransactions } from "../../db/fetchTransactions";
 import { getSession } from "next-auth/react";
@@ -16,8 +17,12 @@ import {
   TransactionContainer,
 } from "../../components";
 
-export default function User({ user, transactions = [], initDate }) {
-  const [date, setDate] = useState(initDate);
+export default function User({ user, transactions = [] }) {
+  const router = useRouter();
+
+  const { year, month } = router.query;
+
+  const [date, setDate] = useState({ year, month });
   const [trans, setTrans] = useState(transactions);
 
   const [showModal, setShowModal] = useState(false);
@@ -109,17 +114,23 @@ export async function getServerSideProps(context) {
   if (!session) {
     return { props: {} };
   }
+  let { year, month } = context.query;
 
   const responce = { user: session.user };
   const user = await getUser(session.user);
-  const transactions = await getTransactions(user);
-  const date = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-  };
 
+  if (!year || !month) {
+    year = new Date().getFullYear();
+    month = new Date().getMonth() + 1;
+    context.res.statusCode = 302;
+    context.res.setHeader(
+      "Location",
+      `/user/${user._id}?year=${year}&month=${month}`
+    );
+  }
+
+  const transactions = await getTransactions(user, { year, month });
   responce.transactions = transactions;
-  responce.initDate = date;
   responce.user = user;
   responce.id = context.params.id;
   return {

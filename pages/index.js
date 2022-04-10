@@ -1,5 +1,4 @@
-import { useSession } from "next-auth/react";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { getUser } from "../db/user";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
