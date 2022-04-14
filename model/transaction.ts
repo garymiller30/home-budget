@@ -16,6 +16,7 @@ export default class Transaction {
   }
   ownerId: string = "";
   description: string = "";
+  comment: string = "";
   type: string = ""; //debit || credit
   amount: number = 0; //
   date: ITransactionDate = {

@@ -10,6 +10,7 @@ export default function InputForm({ type, userId, onClose }) {
     transaction.ownerId = userId;
     transaction.type = type;
     transaction.description = event.target.description.value;
+    transaction.comment = event.target.comment.value;
     transaction.amount = event.target.amount.value;
     buttonRef.current.disabled = true;
     try {
@@ -46,6 +47,15 @@ export default function InputForm({ type, userId, onClose }) {
           name="description"
           required
           autoFocus
+        ></input>
+        <label className={s.label} htmlFor="comment">
+          Comment
+        </label>
+        <input
+          className={s.input}
+          id="comment"
+          type="text"
+          name="comment"
         ></input>
         <label className={s.label} htmlFor="amount">
           ₴

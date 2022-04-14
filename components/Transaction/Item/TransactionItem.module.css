@@ -2,9 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  /* height: 24px; */
-  /* border: 1px solid var(--table-item); */
-  /* background-color: var(--table-item-background); */
 
   margin: 1px 4px;
   border-radius: 3px;
@@ -12,11 +9,6 @@
 .tr:hover,
 .tr:active {
   background-color: var(--table-item);
-}
-
-.tr p {
-  padding: 3px 0px;
-  margin: 0;
 }
 
 .tr:hover .button,
@@ -30,6 +22,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  font-weight: bold;
 }
 
 .button {
@@ -37,4 +30,16 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+.description {
+  margin: 0;
+  font-family: "roboto", "Helvetica Neue";
+}
+.comment {
+  margin: 0;
+  font-family: "roboto condensed", "Helvetica Neue";
+  padding: 0;
+  font-weight: 300;
+  font-size: 0.8em;
+  color: var(--table-item-comment-color);
 }

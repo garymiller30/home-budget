@@ -16,9 +16,14 @@ export default function TransactionItem({ transaction, onDelete }) {
 
   return (
     <li className={s.tr}>
-      <p>{transaction.description}</p>
+      <div>
+        <p className={s.description}>{transaction.description}</p>
+        <p className={s.comment}>{transaction.comment}</p>
+      </div>
+
       <div className={s.amount}>
         <p>{Number(transaction.amount).toFixed(2)}</p>
+
         <button
           width={18}
           height={18}
@@ -30,7 +35,6 @@ export default function TransactionItem({ transaction, onDelete }) {
             color="red"
             sx={{ padding: 0, margin: 0 }}
           />
-          {/* <Image src="/delete.svg" width={18} height={18} alt="Delete" /> */}
         </button>
       </div>
     </li>
