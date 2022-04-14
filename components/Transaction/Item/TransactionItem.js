@@ -18,11 +18,13 @@ export default function TransactionItem({ transaction, onDelete }) {
     <li className={s.tr}>
       <div>
         <p className={s.description}>{transaction.description}</p>
-        <p className={s.comment}>{transaction.comment}</p>
+        {transaction.comment ? (
+          <p className={s.comment}>{transaction.comment}</p>
+        ) : null}
       </div>
 
-      <div className={s.amount}>
-        <p>{Number(transaction.amount).toFixed(2)}</p>
+      <div className={s.amount_container}>
+        <p className={s.amount}>{Number(transaction.amount).toFixed(2)}</p>
 
         <button
           width={18}
