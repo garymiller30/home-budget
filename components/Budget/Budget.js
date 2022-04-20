@@ -10,7 +10,7 @@ export default function Budget({ budget, date, perDay = 0, onChangeDate }) {
     <section className={s.section}>
       <DateNavigator date={date} onChangeDate={onChangeDate} />
       <div className={s.perDayContainer}>
-        <p className={s.perDayTitle}>per day</p>
+        <p className={s.perDayTitle}>per day/30d</p>
         <p className={s.perDayBox}>
           <span className={s.perDayValue}>{perDayInt}</span> ₴
         </p>
