@@ -12,7 +12,7 @@ export default function Budget({ budget, date, perDay = 0, onChangeDate }) {
       <div className={s.perDayContainer}>
         <p className={s.perDayTitle}>per day/30d</p>
         <p className={s.perDayBox}>
-          <span className={s.perDayValue}>{perDayInt}</span> ₴
+          <span className={s.perDayValue}>{perDayInt}</span>
         </p>
       </div>
       <Tooltip title="budget">

@@ -6,7 +6,7 @@ export default function BudgetNumber({ budget }) {
   return (
     <p className={s.budgetMain}>
       {budgetMain}
-      <span className={s.budgetKop}>{budgetKop}</span>₴
+      <span className={s.budgetKop}>{budgetKop}</span>
     </p>
   );
 }

@@ -9,8 +9,8 @@ export default function InputForm({ type, userId, onClose }) {
     const transaction = new Transaction();
     transaction.ownerId = userId;
     transaction.type = type;
-    transaction.description = event.target.description.value;
-    transaction.comment = event.target.comment.value;
+    transaction.description = event.target.description.value.trim();
+    transaction.comment = event.target.comment.value.trim();
     transaction.amount = event.target.amount.value;
     buttonRef.current.disabled = true;
     try {

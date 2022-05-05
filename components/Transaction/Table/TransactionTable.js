@@ -26,7 +26,7 @@ export default function TransactionTable({
         </div>
         <p className={s.budgetMain}>
           ({sum[0]}
-          <span className={s.budgetKop}>{sum[1]}</span> ₴)
+          <span className={s.budgetKop}>{sum[1]}</span>)
         </p>
       </div>
       <TransactionList transactions={trans} onDelete={onDelete} />
