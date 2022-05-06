@@ -45,7 +45,7 @@ export default function ModalInputForm({
   if (isBrowser) {
     return ReactDOM.createPortal(
       modalContent,
-      document.getElementById("modal-root")
+      document.getElementById("modal-root")!
     );
   } else {
     return null;
