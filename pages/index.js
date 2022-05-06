@@ -2,12 +2,9 @@ import { useSession, getSession } from "next-auth/react";
 import { getUser } from "../db/user";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Image from "next/image";
 import Button from "@mui/material/Button";
 import s from "./index.module.css";
-
 import { Circles } from "react-loader-spinner";
-
 import Router from "next/router";
 
 export default function Home() {
