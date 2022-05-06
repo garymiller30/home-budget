@@ -1,6 +1,9 @@
+import { ObjectId } from "mongodb";
+
 export default class User {
-  email:string = "";
-  name:string = "";
-  budget:number = 0;
-  image:string = "";
+  _id?: ObjectId
+  email: string = "";
+  name: string = "";
+  budget: number = 0;
+  image: string = "";
 }

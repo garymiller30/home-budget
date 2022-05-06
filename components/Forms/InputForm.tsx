@@ -2,17 +2,30 @@ import React, { useEffect, useRef } from "react";
 import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
 import s from "./InputForm.module.css";
+import { TRANSACTION_TYPE } from "../../vars/variables";
 
-export default function InputForm({ type, userId, onClose }) {
-  const onSubmit = async (event) => {
+interface InputFormProps {
+  type: TRANSACTION_TYPE;
+  userId: string;
+  onClose: (transaction: Transaction) => void;
+}
+
+interface targetProps {}
+
+export default function InputForm({ type, userId, onClose }: InputFormProps) {
+  const onSubmit = async (event: any) => {
     event.preventDefault();
+    const { target } = event;
+
     const transaction = new Transaction();
     transaction.ownerId = userId;
     transaction.type = type;
-    transaction.description = event.target.description.value.trim();
-    transaction.comment = event.target.comment.value.trim();
-    transaction.amount = event.target.amount.value;
-    buttonRef.current.disabled = true;
+    transaction.description = (
+      event.target as any
+    ).description.value.trim() as string;
+    transaction.comment = (event.target as any).comment.value.trim();
+    transaction.amount = (event.target as any).amount.value;
+    if (buttonRef.current) (buttonRef.current as any).disabled = true;
     try {
       const response = await fetch("/api/transaction", {
         method: "POST",
@@ -23,14 +36,14 @@ export default function InputForm({ type, userId, onClose }) {
       onClose(t);
     } catch (err) {
       //TODO: show error
-      buttonRef.current.disabled = false;
+      if (buttonRef.current) (buttonRef.current as any).disabled = false;
     }
   };
 
   const focusInput = useRef(null);
   const buttonRef = useRef(null);
   useEffect(() => {
-    focusInput.current.focus();
+    if (focusInput.current) (focusInput.current as any).focus();
   }, []);
 
   return (

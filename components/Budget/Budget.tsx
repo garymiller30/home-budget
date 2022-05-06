@@ -1,10 +1,23 @@
 import s from "./Budget.module.css";
-import { DateNavigator } from "../../components";
+import { DateNavigator } from "..";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import Tooltip from "@mui/material/Tooltip";
 import BudgetNumber from "./BudgetNumber";
+import { iDate } from "../../interfaces/iDate";
 
-export default function Budget({ budget, date, perDay = 0, onChangeDate }) {
+interface BudgetProps {
+  budget: number;
+  date: iDate;
+  perDay: number;
+  onChangeDate: () => void;
+}
+
+export default function Budget({
+  budget,
+  date,
+  perDay = 0,
+  onChangeDate,
+}: BudgetProps) {
   const perDayInt = Math.trunc(perDay);
   return (
     <section className={s.section}>

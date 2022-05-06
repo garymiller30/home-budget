@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { deleteTransaction, getTransactions as getTrans, createTransaction } from "../../db/transaction";
 
-import { deleteTransaction, getTransactions as getTrans } from "../../db/transaction";
-import createTransaction from '../../db/transaction/createTransaction';
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
@@ -33,7 +33,10 @@ async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
 async function getTransactions(req: NextApiRequest, res: NextApiResponse) {
 
   const { userId, year, month } = req.query;
-  const trans = await getTrans({ _id: userId }, { year: Number(year), month: Number(month) })
+
+  if (!userId || !year || !month) return res.json([]);
+
+  const trans = await getTrans(userId as string, { year: Number(year), month: Number(month) })
 
   return res.json(trans);
 }

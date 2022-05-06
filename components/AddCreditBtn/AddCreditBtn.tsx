@@ -1,7 +1,10 @@
-import s from "./AddCreditBtn.module.css";
 import Button from "@mui/material/Button";
 
-export default function AddCreditBtn({ onClick }) {
+interface AddCreditBtnProps {
+  onClick: () => void;
+}
+
+export default function AddCreditBtn({ onClick }: AddCreditBtnProps) {
   return (
     <Button variant="contained" color="secondary" onClick={onClick}>
       add credit

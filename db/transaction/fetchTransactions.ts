@@ -1,5 +1,5 @@
-export async function fetchTransactions({ userId = null, year, month }) {
-  if (!userId) return [];
+export async function fetchTransactions(userId: string | undefined, year: string, month: string) {
+  if (!userId || !year || !month) return [];
 
   const response = await fetch(
     `/api/transaction?userId=${userId}&year=${year}&month=${month}`,

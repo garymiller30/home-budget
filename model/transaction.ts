@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 interface ITransactionDate {
   full: Date,
   year: number,
@@ -7,7 +9,7 @@ interface ITransactionDate {
 
 
 export default class Transaction {
-
+  _id?: ObjectId
   constructor() {
 
     this.date.year = this.date.full.getFullYear();

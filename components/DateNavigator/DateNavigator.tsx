@@ -4,11 +4,22 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MobileDatePicker from "@mui/lab/DatePicker";
 import Box from "@mui/material/Box";
+import { iDate } from "../../interfaces/iDate";
 
-export default function DateNavigator({ date, onChangeDate }) {
-  const [value, setValue] = useState(new Date(date.year, date.month - 1));
+interface DateNavigatorProps {
+  date: iDate;
+  onChangeDate: (date: iDate) => void;
+}
 
-  function handleOnChange(d) {
+export default function DateNavigator({
+  date,
+  onChangeDate,
+}: DateNavigatorProps) {
+  const [value, setValue] = useState<Date | null>(
+    new Date(date.year, date.month - 1)
+  );
+
+  function handleOnChange(d: Date) {
     onChangeDate({ year: d.getFullYear(), month: d.getMonth() + 1 });
   }
 
@@ -20,7 +31,7 @@ export default function DateNavigator({ date, onChangeDate }) {
           views={["year", "month"]}
           maxDate={new Date()}
           value={value}
-          onChange={setValue}
+          onChange={(e) => setValue(e)}
           onMonthChange={handleOnChange}
           renderInput={(params) => (
             <TextField {...params} helperText={null} size="small" />

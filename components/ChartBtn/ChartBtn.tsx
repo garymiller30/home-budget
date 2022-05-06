@@ -1,10 +1,16 @@
 import BarChartIcon from "@mui/icons-material/BarChart";
 import IconButton from "@mui/material/IconButton";
 import Router from "next/router";
+import { iDate } from "../../interfaces/iDate";
 
 import s from "./ChartBtn.module.css";
 
-export default function ChartBtn({ date }) {
+interface ChartBtnProps {
+  date: iDate;
+  sx?: any;
+}
+
+export default function ChartBtn({ date }: ChartBtnProps) {
   return (
     <IconButton
       color="primary"

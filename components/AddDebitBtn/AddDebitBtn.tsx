@@ -1,7 +1,11 @@
 import s from "./AddDebitBtn.module.css";
 import Button from "@mui/material/Button";
 
-export default function AddDebitBtn({ onClick }) {
+interface AddDebitBtnProps {
+  onClick: () => void;
+}
+
+export default function AddDebitBtn({ onClick }: AddDebitBtnProps) {
   return (
     <Button
       variant="contained"

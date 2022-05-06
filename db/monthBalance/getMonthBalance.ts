@@ -10,7 +10,7 @@ export default async function getMonthBalance(year: number, month: number) {
 
     const curId = curYear * 12 + curMonth;
 
-    const id = year * 12 + month;
+    const id: number = year * 12 + month;
 
     let mb: MonthBalance = new MonthBalance(year, month);
 
@@ -20,7 +20,7 @@ export default async function getMonthBalance(year: number, month: number) {
     }
     else {
         //якщо поточний місяць, то шукаємо в базі
-        const filter = { id };
+        const filter = { id: id };
 
         const res = await collection.findOne(filter) as any;
         // такого запису нема, потрібно створити

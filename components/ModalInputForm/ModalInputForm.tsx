@@ -4,12 +4,23 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Typography } from "@mui/material";
 import s from "./ModalInputForm.module.css";
 
-export default function ModalInputForm({ show, onClose, children, title }) {
+interface ModalInputFormProps {
+  show: boolean;
+  onClose: () => void;
+  children?: any;
+  title: string;
+}
+export default function ModalInputForm({
+  show,
+  onClose,
+  children,
+  title,
+}: ModalInputFormProps) {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => setIsBrowser(true), []);
 
-  function handleCloseClick(e) {
+  function handleCloseClick(e: any) {
     e.preventDefault();
     onClose();
   }
