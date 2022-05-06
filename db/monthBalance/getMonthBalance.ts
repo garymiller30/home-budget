@@ -1,5 +1,5 @@
-import MonthBalance from "../model/MonthBalance";
-import { getCollection } from "./getCollection";
+import MonthBalance from "../../model/MonthBalance";
+import { getCollection } from "../getCollection";
 
 export default async function getMonthBalance(year: number, month: number) {
     const collection = await getCollection("monthBalance");
