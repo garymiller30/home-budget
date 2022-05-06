@@ -26,7 +26,7 @@ import { iUserResponse } from "../../interfaces/iUserResponse";
 import { iUser } from "../../interfaces/iUser";
 
 interface UserProps {
-  user: U;
+  user: iUser;
   transactions: Transaction[];
 }
 
