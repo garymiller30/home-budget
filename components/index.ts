@@ -1,7 +1,7 @@
 import AddCreditBtn from "./AddCreditBtn/AddCreditBtn";
 import AddDebitBtn from "./AddDebitBtn/AddDebitBtn";
 import InputForm from "./Forms/InputForm";
-import SignOut from "./SignOut/SignOut";
+
 import Budget from "./Budget/Budget";
 import ModalInputForm from "./ModalInputForm/ModalInputForm";
 import DateNavigator from "./DateNavigator/DateNavigator";
@@ -14,7 +14,6 @@ export {
   AddCreditBtn,
   AddDebitBtn,
   InputForm,
-  SignOut,
   Budget,
   ModalInputForm,
   DateNavigator,
