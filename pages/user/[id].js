@@ -8,9 +8,7 @@ import s from "./[id].module.css";
 import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
-
 import { getMonthBalance, updateMonthBalance } from "../../db/monthBalance";
-
 import createTransaction from "../../db/transaction/createTransaction";
 
 import {
