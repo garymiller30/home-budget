@@ -1,13 +1,7 @@
 import { getClient } from "../middleware/database";
 import { ObjectId } from "mongodb";
 import fetch from "isomorphic-unfetch";
-
-async function getCollection() {
-  const client = await getClient();
-  const db = client.db("home-budget");
-  const collection = db.collection("transaction");
-  return collection;
-}
+import { getCollection } from "./getCollection";
 
 export async function getTransactions(
   user,
@@ -28,12 +22,6 @@ export async function getTransactions(
   const res = await transactions.toArray();
 
   return res.map((x) => ({ ...x, _id: x._id.toString() }));
-}
-
-export async function createTransaction(transaction) {
-  const collection = await getCollection();
-  const doc = await collection.insertOne(transaction);
-  return { ...transaction, _id: doc.insertedId };
 }
 
 export async function deleteTransaction(id) {

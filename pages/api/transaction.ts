@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { createTransaction, deleteTransaction, getTransactions as getTrans } from "../../db/transaction";
+import { deleteTransaction, getTransactions as getTrans } from "../../db/transaction";
+import createTransaction from '../../db/transaction/createTransaction';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {

@@ -8,7 +8,9 @@ import s from "./[id].module.css";
 import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
-
+import getMonthBalance from "../../db/getMonthBalance";
+import createTransaction from "../../db/transaction/createTransaction";
+import updateMonthBalance from "../../db/updateMonthBalance";
 import {
   InputForm,
   ModalInputForm,
@@ -16,6 +18,8 @@ import {
   UserMenu,
   TransactionContainer,
 } from "../../components";
+import { getBudget, transactionSplitByType } from "../../lib";
+import Transaction from "../../model/transaction";
 
 export default function User({ user, transactions = [] }) {
   const router = useRouter();
@@ -117,19 +121,46 @@ export async function getServerSideProps(context) {
   let { year, month } = context.query;
 
   const responce = { user: session.user };
+
   const user = await getUser(session.user);
 
   if (!year || !month) {
-    year = new Date().getFullYear();
-    month = new Date().getMonth() + 1;
+    const date = new Date();
+    const [year, month] = [date.getFullYear(), date.getMonth() + 1];
     context.res.statusCode = 302;
     context.res.setHeader(
       "Location",
       `/user/${user._id}?year=${year}&month=${month}`
     );
+    return { props: {} };
+  }
+
+  const monthBalance = await getMonthBalance(year, month);
+
+  if (!monthBalance.isPreviousMonthMoved) {
+    // взяти баланс за минулий місяць і додати до поточного
+    const prevDate = new Date(year, month);
+    prevDate.setMonth(prevDate.getMonth() - 1);
+    const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
+    const prevTransactions = await getTransactions(user, {
+      year: prevYear,
+      month: prevMonth,
+    });
+    const { debit, credit } = transactionSplitByType(prevTransactions);
+    const bdgt = getBudget(debit, credit);
+    //потрібно додати транзакцію
+    const transaction = new Transaction();
+    transaction.ownerId = user._id;
+    transaction.type = TRANSACTION_TYPE.DEBIT;
+    transaction.description = "prev month";
+    transaction.comment = "auto";
+    transaction.amount = bdgt;
+    await createTransaction(JSON.parse(JSON.stringify(transaction)));
+    await updateMonthBalance(monthBalance);
   }
 
   const transactions = await getTransactions(user, { year, month });
+
   responce.transactions = transactions;
   responce.user = user;
   responce.id = context.params.id;
