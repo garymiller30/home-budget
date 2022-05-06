@@ -25,7 +25,7 @@ export default function DateNavigator({
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ width: 90 }}>
+      <Box sx={{ width: 130 }}>
         <MobileDatePicker
           inputFormat="yyyy-MM"
           views={["year", "month"]}
