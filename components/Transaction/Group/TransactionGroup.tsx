@@ -2,7 +2,14 @@ import s from "./TransactionGroup.module.css";
 import { useMemo } from "react";
 import { getDataTotalAmount } from "../../../lib";
 
-export default function TransactionGroup({ title, transactions }) {
+interface TransactionGroupProps {
+  title: string;
+  transactions: any;
+}
+export default function TransactionGroup({
+  title,
+  transactions,
+}: TransactionGroupProps) {
   const sum = useMemo(() => getDataTotalAmount(transactions), [transactions]);
 
   return (
