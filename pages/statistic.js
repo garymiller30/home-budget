@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
   const user = await getUser(session.user);
   const { year, month } = context.query;
 
-  const trans = await getTransactions(user, { year, month });
+  const trans = await getTransactions(user._id, { year, month });
   props.user = user;
   props.transactions = trans;
   props.date = { year, month };
