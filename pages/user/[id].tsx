@@ -24,23 +24,21 @@ import { iDate } from "../../interfaces/iDate";
 import { GetServerSideProps } from "next";
 import { iUserResponse } from "../../interfaces/iUserResponse";
 import { iUser } from "../../interfaces/iUser";
+import { iTransaction } from "../../interfaces/iTransaction";
 
 interface UserProps {
   user: iUser;
-  transactions: Transaction[];
+  transactions: iTransaction[];
 }
 
 export default function User({ user, transactions = [] }: UserProps) {
   const router = useRouter();
-
   const { year, month } = router.query;
-
   const [date, setDate] = useState({
     year: Number(year),
     month: Number(month),
   } as iDate);
-  const [trans, setTrans] = useState(transactions);
-
+  const [trans, setTrans] = useState<iTransaction[]>(transactions);
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
@@ -56,11 +54,7 @@ export default function User({ user, transactions = [] }: UserProps) {
         isFirstRun.current = false;
       } else {
         try {
-          const t = await fetchTransactions(
-            user._id?.toString(),
-            date.year.toString(),
-            date.month.toString()
-          );
+          const t = await fetchTransactions(user._id, date.year, date.month);
           setTrans(t);
         } catch (error) {}
       }
@@ -69,8 +63,17 @@ export default function User({ user, transactions = [] }: UserProps) {
     getTransactions();
   }, [date]);
 
-  function handleonDelete(id: string) {
-    setTrans(trans.filter((t) => t._id?.toString() !== id));
+  async function handleonDelete(transaction: iTransaction) {
+    const response = await fetch("/api/transaction", {
+      method: "DELETE",
+      body: JSON.stringify(transaction._id),
+    });
+    const r = await response.json();
+    if (r) {
+    }
+    //TODO: show error
+
+    setTrans(trans.filter((t) => t._id?.toString() !== transaction._id));
   }
 
   function handleOnClickDebit() {
@@ -83,7 +86,7 @@ export default function User({ user, transactions = [] }: UserProps) {
     setShowModal(true);
   }
 
-  function handleOnClose(transaction: Transaction) {
+  function handleOnClose(transaction: iTransaction) {
     setTrans([...trans, transaction]);
     setShowModal(false);
   }

@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
+import { iTransaction } from "../../../interfaces/iTransaction";
 import { getSum, splitFloatNumber } from "../../../lib";
 import TransactionList from "../List/TransactionList";
 import s from "./TransactionTable.module.css";
+
+interface TransactionTableProps {
+  transactions: iTransaction[];
+  icon: any;
+  color: any;
+  onDelete: (t: iTransaction) => void;
+}
 
 export default function TransactionTable({
   transactions = [],
   icon,
   color,
   onDelete,
-}) {
+}: TransactionTableProps) {
   const [trans, setTrans] = useState(transactions);
   const [sum, setSum] = useState([0, 0]);
   const Icon = icon;

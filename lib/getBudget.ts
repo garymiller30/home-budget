@@ -1,5 +1,6 @@
 import { getSum } from ".";
-import Transaction from "../model/transaction";
-export function getBudget(debit: Transaction[], credit: Transaction[]): number {
+import { iTransaction } from "../interfaces/iTransaction";
+
+export function getBudget(debit: iTransaction[], credit: iTransaction[]): number {
   return getSum(debit) - getSum(credit);
 }

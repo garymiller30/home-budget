@@ -3,11 +3,12 @@ import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
 import s from "./InputForm.module.css";
 import { TRANSACTION_TYPE } from "../../vars/variables";
+import { iTransaction } from "../../interfaces/iTransaction";
 
 interface InputFormProps {
   type: TRANSACTION_TYPE;
   userId: string;
-  onClose: (transaction: Transaction) => void;
+  onClose: (transaction: iTransaction) => void;
 }
 
 interface targetProps {}

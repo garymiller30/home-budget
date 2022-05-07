@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
 import { getBudget, getPerDay, transactionSplitByType } from "../../../lib";
-import { Budget, TransactionTable } from "../../";
+import { Budget, TransactionTable } from "../..";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import { iTransaction } from "../../../interfaces/iTransaction";
+import { iDate } from "../../../interfaces/iDate";
+
+interface TransactionContainerProps {
+  transactions: iTransaction[];
+  date: iDate;
+  onChangeDate: (date: iDate) => void;
+  onDelete: (t: iTransaction) => void;
+}
 
 export default function TransactionContainer({
   transactions = [],
   date,
   onChangeDate,
   onDelete,
-}) {
-  const [debit, setDebit] = useState([]);
-  const [credit, setCredit] = useState([]);
-  const [budget, setBudget] = useState(0);
-  const [perDay, setPerDay] = useState(0);
+}: TransactionContainerProps) {
+  const [debit, setDebit] = useState<iTransaction[]>([]);
+  const [credit, setCredit] = useState<iTransaction[]>([]);
+  const [budget, setBudget] = useState<number>(0);
+  const [perDay, setPerDay] = useState<number>(0);
 
   useEffect(() => {
     const { debit, credit } = transactionSplitByType(transactions);

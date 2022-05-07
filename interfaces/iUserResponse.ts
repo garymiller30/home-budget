@@ -1,7 +1,7 @@
-import Transaction from "../model/transaction";
+import { iTransaction } from "./iTransaction";
 import { iUser } from "./iUser";
 
 export interface iUserResponse {
     user: iUser,
-    transactions: Transaction[]
+    transactions: iTransaction[]
 }

@@ -9,7 +9,7 @@ interface BudgetProps {
   budget: number;
   date: iDate;
   perDay: number;
-  onChangeDate: () => void;
+  onChangeDate: (date: iDate) => void;
 }
 
 export default function Budget({

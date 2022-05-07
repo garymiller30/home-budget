@@ -1,4 +1,4 @@
-export async function fetchTransactions(userId: string | undefined, year: string, month: string) {
+export async function fetchTransactions(userId: string, year: number, month: number) {
   if (!userId || !year || !month) return [];
 
   const response = await fetch(

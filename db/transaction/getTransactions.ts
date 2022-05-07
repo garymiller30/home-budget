@@ -1,3 +1,4 @@
+import { iTransaction } from "../../interfaces/iTransaction";
 import Transaction from "../../model/transaction";
 import User from "../../model/user";
 import { getCollection } from "../getCollection";
@@ -8,7 +9,7 @@ export async function getTransactions(
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   }
-): Promise<Transaction[]> {
+): Promise<iTransaction[]> {
   const collection = await getCollection();
 
   const filter = {

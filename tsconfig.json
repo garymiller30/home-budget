@@ -20,7 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/_app.js",
-    "components/Transaction/List/TransactionList.js",
+    "components/Transaction/List/TransactionList.tsx",
     "components/index.js"
   ],
   "exclude": ["node_modules"]
