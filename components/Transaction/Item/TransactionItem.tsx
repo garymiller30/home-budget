@@ -1,9 +1,7 @@
 import s from "./TransactionItem.module.css";
 import DeleteIcon from "@mui/icons-material/Delete";
-//import Image from "next/image";
-import fetch from "isomorphic-unfetch";
 import { iTransaction } from "../../../interfaces/iTransaction";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 
 interface TransactionItemProps {
   transaction: iTransaction;
