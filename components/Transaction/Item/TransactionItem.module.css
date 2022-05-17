@@ -11,11 +11,6 @@
   background-color: var(--table-item);
 }
 
-.tr:hover .button,
-.tr:active .button {
-  display: block;
-}
-
 .amount_container {
   display: flex;
   justify-content: flex-end;
@@ -36,6 +31,12 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.tr:hover .button,
+.tr:active .button {
+  display: block;
+}
+
 .description {
   margin: 0;
   padding: 0;
