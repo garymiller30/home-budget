@@ -24,9 +24,11 @@ export default function TransactionItem({
       <div className={s.amount_container}>
         <p className={s.amount}>{Number(transaction.amount).toFixed(2)}</p>
         <div className={s.button}>
-          <IconButton size="small" onClick={() => onDelete(transaction)}>
-            <DeleteIcon fontSize="small" sx={{ padding: 0, margin: 0 }} />
-          </IconButton>
+          <Tooltip title="delete">
+            <IconButton size="small" onClick={() => onDelete(transaction)}>
+              <DeleteIcon fontSize="small" sx={{ padding: 0, margin: 0 }} />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
     </li>
