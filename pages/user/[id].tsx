@@ -25,6 +25,7 @@ import { GetServerSideProps } from "next";
 import { iUserResponse } from "../../interfaces/iUserResponse";
 import { iUser } from "../../interfaces/iUser";
 import { iTransaction } from "../../interfaces/iTransaction";
+import { updateTimeZone } from "../api/user/client/updateTimeZone";
 
 interface UserProps {
   user: iUser;
@@ -62,6 +63,15 @@ export default function User({ user, transactions = [] }: UserProps) {
 
     getTransactions();
   }, [date]);
+
+  useEffect(() => {
+    const updateTZ = async () => {
+      await updateTimeZone(user._id);
+    };
+    if (!user.timeZone) {
+      updateTZ();
+    }
+  }, []);
 
   async function handleonDelete(transaction: iTransaction) {
     const response = await fetch("/api/transaction", {
@@ -144,7 +154,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = (await getUser(session.user)) as iUser;
 
   if (!year || !month) {
-    const date = new Date();
+    const date = new Date(
+      new Date().toLocaleString("us-US", { timeZone: user.timeZone })
+    );
+
     const [year, month] = [date.getFullYear(), date.getMonth() + 1];
     context.res.statusCode = 302;
     context.res.setHeader(

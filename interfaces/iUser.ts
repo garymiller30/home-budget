@@ -1,5 +1,6 @@
 export interface iUser {
     _id: string,
     name: string,
-    image: string
+    image: string,
+    timeZone?: string,
 }

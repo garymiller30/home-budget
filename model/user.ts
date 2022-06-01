@@ -6,4 +6,5 @@ export default class User {
   name: string = "";
   budget: number = 0;
   image: string = "";
+  timeZone?: string;
 }
