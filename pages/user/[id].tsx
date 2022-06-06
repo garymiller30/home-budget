@@ -171,7 +171,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!monthBalance.isPreviousMonthMoved) {
     // взяти баланс за минулий місяць і додати до поточного
-    const prevDate = new Date(year, month);
+    const prevDate = new Date(
+      new Date().toLocaleString("us-US", { timeZone: user.timeZone })
+    );
     prevDate.setMonth(prevDate.getMonth() - 1);
     const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
     const prevTransactions = await getTransactions(user._id, {
