@@ -159,11 +159,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = (await getUser(session.user)) as iUser;
 
   if (!year || !month) {
-    const date = convertDateToIso(
-      new Date().toLocaleString("us-US", {
-        timeZone: user.timeZone,
-      })
-    );
+    const date = convertDateToIso(user.timeZone);
 
     [year, month] = [date.getFullYear(), date.getMonth() + 1];
     context.res.statusCode = 302;
@@ -178,11 +174,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!monthBalance.isPreviousMonthMoved) {
     // взяти баланс за минулий місяць і додати до поточного
-    const prevDate = convertDateToIso(
-      new Date().toLocaleString("us-US", {
-        timeZone: user.timeZone,
-      })
-    );
+    const prevDate = convertDateToIso(user.timeZone);
     prevDate.setMonth(prevDate.getMonth() - 1);
     const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
     const prevTransactions = await getTransactions(user._id, {
