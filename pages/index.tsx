@@ -63,9 +63,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const user = await getUser(session.user);
 
-  // context.res.statusCode = 302;
-  // context.res.setHeader("Location", `/user/${user._id}`);
-
   return {
     props: { user },
   };
