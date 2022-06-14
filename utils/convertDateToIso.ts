@@ -1,12 +1,17 @@
 export function convertDateToIso(timeZone: string = ""): Date {
 
     const localDateString = new Date().toLocaleString("us-US", {
-        timeZone: timeZone
+        timeZone
     })
 
     const s = localDateString.split(/\D/);
 
-    return new Date(Number(s[0]), Number(s[1]) - 1, Number(s[2]), Number(s[4]), Number(s[5]), Number(s[6]))
+    //const year = parseInt(s[2])
+
+    const date = new Date(parseInt(s[2]), parseInt(s[1]) - 1, parseInt(s[0]), parseInt(s[4]), parseInt(s[5]), parseInt(s[6]))
+
+    //console.log(date)
+    return date;
     // return new Date(
     //     `${s[2]}-${s[1]}-${s[0]}T${s[4]}:${s[5]}:${s[6]}`)
 }
