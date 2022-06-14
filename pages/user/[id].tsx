@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { getTransactions } from "../../db/transaction/getTransactions";
@@ -12,20 +13,24 @@ import { getMonthBalance, updateMonthBalance } from "../../db/monthBalance";
 import { createTransaction } from "../../db/transaction";
 import {
   InputForm,
-  ModalInputForm,
+  //ModalInputForm,
   BottomNavigation,
   UserMenu,
   TransactionContainer,
 } from "../../components";
 import { getBudget, transactionSplitByType } from "../../lib";
 import Transaction from "../../model/transaction";
-import U from "../../model/user";
 import { iDate } from "../../interfaces/iDate";
 import { GetServerSideProps } from "next";
 import { iUserResponse } from "../../interfaces/iUserResponse";
 import { iUser } from "../../interfaces/iUser";
 import { iTransaction } from "../../interfaces/iTransaction";
 import { updateTimeZone } from "../api/user/client/updateTimeZone";
+import { convertDateToIso } from "../../utils/convertDateToIso";
+
+const DynamicModalInputForm = dynamic(
+  () => import("../../components/ModalInputForm/ModalInputForm")
+);
 
 interface UserProps {
   user: iUser;
@@ -131,13 +136,13 @@ export default function User({ user, transactions = [] }: UserProps) {
           OnClickCredit={handleOnClickCredit}
         />
       </div>
-      <ModalInputForm
+      <DynamicModalInputForm
         onClose={() => setShowModal(false)}
         show={showModal}
         title={`add ${inputType}`}
       >
         <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
-      </ModalInputForm>
+      </DynamicModalInputForm>
       <div id="modal-root"></div>
     </>
   );
@@ -154,11 +159,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const user = (await getUser(session.user)) as iUser;
 
   if (!year || !month) {
-    const date = new Date(
-      new Date().toLocaleString("us-US", { timeZone: user.timeZone })
+    const date = convertDateToIso(
+      new Date().toLocaleString("us-US", {
+        timeZone: user.timeZone,
+      })
     );
 
-    const [year, month] = [date.getFullYear(), date.getMonth() + 1];
+    [year, month] = [date.getFullYear(), date.getMonth() + 1];
     context.res.statusCode = 302;
     context.res.setHeader(
       "Location",
@@ -171,8 +178,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!monthBalance.isPreviousMonthMoved) {
     // взяти баланс за минулий місяць і додати до поточного
-    const prevDate = new Date(
-      new Date().toLocaleString("us-US", { timeZone: user.timeZone })
+    const prevDate = convertDateToIso(
+      new Date().toLocaleString("us-US", {
+        timeZone: user.timeZone,
+      })
     );
     prevDate.setMonth(prevDate.getMonth() - 1);
     const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
