@@ -5,10 +5,16 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import s from "./index.module.css";
 import { Circles } from "react-loader-spinner";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
+import { iUser } from "../interfaces/iUser";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
+interface HomeProps {
+  user: iUser;
+}
+export default function Home({ user }: HomeProps) {
   const { status } = useSession();
+  const router = useRouter();
 
   if (status === "loading") {
     return (
@@ -17,6 +23,13 @@ export default function Home() {
       </div>
     );
   } else {
+    if (user) {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      router.push(`/user/${user._id}?year=${year}&month=${month}`);
+    }
+
     return (
       <div className={`${s.container} ${s.bg}`}>
         <Stack spacing={5}>
@@ -37,19 +50,19 @@ export default function Home() {
   }
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (!session) {
+  if (!session || !session.user) {
     return { props: {} };
   }
 
   const user = await getUser(session.user);
 
-  context.res.statusCode = 302;
-  context.res.setHeader("Location", `/user/${user._id}`);
+  // context.res.statusCode = 302;
+  // context.res.setHeader("Location", `/user/${user._id}`);
 
   return {
-    props: {},
+    props: { user },
   };
-}
+};

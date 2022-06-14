@@ -2,9 +2,9 @@ import { ObjectId } from "mongodb";
 
 export default class User {
   _id?: ObjectId
-  email: string = "";
-  name: string = "";
+  email: string | null | undefined = "";
+  name: string | null | undefined = "";
   budget: number = 0;
-  image: string = "";
+  image: string | null | undefined = "";
   timeZone?: string;
 }

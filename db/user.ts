@@ -1,8 +1,14 @@
 import User from "../model/user";
 import { ObjectId } from "mongodb";
 import { getCollection } from "./getCollection";
+import { iUser } from "../interfaces/iUser";
 
-export async function getUser(user) {
+interface getUserProps {
+  email?: string | null | undefined;
+  name?: string | null | undefined;
+  image?: string | null | undefined;
+}
+export async function getUser(user: getUserProps): Promise<iUser> {
   const collection = await getCollection("user");
   let dbUser = await collection.findOne({ email: user.email });
 
@@ -18,10 +24,10 @@ export async function getUser(user) {
     dbUser = { ...userSchema, _id: doc.insertedId };
   }
 
-  return { ...dbUser, _id: dbUser._id.toString() };
+  return JSON.parse(JSON.stringify(dbUser))
 }
 
-async function findUserById(userId) {
+async function findUserById(userId: string) {
   const collection = await getCollection("user");
   /* Converting the userId to an ObjectId. */
   const newId = new ObjectId(userId);
