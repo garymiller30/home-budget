@@ -8,7 +8,7 @@ export function convertDateToIso(timeZone: string = ""): Date {
 
     //const year = parseInt(s[2])
 
-    const date = new Date(parseInt(s[2]), parseInt(s[1]) - 1, parseInt(s[0]), parseInt(s[4]), parseInt(s[5]), parseInt(s[6]))
+    const date = new Date(parseInt(s[2]), parseInt(s[1]) - 1, parseInt(s[0]))
 
     //console.log(date)
     return date;
