@@ -8,6 +8,7 @@ import { Circles } from "react-loader-spinner";
 import Router, { useRouter } from "next/router";
 import { iUser } from "../interfaces/iUser";
 import { GetServerSideProps } from "next";
+import { useEffect } from "react";
 
 interface HomeProps {
   user: iUser;
@@ -16,20 +17,23 @@ export default function Home({ user }: HomeProps) {
   const { status } = useSession();
   const router = useRouter();
 
-  if (status === "loading") {
-    return (
-      <div className={s.spinner}>
-        <Circles color="#00BFFF" height={80} width={80} />
-      </div>
-    );
-  } else {
+  useEffect(() => {
     if (user) {
       const date = new Date();
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       router.push(`/user/${user._id}?year=${year}&month=${month}`);
     }
+  }, []);
 
+  console.log("user:", user);
+  if (status === "loading" || status === "authenticated") {
+    return (
+      <div className={s.spinner}>
+        <Circles color="#00BFFF" height={80} width={80} />
+      </div>
+    );
+  } else if (status === "unauthenticated") {
     return (
       <div className={`${s.container} ${s.bg}`}>
         <Stack spacing={5}>

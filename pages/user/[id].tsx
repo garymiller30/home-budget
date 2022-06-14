@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-//import { getTransactions } from "../../db/transaction/getTransactions";
 import { fetchTransactions } from "../../db/transaction/fetchTransactions";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
@@ -9,8 +8,6 @@ import s from "./[id].module.css";
 import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
-// import { getMonthBalance, updateMonthBalance } from "../../db/monthBalance";
-// import { createTransaction } from "../../db/transaction";
 import {
   InputForm,
   //ModalInputForm,
@@ -18,15 +15,11 @@ import {
   UserMenu,
   TransactionContainer,
 } from "../../components";
-//import { getBudget, transactionSplitByType } from "../../lib";
-//import Transaction from "../../model/transaction";
 import { iDate } from "../../interfaces/iDate";
 import { GetServerSideProps } from "next";
 import { iUserResponse } from "../../interfaces/iUserResponse";
 import { iUser } from "../../interfaces/iUser";
 import { iTransaction } from "../../interfaces/iTransaction";
-//import { updateTimeZone } from "../api/user/client/updateTimeZone";
-//import { convertDateToIso } from "../../utils/convertDateToIso";
 
 const DynamicModalInputForm = dynamic(
   () => import("../../components/ModalInputForm/ModalInputForm")
@@ -34,7 +27,6 @@ const DynamicModalInputForm = dynamic(
 
 interface UserProps {
   user: iUser;
-  //transactions: iTransaction[];
 }
 
 export default function User({ user }: UserProps) {
@@ -48,35 +40,16 @@ export default function User({ user }: UserProps) {
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
 
-  // const isFirstRun = useRef(true);
-
-  // useEffect(() => {
-  //   setTrans(transactions);
-  // }, [transactions]);
-
   useEffect(() => {
     const getTransactions = async () => {
-      // if (isFirstRun.current) {
-      //   isFirstRun.current = false;
-      // } else {
       try {
         const t = await fetchTransactions(user._id, date.year, date.month);
         setTrans(t);
       } catch (error) {}
-      //}
     };
 
     getTransactions();
   }, [date]);
-
-  // useEffect(() => {
-  //   const updateTZ = async () => {
-  //     await updateTimeZone(user._id);
-  //   };
-  //   if (!user.timeZone) {
-  //     updateTZ();
-  //   }
-  // }, []);
 
   async function handleonDelete(transaction: iTransaction) {
     const response = await fetch("/api/transaction", {
@@ -152,7 +125,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session || !session.user) {
     return { props: {} };
   }
-  //let [year, month] = [Number(context.query.year), Number(context.query.month)];
 
   const responce = {} as iUserResponse;
 
