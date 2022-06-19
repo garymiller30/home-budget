@@ -1,12 +1,8 @@
 import MonthBalance from "../../model/MonthBalance";
 import { getCollection } from "../getCollection";
 
-export default async function getMonthBalance(year: number, month: number) {
+export default async function getMonthBalance(year: number, month: number, curYear: number, curMonth: number) {
     const collection = await getCollection("monthBalance");
-
-    const curDate = new Date();
-    const curYear = curDate.getFullYear();
-    const curMonth = curDate.getMonth();
 
     const curId = curYear * 12 + curMonth;
 

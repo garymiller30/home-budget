@@ -9,10 +9,9 @@ import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
 import {
-  InputForm,
+  //InputForm,
   //ModalInputForm,
   BottomNavigation,
-  UserMenu,
   TransactionContainer,
 } from "../../components";
 import { iDate } from "../../interfaces/iDate";
@@ -23,6 +22,13 @@ import { iTransaction } from "../../interfaces/iTransaction";
 
 const DynamicModalInputForm = dynamic(
   () => import("../../components/ModalInputForm/ModalInputForm")
+);
+const DynamicInputForm = dynamic(
+  () => import("../../components/Forms/InputForm")
+);
+
+const DynamicUserMenu = dynamic(
+  () => import("../../components/UserMenu/UserMenu")
 );
 
 interface UserProps {
@@ -39,6 +45,21 @@ export default function User({ user }: UserProps) {
   const [trans, setTrans] = useState<iTransaction[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [inputType, setInputType] = useState(TRANSACTION_TYPE.CREDIT);
+
+  // перевіримо, чи потрібно переносити баланс
+  useEffect(() => {
+    const checkMonthBalance = async () => {
+      const curDate = new Date();
+      const curYear = curDate.getFullYear();
+      const curMonth = curDate.getMonth();
+
+      await fetch(
+        `/api/monthBalance?userId=${user._id}&year=${date.year}&month=${date.month}&curYear=${curYear}&curMonth=${curMonth}`
+      );
+    };
+
+    checkMonthBalance();
+  }, []);
 
   useEffect(() => {
     const getTransactions = async () => {
@@ -92,7 +113,7 @@ export default function User({ user }: UserProps) {
 
       <div className={s.container}>
         <AppBar position="static">
-          <UserMenu user={user} />
+          <DynamicUserMenu user={user} />
         </AppBar>
 
         <main className={s.main}>
@@ -114,7 +135,11 @@ export default function User({ user }: UserProps) {
         show={showModal}
         title={`add ${inputType}`}
       >
-        <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
+        <DynamicInputForm
+          type={inputType}
+          userId={user._id}
+          onClose={handleOnClose}
+        />
       </DynamicModalInputForm>
       <div id="modal-root"></div>
     </>

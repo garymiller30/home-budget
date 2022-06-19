@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { getBudget, getPerDay, transactionSplitByType } from "../../../lib";
-import { Budget, TransactionTable } from "../..";
+import { Budget } from "../..";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { iTransaction } from "../../../interfaces/iTransaction";
 import { iDate } from "../../../interfaces/iDate";
+import dynamic from "next/dynamic";
+
+const DynamicTransactionTable = dynamic(
+  () => import("../Table/TransactionTable")
+);
 
 interface TransactionContainerProps {
   transactions: iTransaction[];
@@ -40,13 +45,13 @@ export default function TransactionContainer({
         date={date}
         onChangeDate={onChangeDate}
       />
-      <TransactionTable
+      <DynamicTransactionTable
         icon={ArrowUpwardIcon}
         color="success"
         transactions={debit}
         onDelete={onDelete}
       />
-      <TransactionTable
+      <DynamicTransactionTable
         icon={ArrowDownwardIcon}
         color="secondary"
         transactions={credit}
