@@ -1,5 +1,5 @@
 import s from "./Budget.module.css";
-import { DateNavigator } from "..";
+//import { DateNavigator } from "..";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import Tooltip from "@mui/material/Tooltip";
 import BudgetNumber from "./BudgetNumber";
@@ -21,7 +21,7 @@ export default function Budget({
   const perDayInt = Math.trunc(perDay);
   return (
     <section className={s.section}>
-      <DateNavigator date={date} onChangeDate={onChangeDate} />
+      {/* <DateNavigator date={date} onChangeDate={onChangeDate} /> */}
       <div className={s.perDayContainer}>
         <p className={s.perDayTitle}>per day/30d</p>
         <p className={s.perDayBox}>
