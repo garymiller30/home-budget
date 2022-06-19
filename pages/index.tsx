@@ -26,7 +26,7 @@ export default function Home({ user }: HomeProps) {
     }
   }, []);
 
-  console.log("user:", user);
+  //console.log("user:", user);
   if (status === "loading" || status === "authenticated") {
     return (
       <div className={s.spinner}>
