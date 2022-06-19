@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchTransactions } from "../../db/transaction/fetchTransactions";
 import { getSession } from "next-auth/react";
@@ -8,12 +8,7 @@ import s from "./[id].module.css";
 import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import AppBar from "@mui/material/AppBar";
-import {
-  //InputForm,
-  //ModalInputForm,
-  BottomNavigation,
-  TransactionContainer,
-} from "../../components";
+import { BottomNavigation, TransactionContainer } from "../../components";
 import { iDate } from "../../interfaces/iDate";
 import { GetServerSideProps } from "next";
 import { iUserResponse } from "../../interfaces/iUserResponse";
