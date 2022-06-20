@@ -108,7 +108,11 @@ export default function User({ user }: UserProps) {
 
       <div className={s.container}>
         <AppBar position="static">
-          <DynamicUserMenu user={user} />
+          <DynamicUserMenu
+            user={user}
+            date={date}
+            onChangeDate={handleOnChangeDate}
+          />
         </AppBar>
 
         <main className={s.main}>
@@ -149,51 +153,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const responce = {} as iUserResponse;
 
   const user = await getUser(session.user);
-
-  // if (!year || !month) {
-  //   const date = convertDateToIso(user.timeZone);
-
-  //   [year, month] = [date.getFullYear(), date.getMonth() + 1];
-  //   context.res.statusCode = 302;
-  //   context.res.setHeader(
-  //     "Location",
-  //     `/user/${user._id}?year=${year}&month=${month}`
-  //   );
-  //   return { props: {} };
-  // }
-
-  // const monthBalance = await getMonthBalance(year, month);
-
-  // if (!monthBalance.isPreviousMonthMoved) {
-  //   // взяти баланс за минулий місяць і додати до поточного
-  //   const prevDate = convertDateToIso(user.timeZone);
-  //   prevDate.setMonth(prevDate.getMonth() - 1);
-  //   const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
-  //   const prevTransactions = await getTransactions(user._id, {
-  //     year: prevYear,
-  //     month: prevMonth,
-  //   });
-  //   const { debit, credit } = transactionSplitByType(prevTransactions);
-  //   const bdgt = getBudget(debit, credit);
-  //   //потрібно додати транзакцію
-  //   const transaction = new Transaction();
-  //   transaction.ownerId = user._id?.toString();
-  //   transaction.type = TRANSACTION_TYPE.DEBIT;
-  //   transaction.description = "prev month";
-  //   transaction.comment = "auto";
-  //   transaction.amount = bdgt;
-  //   await createTransaction(JSON.parse(JSON.stringify(transaction)));
-  //   await updateMonthBalance(monthBalance);
-  // }
-
-  // const transactions = await getTransactions(user._id, {
-  //   year,
-  //   month,
-  // });
-
-  // responce.transactions = transactions;
   responce.user = user;
-  //responce.id = context.params.id as string;
   return {
     props: responce,
   };
