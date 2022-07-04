@@ -1,4 +1,3 @@
-import * as React from "react";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -13,6 +12,9 @@ import DateNavigator from "../DateNavigator/DateNavigator";
 import { iDate } from "../../interfaces/iDate";
 import { iUser } from "../../interfaces/iUser";
 import { Box } from "@mui/material";
+import ModalInputForm from "../ModalInputForm/ModalInputForm";
+import { useState } from "react";
+import PriceOfUnitComponent from "../PriceOfUnitComponent/PriceOfUnitComponent";
 
 interface UserMenuProps {
   user: iUser;
@@ -21,7 +23,8 @@ interface UserMenuProps {
 }
 
 export default function UserMenu({ user, date, onChangeDate }: UserMenuProps) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -32,6 +35,13 @@ export default function UserMenu({ user, date, onChangeDate }: UserMenuProps) {
 
   const handleMenuItemLogOut = (e: any) => {
     signOut({ callbackUrl: "/" });
+  };
+
+  const handlePriceOfUnit = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -99,6 +109,7 @@ export default function UserMenu({ user, date, onChangeDate }: UserMenuProps) {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
+            <MenuItem onClick={handlePriceOfUnit}>Price of unit</MenuItem>
             <MenuItem disabled={true}>
               <ListItemIcon>
                 <Settings fontSize="small" />
@@ -115,6 +126,13 @@ export default function UserMenu({ user, date, onChangeDate }: UserMenuProps) {
           </Menu>
         </div>
       </Box>
+      <ModalInputForm
+        show={showModal}
+        onClose={handleCloseModal}
+        title="Price of unit"
+      >
+        <PriceOfUnitComponent />
+      </ModalInputForm>
     </Box>
   );
 }
