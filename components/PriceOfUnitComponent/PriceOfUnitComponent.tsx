@@ -19,8 +19,8 @@ const PriceOfUnitComponent = () => {
       width="100%"
     >
       <List>
-        {units.map((unit: any) => (
-          <ListItem>{unit}</ListItem>
+        {units.map((unit: any, unitIndex: number) => (
+          <ListItem key={unitIndex}>{unit}</ListItem>
         ))}
       </List>
       <Button variant="contained" onClick={handleAdd}>
