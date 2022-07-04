@@ -1,5 +1,5 @@
 import { Box, Button, List, ListItem } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PriceOfUnitItem from "./PriceOfUnitItem";
 
 const PriceOfUnitComponent = () => {
@@ -9,6 +9,10 @@ const PriceOfUnitComponent = () => {
     const item = <PriceOfUnitItem />;
     setUnits([...units, item]);
   };
+
+  useEffect(() => {
+    handleAdd();
+  }, []);
 
   return (
     <Box
