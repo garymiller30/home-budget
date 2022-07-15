@@ -20,7 +20,7 @@ export default function User({ user }: UserProps) {
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Box
         sx={{
           display: "flex",
