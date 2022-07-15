@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
@@ -20,7 +20,7 @@ export default function User({ user }: UserProps) {
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <Container maxWidth="md">
+    <Box sx={{ maxWidth: "md" }}>
       <Box
         sx={{
           display: "flex",
@@ -50,7 +50,7 @@ export default function User({ user }: UserProps) {
           <UserBottomButtons />
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }
 
