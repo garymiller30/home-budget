@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 
 export default function UserDebitCredit() {
   return (
@@ -15,11 +15,11 @@ export default function UserDebitCredit() {
       pb={3}
     >
       <Box sx={{ width: "50%" }}>
-        <Typography variant="h5" fontWeight={400} textAlign="center">
+        <Typography variant="h6" fontWeight={400} textAlign="center">
           debit:
         </Typography>
         <Typography
-          variant="h4"
+          sx={{ fontSize: "24px" }}
           fontWeight={700}
           textAlign="center"
           color={"primary"}
@@ -29,12 +29,13 @@ export default function UserDebitCredit() {
           + 45000
         </Typography>
       </Box>
+      <Divider orientation="vertical" flexItem />
       <Box sx={{ width: "50%" }}>
-        <Typography variant="h5" fontWeight={400} textAlign="center">
+        <Typography variant="h6" fontWeight={400} textAlign="center">
           credit:
         </Typography>
         <Typography
-          variant="h4"
+          sx={{ fontSize: "24px" }}
           fontWeight={700}
           textAlign="center"
           color={"secondary"}

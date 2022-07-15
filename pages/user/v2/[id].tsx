@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-
+import { makeStyles } from "@mui/styles";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import UserAppBar from "../../../components/UserAppBar/UserAppBar";
@@ -11,12 +11,29 @@ import UserMonth from "../../../components/UserMonth/UserMonth";
 import { getUser } from "../../../db/user";
 import { iUser } from "../../../interfaces/iUser";
 import { iUserResponse } from "../../../interfaces/iUserResponse";
-
+import s from "./[id].module.css";
 interface UserProps {
   user: iUser;
 }
+const styles = () =>
+  makeStyles(() => ({
+    Box: {
+      "& ::after": {
+        content: '""',
+        display: "block",
+        height: "100%",
+        width: "100%",
+        position: "absolute",
+        background: "rgba(217, 217, 217, 0.35)",
+        borderRadius: "0px 0px 0px 187px",
+        top: "0",
+        left: "0",
+      },
+    },
+  }));
 
 export default function User({ user }: UserProps) {
+  const classes: any = styles();
   if (!user) return <p>Unauthorized</p>;
 
   return (
@@ -44,6 +61,18 @@ export default function User({ user }: UserProps) {
           <UserMonth />
           <UserBalance />
           <UserDebitCredit />
+          <Box
+            sx={{
+              position: "absolute",
+              width: "100%",
+              height: "85vh",
+              top: "0",
+              left: "0",
+              background: "rgba(217, 217, 217, 0.35)",
+              borderRadius: "0 0 0 190px",
+              zIndex: "-1",
+            }}
+          ></Box>
         </Box>
         <Box>
           <UserGoToReport />

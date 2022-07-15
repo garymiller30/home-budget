@@ -6,9 +6,10 @@ export default function UserGoToReport() {
     <Box
       sx={{
         width: "100%",
-        height: "50px",
+        height: "60px",
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <NextLink href="/">
