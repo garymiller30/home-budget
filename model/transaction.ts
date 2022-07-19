@@ -1,13 +1,5 @@
 import { ObjectId } from "mongodb";
-
-interface ITransactionDate {
-  full: Date,
-  year: number,
-  month: number,
-  day: number
-}
-
-
+import { iTransactionDate } from "../interfaces/iTransactionDate";
 export default class Transaction {
   _id?: ObjectId
   constructor() {
@@ -21,7 +13,7 @@ export default class Transaction {
   comment: string = "";
   type: string = ""; //debit || credit
   amount: number = 0; //
-  date: ITransactionDate = {
+  date: iTransactionDate = {
     full: new Date(),
     year: 0,
     month: 0,

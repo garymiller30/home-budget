@@ -1,43 +1,51 @@
 import { Box } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import UserAppBar from "../../../components/UserAppBar/UserAppBar";
+import UserBackground from "../../../components/UserBackground/UserBackground";
 import UserBalance from "../../../components/UserBalance/UserBalance";
 import UserBottomButtons from "../../../components/UserBottomButtons/UserBottomButtons";
 import UserDebitCredit from "../../../components/UserDebitCredit/UserDebitCredit";
 import UserGoToReport from "../../../components/UserGoToReport/UserGoToReport";
+import UserLastTransactions from "../../../components/UserLastTransactions/UserLastTransactions";
 import UserMonth from "../../../components/UserMonth/UserMonth";
+import { fetchTransactions } from "../../../db/transaction/fetchTransactions";
 import { getUser } from "../../../db/user";
 import { iUser } from "../../../interfaces/iUser";
 import { iUserResponse } from "../../../interfaces/iUserResponse";
-import s from "./[id].module.css";
+import { transactionsAtom } from "../../../recoil/atoms/transactionsAtom";
+import { userAtom } from "../../../recoil/atoms/userAtom";
+
 interface UserProps {
   user: iUser;
 }
-const styles = () =>
-  makeStyles(() => ({
-    Box: {
-      "& ::after": {
-        content: '""',
-        display: "block",
-        height: "100%",
-        width: "100%",
-        position: "absolute",
-        background: "rgba(217, 217, 217, 0.35)",
-        borderRadius: "0px 0px 0px 187px",
-        top: "0",
-        left: "0",
-      },
-    },
-  }));
 
 export default function User({ user }: UserProps) {
-  const classes: any = styles();
+  const setTransList = useSetRecoilState(transactionsAtom);
+  const setUser = useSetRecoilState(userAtom);
+
+  useEffect(() => {
+    const getTransactions = async () => {
+      try {
+        const date = new Date();
+        const t = await fetchTransactions(
+          user._id,
+          date.getFullYear(),
+          date.getMonth() + 1
+        );
+        setTransList(t);
+      } catch (error) {}
+    };
+
+    getTransactions();
+    setUser(user);
+  }, []);
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <Box sx={{ maxWidth: "md" }}>
+    <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
       <Box
         sx={{
           display: "flex",
@@ -47,38 +55,32 @@ export default function User({ user }: UserProps) {
         }}
       >
         <UserAppBar />
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            flexWrap: "wrap",
-            flexGrow: "1",
-          }}
-        >
-          <UserMonth />
-          <UserBalance />
-          <UserDebitCredit />
+        <Box sx={{ display: "flex", width: "100%" }} pb={2}>
           <Box
             sx={{
-              position: "absolute",
+              display: "flex",
               width: "100%",
-              height: "85vh",
-              top: "0",
-              left: "0",
-              background: "rgba(217, 217, 217, 0.35)",
-              borderRadius: "0 0 0 190px",
-              zIndex: "-1",
+              flexDirection: "column",
+              alignItems: "center",
+              flexWrap: "wrap",
+              position: "relative",
+              left: 0,
+              top: 0,
             }}
-          ></Box>
+          >
+            <UserBackground />
+            <UserMonth />
+            <UserBalance />
+            <UserDebitCredit />
+          </Box>
         </Box>
+        <UserLastTransactions />
         <Box>
           <UserGoToReport />
           <UserBottomButtons />
         </Box>
       </Box>
+      <div id="modal-root"></div>
     </Box>
   );
 }
@@ -93,6 +95,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const user = await getUser(session.user);
   responce.user = user;
+
   return {
     props: responce,
   };

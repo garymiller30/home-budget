@@ -33,7 +33,7 @@ export default function ModalInputForm({
         </div>
 
         {title && (
-          <Typography variant="h4" className={s.title}>
+          <Typography variant="h5" textAlign="center">
             {title}
           </Typography>
         )}

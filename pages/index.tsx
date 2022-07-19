@@ -19,10 +19,7 @@ export default function Home({ user }: HomeProps) {
 
   useEffect(() => {
     if (user) {
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      router.push(`/user/${user._id}?year=${year}&month=${month}`);
+      router.push(`/user/v2/${user._id}`);
     }
   }, []);
 

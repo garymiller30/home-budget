@@ -1,23 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
-import s from "./InputForm.module.css";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
+import { Button, Container, FormControl, TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { useTransactionController } from "../../hooks/useTransactionController";
 
 interface InputFormProps {
   type: TRANSACTION_TYPE;
   userId: string;
-  onClose: (transaction: iTransaction) => void;
+  onClose: () => void;
 }
 
-interface targetProps {}
-
 export default function InputForm({ type, userId, onClose }: InputFormProps) {
+  const contoller = useTransactionController();
+  const [saving, setSaving] = useState<boolean>(false);
   const onSubmit = async (event: any) => {
     event.preventDefault();
-    const { target } = event;
-
+    setSaving(true);
     const transaction = new Transaction();
     transaction.ownerId = userId;
     transaction.type = type;
@@ -26,67 +27,61 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
     ).description.value.trim() as string;
     transaction.comment = (event.target as any).comment.value.trim();
     transaction.amount = (event.target as any).amount.value;
-    if (buttonRef.current) (buttonRef.current as any).disabled = true;
+
     try {
-      const response = await fetch("/api/transaction", {
-        method: "POST",
-        body: JSON.stringify(transaction),
-      });
-      const t = await response.json();
-      //console.log("t", t);
-      onClose(t);
+      await contoller.add(transaction);
+      onClose();
     } catch (err) {
       //TODO: show error
-      if (buttonRef.current) (buttonRef.current as any).disabled = false;
+      setSaving(false);
     }
   };
 
   const focusInput = useRef(null);
-  const buttonRef = useRef(null);
+
   useEffect(() => {
     if (focusInput.current) (focusInput.current as any).focus();
   }, []);
 
   return (
-    <div className={s.container}>
-      <form className={s.form} onSubmit={onSubmit}>
-        <label className={s.label} htmlFor="description">
-          Description
-        </label>
-        <input
-          ref={focusInput}
-          className={s.input}
-          id="description"
-          type="text"
-          name="description"
-          required
-          autoFocus
-        ></input>
-        <label className={s.label} htmlFor="comment">
-          Comment
-        </label>
-        <input
-          className={s.input}
-          id="comment"
-          type="text"
-          name="comment"
-        ></input>
-        <label className={s.label} htmlFor="amount">
-          ₴
-        </label>
-        <input
-          className={s.input}
-          id="amount"
-          type="number"
-          name="amount"
-          step="0.01"
-          min="0"
-          required
-        ></input>
-        <button ref={buttonRef} className={s.button} type="submit">
-          Add
-        </button>
+    <Container sx={{ padding: "6px 0" }}>
+      <form onSubmit={onSubmit}>
+        <FormControl sx={{ width: "100%" }}>
+          <TextField
+            ref={focusInput}
+            id="description"
+            type="text"
+            name="description"
+            label="Description"
+            required
+            autoFocus
+            sx={{ width: "100%", padding: "12px 0" }}
+          ></TextField>
+          <TextField
+            label="Comment"
+            id="comment"
+            type="text"
+            name="comment"
+            sx={{ width: "100%", padding: "12px 0" }}
+          ></TextField>
+          <TextField
+            id="amount"
+            type="number"
+            name="amount"
+            label="₴"
+            required
+            sx={{ width: "100%", padding: "12px 0" }}
+          ></TextField>
+          <LoadingButton
+            variant="contained"
+            size="large"
+            loading={saving}
+            type="submit"
+          >
+            ADD
+          </LoadingButton>
+        </FormControl>
       </form>
-    </div>
+    </Container>
   );
 }

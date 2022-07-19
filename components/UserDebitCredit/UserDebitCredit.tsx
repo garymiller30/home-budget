@@ -1,6 +1,12 @@
 import { Box, Divider, Typography } from "@mui/material";
+import { useRecoilValue } from "recoil";
+import { creditSumSelector } from "../../recoil/selectors/creditSumSelector";
+import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
+import { debitSumSelector } from "../../recoil/selectors/debitSumSelector";
 
 export default function UserDebitCredit() {
+  const { creditSum, debitSum } = useRecoilValue(debitCreditSumSelector);
+
   return (
     <Box
       sx={{
@@ -11,8 +17,9 @@ export default function UserDebitCredit() {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "20px",
       }}
-      pt={3}
-      pb={3}
+      pt={2}
+      pb={2}
+      mb={3}
     >
       <Box sx={{ width: "50%" }}>
         <Typography variant="h6" fontWeight={400} textAlign="center">
@@ -26,7 +33,7 @@ export default function UserDebitCredit() {
           pt={1}
           pb={1}
         >
-          + 45000
+          + {debitSum}
         </Typography>
       </Box>
       <Divider orientation="vertical" flexItem />
@@ -42,7 +49,7 @@ export default function UserDebitCredit() {
           pt={1}
           pb={1}
         >
-          - 18000
+          - {creditSum}
         </Typography>
       </Box>
     </Box>
