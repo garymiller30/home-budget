@@ -20,7 +20,7 @@ export default function UserBalance() {
       mb={3}
     >
       <Typography
-        variant="h5"
+        variant="h6"
         fontWeight={300}
         textAlign={"center"}
         pt={2}
@@ -37,10 +37,10 @@ export default function UserBalance() {
         }}
         pb={1}
       >
-        <Typography sx={{ display: "block" }} variant="h2" fontWeight={500}>
+        <Typography sx={{ display: "block" }} variant="h3" fontWeight={500}>
           {budgetMain}
         </Typography>
-        <Typography sx={{ display: "block" }} variant="h5" fontWeight={300}>
+        <Typography sx={{ display: "block" }} variant="h6" fontWeight={300}>
           {budgetKop}
         </Typography>
       </Box>

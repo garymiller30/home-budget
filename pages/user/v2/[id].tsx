@@ -48,6 +48,7 @@ export default function User({ user }: UserProps) {
   return (
     <>
       <Head>
+        <title>Home Budget</title>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link
           rel="preconnect"
