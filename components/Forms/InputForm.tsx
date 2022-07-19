@@ -68,7 +68,7 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
             id="amount"
             type="number"
             name="amount"
-            inputProps={{ step: "0.1" }}
+            inputProps={{ step: "0.01" }}
             label="₴"
             required
             sx={{ width: "100%", padding: "12px 0" }}
