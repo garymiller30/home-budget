@@ -23,8 +23,8 @@ export default function UserBalance() {
         variant="h5"
         fontWeight={300}
         textAlign={"center"}
-        pt={3}
-        pb={2}
+        pt={2}
+        pb={1}
       >
         balance
       </Typography>
