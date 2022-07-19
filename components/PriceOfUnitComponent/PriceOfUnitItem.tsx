@@ -19,7 +19,7 @@ const PriceOfUnitItem = () => {
         variant="outlined"
         type="number"
         onChange={(e: any) => setPrice(Number(e.target.value))}
-        value={price}
+        // value={price}
       />
       <TextField
         sx={{ marginLeft: "4px", marginRight: "4px" }}
@@ -27,7 +27,7 @@ const PriceOfUnitItem = () => {
         variant="outlined"
         type="number"
         onChange={(e: any) => setUnits(Number(e.target.value))}
-        value={units}
+        // value={units}
       />
       <TextField
         sx={{ marginLeft: "4px" }}
