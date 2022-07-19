@@ -21,7 +21,8 @@
     "**/*.tsx",
     "pages/_app.js",
     "components/Transaction/List/TransactionList.tsx",
-    "components/index.js"
+    "components/index.js",
+    "pages/user/del_[id].tsx._del"
   ],
   "exclude": ["node_modules"]
 }
