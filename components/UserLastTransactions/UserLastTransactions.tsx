@@ -15,10 +15,8 @@ import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 
 export default function UserLastTransactions() {
-  const list = useRecoilValue(transactionsAtom);
   const controller = useTransactionController();
-  const revList = [...list];
-  revList.reverse();
+  const revList = controller.getAllDesc();
 
   const handleDelete = async (t: iTransaction) => {
     await controller.remove(t);

@@ -28,9 +28,17 @@ export function useTransactionController() {
         }
 
     }
+    const getAll = () => {
+        return list;
+    }
+    const getAllDesc = () => {
+        const revList = [...list];
+        revList.reverse();
+        return revList;
+    }
 
     return {
         add,
-        remove
+        remove, getAll, getAllDesc
     }
 }
