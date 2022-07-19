@@ -31,37 +31,35 @@ export default function UserLastTransactions() {
           const color =
             item.type === TRANSACTION_TYPE.DEBIT ? "primary" : "secondary";
           return (
-            <>
-              <ListItem
-                secondaryAction={
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => handleDelete(item)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
+            <ListItem
+              key={item._id}
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => handleDelete(item)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemText
+                primary={item.description}
+                secondary={`${item.date.day}.${item.date.month}.${item.date.year}`}
+              />
+              <ListItemText
+                primary={
+                  <Typography textAlign={"left"}>{item.comment}</Typography>
                 }
-              >
-                <ListItemText
-                  primary={item.description}
-                  secondary={`${item.date.day}.${item.date.month}.${item.date.year}`}
-                />
-                <ListItemText
-                  primary={
-                    <Typography textAlign={"left"}>{item.comment}</Typography>
-                  }
-                />
-                <ListItemText
-                  primary={
-                    <Typography color={color} variant="h6" textAlign={"right"}>
-                      {Number(item.amount).toFixed(2)}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </>
+              />
+              <ListItemText
+                primary={
+                  <Typography color={color} variant="h6" textAlign={"right"}>
+                    {Number(item.amount).toFixed(2)}
+                  </Typography>
+                }
+              />
+            </ListItem>
           );
         })}
       </List>
