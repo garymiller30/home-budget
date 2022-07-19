@@ -35,7 +35,7 @@ export default function UserBalance() {
           justifyContent: "center",
           alignItems: "start",
         }}
-        pb={2}
+        pb={1}
       >
         <Typography sx={{ display: "block" }} variant="h2" fontWeight={500}>
           {budgetMain}

@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import UserAppBar from "../../../components/UserAppBar/UserAppBar";
@@ -45,43 +46,57 @@ export default function User({ user }: UserProps) {
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          width: "100%",
-        }}
-      >
-        <UserAppBar />
-        <Box sx={{ display: "flex", width: "100%" }} pb={2}>
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              flexDirection: "column",
-              alignItems: "center",
-              flexWrap: "wrap",
-              position: "relative",
-              left: 0,
-              top: 0,
-            }}
-          >
-            <UserBackground />
-            <UserMonth />
-            <UserBalance />
-            <UserDebitCredit />
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        ></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+          rel="stylesheet"
+        ></link>
+      </Head>
+      <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh",
+            width: "100%",
+          }}
+        >
+          <UserAppBar />
+          <Box sx={{ display: "flex", width: "100%" }} pb={2}>
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                flexDirection: "column",
+                alignItems: "center",
+                flexWrap: "wrap",
+                position: "relative",
+                left: 0,
+                top: 0,
+              }}
+            >
+              <UserBackground />
+              <UserMonth />
+              <UserBalance />
+              <UserDebitCredit />
+            </Box>
+          </Box>
+          <UserLastTransactions />
+          <Box>
+            <UserGoToReport />
+            <UserBottomButtons />
           </Box>
         </Box>
-        <UserLastTransactions />
-        <Box>
-          <UserGoToReport />
-          <UserBottomButtons />
-        </Box>
+        <div id="modal-root"></div>
       </Box>
-      <div id="modal-root"></div>
-    </Box>
+    </>
   );
 }
 

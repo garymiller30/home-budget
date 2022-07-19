@@ -33,7 +33,6 @@ export default function UserLastTransactions() {
           return (
             <>
               <ListItem
-                key={item._id.toString()}
                 secondaryAction={
                   <IconButton
                     edge="end"
