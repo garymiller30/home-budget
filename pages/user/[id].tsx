@@ -129,7 +129,7 @@ export default function User({ user }: UserProps) {
           OnClickCredit={handleOnClickCredit}
         />
       </div>
-      <DynamicModalInputForm
+      {/* <DynamicModalInputForm
         onClose={() => setShowModal(false)}
         show={showModal}
         title={`add ${inputType}`}
@@ -139,7 +139,7 @@ export default function User({ user }: UserProps) {
           userId={user._id}
           onClose={handleOnClose}
         />
-      </DynamicModalInputForm>
+      </DynamicModalInputForm> */}
       <div id="modal-root"></div>
     </>
   );
