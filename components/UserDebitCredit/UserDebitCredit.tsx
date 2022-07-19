@@ -17,8 +17,8 @@ export default function UserDebitCredit() {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         borderRadius: "20px",
       }}
-      pt={2}
-      pb={2}
+      pt={1}
+      pb={1}
       mb={3}
     >
       <Box sx={{ width: "50%" }}>

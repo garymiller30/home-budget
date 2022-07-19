@@ -17,13 +17,13 @@ export default function UserBalance() {
         borderRadius: "20px",
         filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
       }}
-      mb={3}
+      mb={2}
     >
       <Typography
         variant="h6"
         fontWeight={300}
         textAlign={"center"}
-        pt={2}
+        pt={1}
         pb={1}
       >
         balance
