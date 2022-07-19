@@ -30,8 +30,6 @@ export default function UserDebitCredit() {
           fontWeight={700}
           textAlign="center"
           color={"primary"}
-          pt={1}
-          pb={1}
         >
           + {debitSum}
         </Typography>
@@ -46,8 +44,6 @@ export default function UserDebitCredit() {
           fontWeight={700}
           textAlign="center"
           color={"secondary"}
-          pt={1}
-          pb={1}
         >
           - {creditSum}
         </Typography>
