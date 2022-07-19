@@ -26,13 +26,14 @@ export default function UserLastTransactions() {
 
   return (
     <Box sx={{ flexGrow: 1, height: "100%", overflow: "scroll" }}>
-      <List dense sx={{}}>
+      <List dense>
         {revList.map((item) => {
           const color =
             item.type === TRANSACTION_TYPE.DEBIT ? "primary" : "secondary";
           return (
             <>
               <ListItem
+                key={item._id.toString()}
                 secondaryAction={
                   <IconButton
                     edge="end"
