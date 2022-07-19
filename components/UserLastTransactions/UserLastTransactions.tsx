@@ -1,14 +1,11 @@
 import {
   Box,
-  Divider,
   IconButton,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useRecoilValue } from "recoil";
-import { transactionsAtom } from "../../recoil/atoms/transactionsAtom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
