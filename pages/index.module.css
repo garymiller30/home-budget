@@ -19,27 +19,33 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  
-  background: linear-gradient(to bottom right,
-      #2C3E50, #FD746C,
-      #FF8235, #ffff1c,
-      #92FE9D, #00C9FF,
-      #a044ff, #e73827);
+
+  background: linear-gradient(
+    to bottom right,
+    #3b6fc8,
+    #fd746c,
+    #ff8235,
+    #ffff1c,
+    #92fe9d,
+    #00c9ff,
+    #a044ff,
+    #e73827
+  );
   background-repeat: no-repeat;
   background-size: 1000% 1000%;
   animation: gradient 240s ease infinite;
 }
 @keyframes gradient {
   0% {
-    background-position: 0% 0%
+    background-position: 0% 0%;
   }
 
   50% {
-    background-position: 100% 100%
+    background-position: 100% 100%;
   }
 
   100% {
-    background-position: 0% 0%
+    background-position: 0% 0%;
   }
 }
 .img {
@@ -49,9 +55,9 @@
 .button {
   background-image: linear-gradient(
     to right,
-    #a73737 0%,
-    #7a2828 51%,
-    #a73737 100%
+    #a79c37 0%,
+    #527a28 51%,
+    #37a78b 100%
   );
   cursor: pointer;
 }
@@ -82,6 +88,6 @@
   align-items: center;
   justify-content: center;
 }
-.title{
+.title {
   text-align: center;
 }

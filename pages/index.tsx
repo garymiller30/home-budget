@@ -35,10 +35,7 @@ export default function Home({ user }: HomeProps) {
     return (
       <div className={`${s.container} ${s.bg}`}>
         <Stack spacing={5}>
-          <Typography variant="h2" className={s.title}>
-            Home budget
-            <br /> app
-          </Typography>
+          <Typography variant="h2">Home budget</Typography>
           <Button
             onClick={() => {
               signIn("google", { callbackUrl: "/" });
