@@ -43,6 +43,8 @@ export default function User({ user }: UserProps) {
 
     getTransactions();
     setUser(user);
+    window.addEventListener("resize", appHeight);
+    appHeight();
   }, []);
   if (!user) return <p>Unauthorized</p>;
 
