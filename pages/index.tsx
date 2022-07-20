@@ -9,6 +9,7 @@ import Router, { useRouter } from "next/router";
 import { iUser } from "../interfaces/iUser";
 import { GetServerSideProps } from "next";
 import { useEffect } from "react";
+import { signIn } from "next-auth/react";
 
 interface HomeProps {
   user: iUser;
@@ -35,11 +36,13 @@ export default function Home({ user }: HomeProps) {
       <div className={`${s.container} ${s.bg}`}>
         <Stack spacing={5}>
           <Typography variant="h2" className={s.title}>
-            simple budget
+            Home budget
             <br /> app
           </Typography>
           <Button
-            onClick={() => Router.push("/login")}
+            onClick={() => {
+              signIn("google", { callbackUrl: "/" });
+            }}
             variant="contained"
             size="large"
           >

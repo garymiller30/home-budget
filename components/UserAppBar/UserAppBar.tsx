@@ -3,20 +3,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircle } from "@mui/icons-material";
 import AppMenu from "../AppMenu/AppMenu";
 import { useState } from "react";
+import AccountMenu from "../AccountMenu/AccountMenu";
 
 export default function UserAppBar() {
   const [anchorAppMenuBnt, setAnchorAppMenuBnt] = useState<null | HTMLElement>(
     null
   );
+  const [anchorAccMenuBnt, setAnchorAccMenuBnt] = useState<null | HTMLElement>(
+    null
+  );
 
-  const open = Boolean(anchorAppMenuBnt);
-
-  const handleCloseAppMenu = () => {
-    setAnchorAppMenuBnt(null);
-  };
+  const openAppMenu = Boolean(anchorAppMenuBnt);
+  const openAccMenu = Boolean(anchorAccMenuBnt);
 
   const handleAppMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorAppMenuBnt(event.currentTarget);
+  };
+  const handleAccMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorAccMenuBnt(event.currentTarget);
   };
 
   return (
@@ -34,10 +38,11 @@ export default function UserAppBar() {
         </IconButton>
 
         <AppMenu
-          open={open}
-          close={handleCloseAppMenu}
+          open={openAppMenu}
+          close={() => setAnchorAppMenuBnt(null)}
           anchor={anchorAppMenuBnt}
         />
+
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Home Budget
         </Typography>
@@ -48,9 +53,15 @@ export default function UserAppBar() {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             color="inherit"
+            onClick={handleAccMenuClick}
           >
             <AccountCircle />
           </IconButton>
+          <AccountMenu
+            open={openAccMenu}
+            close={() => setAnchorAccMenuBnt(null)}
+            anchor={anchorAccMenuBnt}
+          />
         </div>
       </Toolbar>
     </AppBar>
