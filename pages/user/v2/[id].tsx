@@ -18,6 +18,7 @@ import { iUser } from "../../../interfaces/iUser";
 import { iUserResponse } from "../../../interfaces/iUserResponse";
 import { transactionsAtom } from "../../../recoil/atoms/transactionsAtom";
 import { userAtom } from "../../../recoil/atoms/userAtom";
+import { appHeight } from "../../../utils/appHeight";
 import s from "./[id].module.css";
 interface UserProps {
   user: iUser;
@@ -46,7 +47,7 @@ export default function User({ user }: UserProps) {
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <>
+    <div>
       <Head>
         <title>Home Budget</title>
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
@@ -97,7 +98,7 @@ export default function User({ user }: UserProps) {
         </Box>
         <div id="modal-root"></div>
       </Box>
-    </>
+    </div>
   );
 }
 
