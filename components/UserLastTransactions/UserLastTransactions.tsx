@@ -20,7 +20,7 @@ export default function UserLastTransactions() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, height: "100%", overflow: "scroll" }}>
+    <Box sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}>
       <List dense>
         {revList.map((item) => {
           const color =
