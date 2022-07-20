@@ -18,7 +18,7 @@ import { iUser } from "../../../interfaces/iUser";
 import { iUserResponse } from "../../../interfaces/iUserResponse";
 import { transactionsAtom } from "../../../recoil/atoms/transactionsAtom";
 import { userAtom } from "../../../recoil/atoms/userAtom";
-
+import s from "./[id].module.css";
 interface UserProps {
   user: iUser;
 }
@@ -65,14 +65,9 @@ export default function User({ user }: UserProps) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            height: "100vh",
             width: "100%",
-            position: "fixed",
-            left: "0",
-            top: "0",
-            right: "0",
-            bottom: "0",
           }}
+          className={s.box}
         >
           <UserAppBar />
           <Box sx={{ display: "flex", width: "100%" }} pb={2}>
