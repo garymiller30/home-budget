@@ -66,6 +66,7 @@ export default function User({ user }: UserProps) {
             display: "flex",
             flexDirection: "column",
             height: "100vh",
+            maxHeight: "100%",
             width: "100%",
           }}
         >
