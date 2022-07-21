@@ -38,10 +38,9 @@ export default function User({ user }: UserProps) {
           date.getMonth() + 1
         );
         setTransList(t);
-        
       } catch (error) {}
     };
-    useAutoTransferBalance(user._id);
+
     getTransactions();
     setUser(user);
     //  хак для сафарі
@@ -49,7 +48,7 @@ export default function User({ user }: UserProps) {
     appHeight();
   }, []);
   if (!user) return <p>Unauthorized</p>;
-
+  useAutoTransferBalance(user._id);
   return (
     <div>
       <Head>
