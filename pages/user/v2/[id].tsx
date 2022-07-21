@@ -97,7 +97,7 @@ export default function User({ user }: UserProps) {
           </Box>
           <UserLastTransactions />
           <Box>
-            <UserGoToReport />
+            {/* <UserGoToReport /> */}
             <UserBottomButtons />
           </Box>
         </Box>
