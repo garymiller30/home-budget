@@ -5,24 +5,24 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import s from "./index.module.css";
 import { Circles } from "react-loader-spinner";
-import Router, { useRouter } from "next/router";
+//import Router, { useRouter } from "next/router";
 import { iUser } from "../interfaces/iUser";
 import { GetServerSideProps } from "next";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import { signIn } from "next-auth/react";
 
 interface HomeProps {
   user: iUser;
 }
-export default function Home({ user }: HomeProps) {
+export default function Home() {
   const { status } = useSession();
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      router.push(`/user/v2/${user._id}`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push(`/user/v2/${user._id}`);
+  //   }
+  // }, []);
 
   //console.log("user:", user);
   if (status === "loading" || status === "authenticated") {
@@ -53,14 +53,15 @@ export default function Home({ user }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-
+  const { res } = context;
   if (!session || !session.user) {
     return { props: {} };
   }
 
   const user = await getUser(session.user);
 
-  return {
-    props: { user },
-  };
+  res.setHeader("Location", `/user/v2/${user._id}`);
+  res.statusCode = 302;
+  res.end();
+  return { props: {} };
 };
