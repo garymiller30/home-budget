@@ -5,7 +5,6 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import UserAppBar from "../../../components/UserAppBar/UserAppBar";
-import UserBackground from "../../../components/UserBackground/UserBackground";
 import UserBalance from "../../../components/UserBalance/UserBalance";
 import UserBottomButtons from "../../../components/UserBottomButtons/UserBottomButtons";
 import UserDebitCredit from "../../../components/UserDebitCredit/UserDebitCredit";
@@ -14,6 +13,7 @@ import UserLastTransactions from "../../../components/UserLastTransactions/UserL
 import UserMonth from "../../../components/UserMonth/UserMonth";
 import { fetchTransactions } from "../../../db/transaction/fetchTransactions";
 import { getUser } from "../../../db/user";
+import { useAutoTransferBalance } from "../../../hooks/useAutoTransferBalance";
 import { iUser } from "../../../interfaces/iUser";
 import { iUserResponse } from "../../../interfaces/iUserResponse";
 import { transactionsAtom } from "../../../recoil/atoms/transactionsAtom";
@@ -38,6 +38,7 @@ export default function User({ user }: UserProps) {
           date.getMonth() + 1
         );
         setTransList(t);
+        useAutoTransferBalance(user._id);
       } catch (error) {}
     };
 
