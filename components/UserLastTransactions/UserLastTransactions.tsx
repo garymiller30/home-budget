@@ -28,6 +28,8 @@ export default function UserLastTransactions() {
             item.type === TRANSACTION_TYPE.DEBIT ? "primary" : "secondary";
 
           const [m, k] = splitFloatNumber(item.amount);
+
+          const sign = item.type === TRANSACTION_TYPE.DEBIT ? "+" : "-";
           return (
             <ListItem
               key={item._id}
@@ -52,15 +54,41 @@ export default function UserLastTransactions() {
               />
               <ListItemText
                 primary={
-                  <Box>
-                    <Typography color={color} textAlign={"right"} variant="h6">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "flex-end",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <Typography
+                      color={color}
+                      textAlign={"right"}
+                      variant="h6"
+                      sx={{ display: "inline", lineHeight: "1.6rem" }}
+                      mr="0.2rem"
+                    >
+                      {sign}
+                    </Typography>
+                    <Typography
+                      color={color}
+                      textAlign={"right"}
+                      variant="h6"
+                      sx={{ display: "inline", lineHeight: "1.6rem" }}
+                    >
                       {m}
-                      <Typography
-                        variant="body2"
-                        sx={{ display: "inline", fontWeight: "300" }}
-                      >
-                        {k}
-                      </Typography>
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        display: "inline",
+                        fontWeight: "300",
+                        fontSize: "0.8rem",
+                      }}
+                      pl="0.1rem"
+                    >
+                      {k}
                     </Typography>
                   </Box>
                 }
