@@ -52,15 +52,17 @@ export default function UserLastTransactions() {
               />
               <ListItemText
                 primary={
-                  <Typography color={color} textAlign={"right"} variant="h6">
-                    {m}
-                    <Typography
-                      variant="body2"
-                      sx={{ display: "inline", fontWeight: "300" }}
-                    >
-                      {k}
+                  <Box>
+                    <Typography color={color} textAlign={"right"} variant="h6">
+                      {m}
+                      <Typography
+                        variant="body2"
+                        sx={{ display: "inline", fontWeight: "300" }}
+                      >
+                        {k}
+                      </Typography>
                     </Typography>
-                  </Typography>
+                  </Box>
                 }
               />
             </ListItem>

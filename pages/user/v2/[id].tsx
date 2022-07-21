@@ -27,6 +27,7 @@ interface UserProps {
 export default function User({ user }: UserProps) {
   const setTransList = useSetRecoilState(transactionsAtom);
   const setUser = useSetRecoilState(userAtom);
+  const autobalance = useAutoTransferBalance();
 
   useEffect(() => {
     const getTransactions = async () => {
@@ -38,6 +39,7 @@ export default function User({ user }: UserProps) {
           date.getMonth() + 1
         );
         setTransList(t);
+        await autobalance(user._id);
       } catch (error) {}
     };
 
@@ -48,7 +50,7 @@ export default function User({ user }: UserProps) {
     appHeight();
   }, []);
   if (!user) return <p>Unauthorized</p>;
-  useAutoTransferBalance(user._id);
+
   return (
     <div>
       <Head>
