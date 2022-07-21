@@ -43,6 +43,7 @@ export default function User({ user }: UserProps) {
 
     getTransactions();
     setUser(user);
+    //  хак для сафарі
     window.addEventListener("resize", appHeight);
     appHeight();
   }, []);
@@ -70,7 +71,7 @@ export default function User({ user }: UserProps) {
             flexDirection: "column",
             width: "100%",
           }}
-          className={s.box}
+          className={`${s.box}`}
         >
           <UserAppBar />
           <Box sx={{ display: "flex", width: "100%" }} pb={2}>
@@ -85,8 +86,8 @@ export default function User({ user }: UserProps) {
                 left: 0,
                 top: 0,
               }}
+              className={`${s.back}`}
             >
-              <UserBackground />
               <UserMonth />
               <UserBalance />
               <UserDebitCredit />
