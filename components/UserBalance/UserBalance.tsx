@@ -37,10 +37,10 @@ export default function UserBalance() {
         }}
         pb={1}
       >
-        <Typography sx={{ display: "block" }} variant="h3" fontWeight={500}>
+        <Typography sx={{ lineHeight: "3.1rem" }} variant="h3" fontWeight={500}>
           {budgetMain}
         </Typography>
-        <Typography sx={{ display: "block" }} variant="h6" fontWeight={300}>
+        <Typography sx={{}} variant="h6" fontWeight={300}>
           {budgetKop}
         </Typography>
       </Box>

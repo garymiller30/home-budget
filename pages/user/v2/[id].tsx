@@ -38,10 +38,10 @@ export default function User({ user }: UserProps) {
           date.getMonth() + 1
         );
         setTransList(t);
-        useAutoTransferBalance(user._id);
+        
       } catch (error) {}
     };
-
+    useAutoTransferBalance(user._id);
     getTransactions();
     setUser(user);
     //  хак для сафарі

@@ -1,12 +1,12 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
-import { creditSumSelector } from "../../recoil/selectors/creditSumSelector";
+import { splitFloatNumber } from "../../lib";
 import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
-import { debitSumSelector } from "../../recoil/selectors/debitSumSelector";
 
 export default function UserDebitCredit() {
   const { creditSum, debitSum } = useRecoilValue(debitCreditSumSelector);
-
+  const [debM, debK] = splitFloatNumber(debitSum);
+  const [credM, credK] = splitFloatNumber(creditSum);
   return (
     <Box
       sx={{
@@ -25,28 +25,62 @@ export default function UserDebitCredit() {
         <Typography variant="h6" fontWeight={400} textAlign="center">
           debit:
         </Typography>
-        <Typography
-          sx={{ fontSize: "24px" }}
-          fontWeight={700}
-          textAlign="center"
-          color={"primary"}
+        <Box
+          sx={{
+            display: "inline-flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "start",
+          }}
         >
-          + {debitSum}
-        </Typography>
+          <Typography
+            sx={{ fontSize: "1.5rem", lineHeight: "1.7rem" }}
+            fontWeight={700}
+            textAlign="center"
+            color={"primary"}
+          >
+            + {debM}
+          </Typography>
+          <Typography
+            sx={{ fontSize: "0.875rem" }}
+            fontWeight={300}
+            textAlign="center"
+            color={"primary"}
+          >
+            {debK}
+          </Typography>
+        </Box>
       </Box>
       <Divider orientation="vertical" flexItem />
       <Box sx={{ width: "50%" }}>
         <Typography variant="h6" fontWeight={400} textAlign="center">
           credit:
         </Typography>
-        <Typography
-          sx={{ fontSize: "24px" }}
-          fontWeight={700}
-          textAlign="center"
-          color={"secondary"}
+        <Box
+          sx={{
+            display: "inline-flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "start",
+          }}
         >
-          - {creditSum}
-        </Typography>
+          <Typography
+            sx={{ fontSize: "1.5rem", lineHeight: "1.7rem" }}
+            fontWeight={700}
+            textAlign="center"
+            color={"secondary"}
+          >
+            - {credM}
+          </Typography>
+          <Typography
+            sx={{ fontSize: "0.875rem" }}
+            fontWeight={300}
+            textAlign="center"
+            color={"secondary"}
+          >
+            {credK}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

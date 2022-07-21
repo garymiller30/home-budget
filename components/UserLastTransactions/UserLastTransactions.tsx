@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
+import { splitFloatNumber } from "../../lib";
 
 export default function UserLastTransactions() {
   const controller = useTransactionController();
@@ -25,6 +26,8 @@ export default function UserLastTransactions() {
         {revList.map((item) => {
           const color =
             item.type === TRANSACTION_TYPE.DEBIT ? "primary" : "secondary";
+
+          const [m, k] = splitFloatNumber(item.amount);
           return (
             <ListItem
               key={item._id}
@@ -49,8 +52,14 @@ export default function UserLastTransactions() {
               />
               <ListItemText
                 primary={
-                  <Typography color={color} variant="h6" textAlign={"right"}>
-                    {Number(item.amount).toFixed(2)}
+                  <Typography color={color} textAlign={"right"} variant="h6">
+                    {m}
+                    <Typography
+                      variant="body2"
+                      sx={{ display: "inline", fontWeight: "300" }}
+                    >
+                      {k}
+                    </Typography>
                   </Typography>
                 }
               />
