@@ -4,25 +4,29 @@ import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import UserAppBar from "../../../components/UserAppBar/UserAppBar";
-import UserBalance from "../../../components/UserBalance/UserBalance";
-import UserBottomButtons from "../../../components/UserBottomButtons/UserBottomButtons";
-import UserDebitCredit from "../../../components/UserDebitCredit/UserDebitCredit";
+import UserAppBar from "@/components/UserAppBar/UserAppBar";
+import UserBalance from "@/components/UserBalance/UserBalance";
+import UserBottomButtons from "@/components/UserBottomButtons/UserBottomButtons";
+import UserDebitCredit from "@/components/UserDebitCredit/UserDebitCredit";
 // import UserGoToReport from "../../../components/UserGoToReport/UserGoToReport";
-import UserLastTransactions from "../../../components/UserLastTransactions/UserLastTransactions";
-import UserMonth from "../../../components/UserMonth/UserMonth";
-import { fetchTransactions } from "../../../db/transaction/fetchTransactions";
-import { getUser } from "../../../db/user";
-import { useAutoTransferBalance } from "../../../hooks/useAutoTransferBalance";
-import { iUser } from "../../../interfaces/iUser";
-import { iUserResponse } from "../../../interfaces/iUserResponse";
-import { transactionsAtom } from "../../../recoil/atoms/transactionsAtom";
-import { userAtom } from "../../../recoil/atoms/userAtom";
-import { appHeight } from "../../../utils/appHeight";
+import UserMonth from "@/components/UserMonth/UserMonth";
+import { fetchTransactions } from "@/db/transaction/fetchTransactions";
+import { getUser } from "@/db/user";
+import { useAutoTransferBalance } from "@/hooks/useAutoTransferBalance";
+import { iUser } from "@/interfaces/iUser";
+import { iUserResponse } from "@/interfaces/iUserResponse";
+import { transactionsAtom } from "@/recoil/atoms/transactionsAtom";
+import { userAtom } from "@/recoil/atoms/userAtom";
+import { appHeight } from "@/utils/appHeight";
 import s from "./[id].module.css";
+import dynamic from "next/dynamic";
 interface UserProps {
   user: iUser;
 }
+
+const DynUserLastTransactions = dynamic(
+  () => import("@/components/UserLastTransactions/UserLastTransactions")
+);
 
 export default function User({ user }: UserProps) {
   const setTransList = useSetRecoilState(transactionsAtom);
@@ -87,7 +91,7 @@ export default function User({ user }: UserProps) {
               <UserDebitCredit />
             </Box>
           </Box>
-          <UserLastTransactions />
+          <DynUserLastTransactions />
           <Box>
             {/* <UserGoToReport /> */}
             <UserBottomButtons />
