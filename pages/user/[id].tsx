@@ -54,6 +54,7 @@ export default function User({ user }: UserProps) {
     };
 
     checkMonthBalance();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function User({ user }: UserProps) {
     };
 
     getTransactions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
 
   async function handleonDelete(transaction: iTransaction) {
