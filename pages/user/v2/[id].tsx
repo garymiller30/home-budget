@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import UserAppBar from "@/components/UserAppBar/UserAppBar";
 import UserBalance from "@/components/UserBalance/UserBalance";
@@ -28,7 +28,10 @@ export default function User({ user }: UserProps) {
   const setTransList = useSetRecoilState(transactionsAtom);
   const setUser = useSetRecoilState(userAtom);
   const autobalance = useAutoTransferBalance();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   const transPromise = getTransactions();
+
   async function getTransactions() {
     try {
       if (user) {
@@ -47,7 +50,10 @@ export default function User({ user }: UserProps) {
     return null;
   }
   useEffect(() => {
-    transPromise.then((data) => setTransList(data));
+    transPromise.then((data) => {
+      setTransList(data);
+      setIsLoaded(true);
+    });
     //   getTransactions();
     setUser(user);
     //  хак для сафарі
@@ -88,7 +94,7 @@ export default function User({ user }: UserProps) {
               className={`${s.back}`}
             >
               <UserMonth />
-              <UserBalance />
+              <UserBalance isLoaded={isLoaded} />
               <UserDebitCredit />
             </Box>
           </Box>

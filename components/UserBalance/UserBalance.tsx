@@ -1,9 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
 
-export default function UserBalance() {
+type UserBalanceProp = {
+  isLoaded: boolean;
+};
+
+export default function UserBalance({ isLoaded }: UserBalanceProp) {
   const balance = useRecoilValue(balanceSelector);
 
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
@@ -38,10 +42,10 @@ export default function UserBalance() {
         pb={1}
       >
         <Typography sx={{ lineHeight: "3.1rem" }} variant="h3" fontWeight={500}>
-          {budgetMain}
+          {isLoaded ? budgetMain : <Skeleton width={100} />}
         </Typography>
         <Typography sx={{}} variant="h6" fontWeight={300}>
-          {budgetKop}
+          {isLoaded ? budgetKop : <Skeleton width={30} />}
         </Typography>
       </Box>
     </Box>
