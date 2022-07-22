@@ -19,23 +19,19 @@ import { transactionsAtom } from "@/recoil/atoms/transactionsAtom";
 import { userAtom } from "@/recoil/atoms/userAtom";
 import { appHeight } from "@/utils/appHeight";
 import s from "./[id].module.css";
-import dynamic from "next/dynamic";
+import UserLastTransactions from "@/components/UserLastTransactions/UserLastTransactions";
 interface UserProps {
   user: iUser;
 }
-
-const DynUserLastTransactions = dynamic(
-  () => import("@/components/UserLastTransactions/UserLastTransactions")
-);
 
 export default function User({ user }: UserProps) {
   const setTransList = useSetRecoilState(transactionsAtom);
   const setUser = useSetRecoilState(userAtom);
   const autobalance = useAutoTransferBalance();
-
-  useEffect(() => {
-    const getTransactions = async () => {
-      try {
+  const transPromise = getTransactions();
+  async function getTransactions() {
+    try {
+      if (user) {
         await autobalance(user._id);
         const date = new Date();
         const t = await fetchTransactions(
@@ -43,10 +39,15 @@ export default function User({ user }: UserProps) {
           date.getFullYear(),
           date.getMonth() + 1
         );
-        setTransList(t);
-      } catch (error) {}
-    };
-
+        return t;
+      }
+    } catch (error) {
+      return null;
+    }
+    return null;
+  }
+  useEffect(() => {
+    transPromise.then((data) => setTransList(data));
     //   getTransactions();
     setUser(user);
     //  хак для сафарі
@@ -91,7 +92,7 @@ export default function User({ user }: UserProps) {
               <UserDebitCredit />
             </Box>
           </Box>
-          <DynUserLastTransactions />
+          <UserLastTransactions />
           <Box>
             {/* <UserGoToReport /> */}
             <UserBottomButtons />
