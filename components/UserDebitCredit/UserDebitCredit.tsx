@@ -70,7 +70,7 @@ export default function UserDebitCredit() {
             textAlign="center"
             color={"secondary"}
           >
-            - {credM}
+            - {credM.toString().padStart(2, "0")}
           </Typography>
           <Typography
             sx={{ fontSize: "0.875rem" }}
@@ -78,7 +78,7 @@ export default function UserDebitCredit() {
             textAlign="center"
             color={"secondary"}
           >
-            {credK}
+            {credK.toString().padStart(2, "0")}
           </Typography>
         </Box>
       </Box>
