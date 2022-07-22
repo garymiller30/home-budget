@@ -45,7 +45,11 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
           {isLoaded ? budgetMain : <Skeleton width={100} />}
         </Typography>
         <Typography sx={{}} variant="h6" fontWeight={300}>
-          {isLoaded ? budgetKop : <Skeleton width={30} />}
+          {isLoaded ? (
+            budgetKop.toString().padStart(2, "0")
+          ) : (
+            <Skeleton width={30} />
+          )}
         </Typography>
       </Box>
     </Box>

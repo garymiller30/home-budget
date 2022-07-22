@@ -81,6 +81,7 @@ export default function UserLastTransactions() {
                     </Typography>
                     <Typography
                       variant="h6"
+                      color={color}
                       sx={{
                         display: "inline",
                         fontWeight: "300",
@@ -88,7 +89,7 @@ export default function UserLastTransactions() {
                       }}
                       pl="0.1rem"
                     >
-                      {k}
+                      {k.toString().padStart(2, "0")}
                     </Typography>
                   </Box>
                 }
