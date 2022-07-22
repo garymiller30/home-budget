@@ -21,29 +21,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
-    const { userId, year, month, curYear, curMonth } = req.query;
-    const monthBalance = await getMonthBalance(+year, +month, +curYear, +curMonth);
-    if (!monthBalance.isPreviousMonthMoved) {
-        const prevDate = new Date(+year, +month);
-        prevDate.setMonth(prevDate.getMonth() - 1);
-        const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
-        const prevTransactions = await getTransactions(userId as string, {
-            year: prevYear,
-            month: prevMonth,
-        });
-        const { debit, credit } = transactionSplitByType(prevTransactions);
-        const bdgt = getBudget(debit, credit);
-        //потрібно додати транзакцію
-        const transaction = new Transaction();
-        transaction.ownerId = userId as string;
-        transaction.type = TRANSACTION_TYPE.DEBIT;
-        transaction.description = "prev month";
-        transaction.comment = "auto";
-        transaction.amount = bdgt;
-        await createTransaction(JSON.parse(JSON.stringify(transaction)));
-        await updateMonthBalance(monthBalance);
 
+    const { userId, year, month, curYear, curMonth } = req.query;
+    if (year && month && curYear && curMonth) {
+        const monthBalance = await getMonthBalance(+year, +month, +curYear, +curMonth);
+        if (!monthBalance.isPreviousMonthMoved) {
+            const prevDate = new Date(+year, +month);
+            prevDate.setMonth(prevDate.getMonth() - 1);
+            const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
+            const prevTransactions = await getTransactions(userId as string, {
+                year: prevYear,
+                month: prevMonth,
+            });
+            const { debit, credit } = transactionSplitByType(prevTransactions);
+            const bdgt = getBudget(debit, credit);
+            //потрібно додати транзакцію
+            const transaction = new Transaction();
+            transaction.ownerId = userId as string;
+            transaction.type = TRANSACTION_TYPE.DEBIT;
+            transaction.description = "prev month";
+            transaction.comment = "auto";
+            transaction.amount = bdgt;
+            await createTransaction(JSON.parse(JSON.stringify(transaction)));
+            await updateMonthBalance(monthBalance);
+
+        }
     }
+
     return res.json({});
 }
 
