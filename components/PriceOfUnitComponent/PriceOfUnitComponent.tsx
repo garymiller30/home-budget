@@ -12,6 +12,7 @@ const PriceOfUnitComponent = () => {
 
   useEffect(() => {
     handleAdd();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
