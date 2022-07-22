@@ -32,6 +32,8 @@ export function useTransactionController() {
         return list;
     }
     const getAllDesc = () => {
+
+        if (!list) return [];
         const revList = [...list];
         revList.reverse();
         return revList;
