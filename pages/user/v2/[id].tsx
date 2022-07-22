@@ -8,7 +8,7 @@ import UserAppBar from "../../../components/UserAppBar/UserAppBar";
 import UserBalance from "../../../components/UserBalance/UserBalance";
 import UserBottomButtons from "../../../components/UserBottomButtons/UserBottomButtons";
 import UserDebitCredit from "../../../components/UserDebitCredit/UserDebitCredit";
-import UserGoToReport from "../../../components/UserGoToReport/UserGoToReport";
+// import UserGoToReport from "../../../components/UserGoToReport/UserGoToReport";
 import UserLastTransactions from "../../../components/UserLastTransactions/UserLastTransactions";
 import UserMonth from "../../../components/UserMonth/UserMonth";
 import { fetchTransactions } from "../../../db/transaction/fetchTransactions";
@@ -55,16 +55,6 @@ export default function User({ user }: UserProps) {
     <div>
       <Head>
         <title>Home Budget</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        ></link>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-          rel="stylesheet"
-        ></link>
       </Head>
       <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
         <Box
