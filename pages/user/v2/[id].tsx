@@ -32,6 +32,7 @@ export default function User({ user }: UserProps) {
   useEffect(() => {
     const getTransactions = async () => {
       try {
+        await autobalance(user._id);
         const date = new Date();
         const t = await fetchTransactions(
           user._id,
@@ -39,7 +40,6 @@ export default function User({ user }: UserProps) {
           date.getMonth() + 1
         );
         setTransList(t);
-        await autobalance(user._id);
       } catch (error) {}
     };
 
