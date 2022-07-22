@@ -36,6 +36,7 @@ export default function TransactionContainer({
     const bdgt = getBudget(debit, credit);
     setBudget(bdgt);
     setPerDay(getPerDay(bdgt, date));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactions]);
   return (
     <>
