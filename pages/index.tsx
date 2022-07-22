@@ -28,7 +28,7 @@ export default function Home({ user }: HomeProps) {
         { shallow: true }
       );
     }
-  }, []);
+  }, [user, router]);
 
   //console.log("user:", user);
   if (status === "loading" || status === "authenticated") {
