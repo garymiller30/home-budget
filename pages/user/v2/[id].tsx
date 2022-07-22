@@ -34,24 +34,24 @@ export default function User({ user }: UserProps) {
   const autobalance = useAutoTransferBalance();
 
   useEffect(() => {
-    //   const getTransactions = async () => {
-    //     try {
-    //       await autobalance(user._id);
-    //       const date = new Date();
-    //       const t = await fetchTransactions(
-    //         user._id,
-    //         date.getFullYear(),
-    //         date.getMonth() + 1
-    //       );
-    //       setTransList(t);
-    //     } catch (error) {}
-    //   };
+    const getTransactions = async () => {
+      try {
+        await autobalance(user._id);
+        const date = new Date();
+        const t = await fetchTransactions(
+          user._id,
+          date.getFullYear(),
+          date.getMonth() + 1
+        );
+        setTransList(t);
+      } catch (error) {}
+    };
 
     //   getTransactions();
     setUser(user);
-    //   //  хак для сафарі
-    //   window.addEventListener("resize", appHeight);
-    //   appHeight();
+    //  хак для сафарі
+    window.addEventListener("resize", appHeight);
+    appHeight();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
