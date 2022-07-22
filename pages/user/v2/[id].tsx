@@ -48,7 +48,9 @@ export default function User({ user }: UserProps) {
     //  хак для сафарі
     window.addEventListener("resize", appHeight);
     appHeight();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   if (!user) return <p>Unauthorized</p>;
 
   return (
