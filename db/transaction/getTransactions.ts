@@ -19,7 +19,7 @@ export async function getTransactions(
   };
   const transactions = await collection.find(filter).toArray();
 
-  //return res.map((x) => ({ ...x, _id: x._id.toString() }));
+  return transactions.map((x: any) => ({ ...x, _id: x._id.toString() }));
   //return JSON.parse(JSON.stringify(transactions));
-  return []
+  //return []
 }
