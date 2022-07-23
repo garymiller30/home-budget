@@ -50,6 +50,7 @@ export default function User({ user }: UserProps) {
   useEffect(() => {
     const transPromise = getTransactions();
     transPromise.then((data) => {
+      console.log("getTransaction=======");
       setTransList(data);
       setIsLoaded(true);
     });
