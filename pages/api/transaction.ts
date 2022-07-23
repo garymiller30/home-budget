@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 async function addTransaction(req: NextApiRequest, res: NextApiResponse) {
   const trans = await createTransaction(JSON.parse(req.body));
-  return res.json(trans);
+  return res.status(201).json(trans);
 }
 async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
   const id = JSON.parse(req.body);
@@ -27,7 +27,7 @@ async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
   if (transaction) {
     return res.json(transaction);
   }
-  return res.json(null);
+  return res.status(404).json(null);
 }
 
 async function getTransactions(req: NextApiRequest, res: NextApiResponse) {
@@ -38,5 +38,5 @@ async function getTransactions(req: NextApiRequest, res: NextApiResponse) {
 
   const trans = await getTrans(userId as string, { year: Number(year), month: Number(month) })
 
-  return res.json(trans);
+  return res.status(200).json(trans);
 }
