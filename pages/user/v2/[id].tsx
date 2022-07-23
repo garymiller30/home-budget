@@ -30,8 +30,6 @@ export default function User({ user }: UserProps) {
   const autobalance = useAutoTransferBalance();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const transPromise = getTransactions();
-
   async function getTransactions() {
     try {
       if (user) {
@@ -50,6 +48,7 @@ export default function User({ user }: UserProps) {
     return null;
   }
   useEffect(() => {
+    const transPromise = getTransactions();
     transPromise.then((data) => {
       setTransList(data);
       setIsLoaded(true);
