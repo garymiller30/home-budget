@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return await delTransaction(req, res);
     }
   }
+  return res.status(404)
 }
 
 async function addTransaction(req: NextApiRequest, res: NextApiResponse) {
@@ -26,6 +27,7 @@ async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
   if (transaction) {
     return res.json(transaction);
   }
+  return res.json(null);
 }
 
 async function getTransactions(req: NextApiRequest, res: NextApiResponse) {

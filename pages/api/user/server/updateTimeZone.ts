@@ -7,6 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'PUT':
             return await updateUserApi(req, res);
     }
+    return res.status(404)
 }
 
 async function updateUserApi(req: NextApiRequest, res: NextApiResponse) {
