@@ -1,4 +1,5 @@
-import { Box, Divider, Typography } from "@mui/material";
+//import { Box, Divider, Typography } from "@mui/material";
+import { Box, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
@@ -22,9 +23,9 @@ export default function UserDebitCredit() {
       mb={3}
     >
       <Box sx={{ width: "50%" }}>
-        <Typography variant="h6" fontWeight={400} textAlign="center">
+        <Text variant="h6" fontWeight={400} textAlign="center">
           debit:
-        </Typography>
+        </Text>
         <Box
           sx={{
             display: "inline-flex",
@@ -33,29 +34,30 @@ export default function UserDebitCredit() {
             alignItems: "start",
           }}
         >
-          <Typography
-            sx={{ fontSize: "1.5rem", lineHeight: "1.7rem" }}
+          <Text
+            fontSize="1.5rem"
+            lineHeight="1.7rem"
             fontWeight={700}
             textAlign="center"
-            color={"primary"}
+            color={"green"}
           >
             + {debM}
-          </Typography>
-          <Typography
-            sx={{ fontSize: "0.875rem" }}
+          </Text>
+          <Text
+            fontSize="0.875rem"
             fontWeight={300}
             textAlign="center"
-            color={"primary"}
+            color={"green"}
           >
             {debK.toString().padStart(2, "0")}
-          </Typography>
+          </Text>
         </Box>
       </Box>
-      <Divider orientation="vertical" flexItem />
+      {/* <Divider orientation="vertical" flexItem /> */}
       <Box sx={{ width: "50%" }}>
-        <Typography variant="h6" fontWeight={400} textAlign="center">
+        <Text fontWeight={400} textAlign="center">
           credit:
-        </Typography>
+        </Text>
         <Box
           sx={{
             display: "inline-flex",
@@ -64,22 +66,22 @@ export default function UserDebitCredit() {
             alignItems: "start",
           }}
         >
-          <Typography
+          <Text
             sx={{ fontSize: "1.5rem", lineHeight: "1.7rem" }}
             fontWeight={700}
             textAlign="center"
-            color={"secondary"}
+            color={"darkmagenta"}
           >
             - {credM}
-          </Typography>
-          <Typography
+          </Text>
+          <Text
             sx={{ fontSize: "0.875rem" }}
             fontWeight={300}
             textAlign="center"
-            color={"secondary"}
+            color={"darkmagenta"}
           >
             {credK.toString().padStart(2, "0")}
-          </Typography>
+          </Text>
         </Box>
       </Box>
     </Box>

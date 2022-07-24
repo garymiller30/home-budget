@@ -1,7 +1,9 @@
+import { CloseIcon } from "@chakra-ui/icons";
+import { Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import CloseIcon from "@mui/icons-material/Close";
-import { Typography } from "@mui/material";
+// import CloseIcon from "@mui/icons-material/Close";
+// import { Typography } from "@mui/material";
 import s from "./ModalInputForm.module.css";
 
 interface ModalInputFormProps {
@@ -33,9 +35,9 @@ export default function ModalInputForm({
         </div>
 
         {title && (
-          <Typography variant="h5" textAlign="center">
+          <Text variant="h5" textAlign="center">
             {title}
-          </Typography>
+          </Text>
         )}
         {children}
       </div>

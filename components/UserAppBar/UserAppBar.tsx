@@ -1,9 +1,11 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { AccountCircle } from "@mui/icons-material";
-import AppMenu from "../AppMenu/AppMenu";
+//import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import { AccountCircle } from "@mui/icons-material";
+// import AppMenu from "../AppMenu/AppMenu";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { Avatar, Box, Flex, IconButton, Spacer, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import AccountMenu from "../AccountMenu/AccountMenu";
+// import AccountMenu from "../AccountMenu/AccountMenu";
 
 export default function UserAppBar() {
   const [anchorAppMenuBnt, setAnchorAppMenuBnt] = useState<null | HTMLElement>(
@@ -24,8 +26,21 @@ export default function UserAppBar() {
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <Flex
+      position="static"
+      bgColor="royalblue"
+      w="100%"
+      h="3rem"
+      alignItems="center"
+      p={2}
+    >
+      <IconButton aria-label="appMenu" size="sm" icon={<HamburgerIcon />} />
+      <Text fontSize="2xl" pl={2} color="yellow">
+        Home Budget
+      </Text>
+      <Spacer />
+      <Avatar size="sm" />
+      {/* <Toolbar>
         <IconButton
           size="large"
           edge="start"
@@ -50,7 +65,7 @@ export default function UserAppBar() {
           <IconButton
             size="large"
             aria-label="account of current user"
-            aria-controls="menu-appbar"
+            aria-controls="menu-div"
             aria-haspopup="true"
             color="inherit"
             onClick={handleAccMenuClick}
@@ -63,7 +78,7 @@ export default function UserAppBar() {
             anchor={anchorAccMenuBnt}
           />
         </div>
-      </Toolbar>
-    </AppBar>
+      </Toolbar> */}
+    </Flex>
   );
 }

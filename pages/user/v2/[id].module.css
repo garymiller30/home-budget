@@ -9,7 +9,7 @@
 .back {
   display: flex;
 }
-.back::after {
+.back::before {
   content: "";
   display: block;
   position: absolute;

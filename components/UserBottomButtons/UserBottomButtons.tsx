@@ -1,4 +1,5 @@
-import { Box, Button } from "@mui/material";
+//import { Box, Button } from "@mui/material";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../recoil/atoms/userAtom";
@@ -28,24 +29,12 @@ export default function UserBottomButtons() {
   };
   if (!user) return null;
   return (
-    <Box sx={{ width: "100%", display: "flex" }}>
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        sx={{ width: "50%" }}
-        onClick={handleDebitBtn}
-      >
-        ADD DEBIT
+    <Flex w="100%" h="3.5rem">
+      <Button w="50%" h="inherit" onClick={handleDebitBtn} bg="green">
+        <Text color="white">ADD DEBIT</Text>
       </Button>
-      <Button
-        variant="contained"
-        color="secondary"
-        size="large"
-        sx={{ width: "50%", height: "50px" }}
-        onClick={handleCreditBtn}
-      >
-        ADD CREDIT
+      <Button w="50%" h="inherit" onClick={handleCreditBtn} bg="darkmagenta">
+        <Text color="white">ADD CREDIT</Text>
       </Button>
 
       <ModalInputForm
@@ -55,6 +44,6 @@ export default function UserBottomButtons() {
       >
         <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
       </ModalInputForm>
-    </Box>
+    </Flex>
   );
 }

@@ -3,9 +3,20 @@ import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
-import { Button, Container, FormControl, TextField } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+// import { Button, Container, FormControl, TextField } from "@mui/material";
+// import { LoadingButton } from "@mui/lab";
 import { useTransactionController } from "../../hooks/useTransactionController";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  FormControl,
+  FormLabel,
+  Input,
+  Spacer,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 interface InputFormProps {
   type: TRANSACTION_TYPE;
@@ -46,8 +57,34 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
   return (
     <Container sx={{ padding: "6px 0" }}>
       <form onSubmit={onSubmit}>
-        <FormControl sx={{ width: "100%" }}>
-          <TextField
+        <Stack spacing={2}>
+          <FormControl isRequired>
+            <FormLabel>Description</FormLabel>
+            <Input placeholder="Description" id="description" />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Amount</FormLabel>
+            <Input type="number" id="amount" placeholder="Amount" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Comment</FormLabel>
+            <Input placeholder="Comment" id="comment" />
+          </FormControl>
+          <Spacer />
+          <Button w="100%" type="submit">
+            {saving && (
+              <CircularProgress
+                size="1.5rem"
+                isIndeterminate
+                color="green.300"
+              />
+            )}
+            <Text>ADD</Text>
+          </Button>
+        </Stack>
+        {/* <FormControl sx={{ width: "100%" }}>
+
+           <TextField
             ref={focusInput}
             id="description"
             type="text"
@@ -80,8 +117,8 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
             type="submit"
           >
             ADD
-          </LoadingButton>
-        </FormControl>
+          </LoadingButton> 
+        </FormControl>*/}
       </form>
     </Container>
   );
