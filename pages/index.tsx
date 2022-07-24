@@ -1,8 +1,8 @@
 import { useSession, getSession } from "next-auth/react";
 import { getUser } from "../db/user";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+// import Typography from "@mui/material/Typography";
+// import Stack from "@mui/material/Stack";
+// import Button from "@mui/material/Button";
 import s from "./index.module.css";
 import { Circles } from "react-loader-spinner";
 //import Router, { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import { iUser } from "../interfaces/iUser";
 import { GetServerSideProps } from "next";
 //import { useEffect } from "react";
 import { signIn } from "next-auth/react";
+import { Button, HStack, Text } from "@chakra-ui/react";
 
 interface HomeProps {
   user: iUser;
@@ -34,8 +35,8 @@ export default function Home() {
   } else if (status === "unauthenticated") {
     return (
       <div className={`${s.container} ${s.bg}`}>
-        <Stack spacing={5}>
-          <Typography variant="h2">Home budget</Typography>
+        <HStack spacing={5}>
+          <Text variant="h2">Home budget</Text>
           <Button
             onClick={() => {
               signIn("google", { callbackUrl: "/" });
@@ -45,7 +46,7 @@ export default function Home() {
           >
             Sign in with Google
           </Button>
-        </Stack>
+        </HStack>
       </div>
     );
   }

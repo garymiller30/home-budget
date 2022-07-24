@@ -1,4 +1,6 @@
-import { Box, Typography } from "@mui/material";
+//import { Box, Typography } from "@mui/material";
+
+import { Box, Text } from "@chakra-ui/react";
 
 export default function UserMonth() {
   const d = new Date();
@@ -14,9 +16,9 @@ export default function UserMonth() {
       pt={2}
       pb={2}
     >
-      <Typography variant="h5" sx={{ textTransform: "uppercase" }}>
+      <Text textTransform="uppercase" fontSize="1.2rem" fontWeight="600">
         {monthName} {d.getFullYear()}
-      </Typography>
+      </Text>
     </Box>
   );
 }

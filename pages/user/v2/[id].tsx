@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@mui/material";
+import { Box, Flex, Spacer, VStack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
@@ -30,31 +30,27 @@ export default function User({ user }: UserProps) {
   const autobalance = useAutoTransferBalance();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  async function getTransactions() {
-    try {
-      if (user) {
-        await autobalance(user._id);
-        const date = new Date();
-        const t = await fetchTransactions(
-          user._id,
-          date.getFullYear(),
-          date.getMonth() + 1
-        );
-        return t;
-      }
-    } catch (error) {
-      return null;
-    }
-    return null;
-  }
   useEffect(() => {
-    const transPromise = getTransactions();
-    transPromise.then((data) => {
-      console.log("getTransaction=======");
-      setTransList(data);
-      setIsLoaded(true);
-    });
-    //   getTransactions();
+    async function getTransactions() {
+      try {
+        if (user) {
+          await autobalance(user._id);
+          const date = new Date();
+          const t = await fetchTransactions(
+            user._id,
+            date.getFullYear(),
+            date.getMonth() + 1
+          );
+          setTransList(t);
+          setIsLoaded(true);
+        }
+      } catch (error) {
+        //return null;
+      }
+      //return null;
+    }
+
+    getTransactions();
     setUser(user);
     //  хак для сафарі
     window.addEventListener("resize", appHeight);
@@ -65,49 +61,89 @@ export default function User({ user }: UserProps) {
   if (!user) return <p>Unauthorized</p>;
 
   return (
-    <div>
+    <>
       <Head>
         <title>Home Budget</title>
       </Head>
-      <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-          }}
-          className={`${s.box}`}
+      <Flex
+        w="100%"
+        maxW="md"
+        m="0 auto"
+        flexDirection="column"
+        className={s.box}
+      >
+        <Flex
+          flexDirection="column"
+          w="100%"
+          position="relative"
+          top="0"
+          left="0"
         >
           <UserAppBar />
-          <Box sx={{ display: "flex", width: "100%" }} pb={2}>
-            <Box
-              sx={{
-                display: "flex",
-                width: "100%",
-                flexDirection: "column",
-                alignItems: "center",
-                flexWrap: "wrap",
-                position: "relative",
-                left: 0,
-                top: 0,
-              }}
-              className={`${s.back}`}
-            >
-              <UserMonth />
-              <UserBalance isLoaded={isLoaded} />
-              <UserDebitCredit />
-            </Box>
-          </Box>
-          <UserLastTransactions />
-          <Box>
-            {/* <UserGoToReport /> */}
-            <UserBottomButtons />
-          </Box>
+          <Flex
+            w="100%"
+            flexDirection="column"
+            alignItems="center"
+            className={s.back}
+          >
+            <UserMonth />
+            <UserBalance />
+            <UserDebitCredit />
+          </Flex>
+        </Flex>
+        <UserLastTransactions />
+        <Spacer />
+        <Box w="100%">
+          <UserBottomButtons />
         </Box>
-        <div id="modal-root"></div>
-      </Box>
-    </div>
+      </Flex>
+      <div id="modal-root"></div>
+    </>
   );
+  // return (
+  //   <>
+  //     <Head>
+  //       <title>Home Budget</title>
+  //     </Head>
+  //     <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
+  //       <Box
+  //         sx={{
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           width: "100%",
+  //         }}
+  //         className={`${s.box}`}
+  //       >
+  //         <UserAppBar />
+  //         <Box sx={{ display: "flex", width: "100%" }} pb={2}>
+  //           <Box
+  //             sx={{
+  //               display: "flex",
+  //               width: "100%",
+  //               flexDirection: "column",
+  //               alignItems: "center",
+  //               flexWrap: "wrap",
+  //               position: "relative",
+  //               left: 0,
+  //               top: 0,
+  //             }}
+  //             className={`${s.back}`}
+  //           >
+  //             <UserMonth />
+  //             <UserBalance isLoaded={isLoaded} />
+  //             <UserDebitCredit />
+  //           </Box>
+  //         </Box>
+  //         <UserLastTransactions />
+  //         <Box>
+  //           {/* <UserGoToReport /> */}
+  //           <UserBottomButtons />
+  //         </Box>
+  //       </Box>
+  //       <div id="modal-root"></div>
+  //     </Box>
+  //   </>
+  // );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

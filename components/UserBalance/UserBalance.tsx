@@ -1,4 +1,5 @@
-import { Box, Skeleton, Typography } from "@mui/material";
+//import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
@@ -7,12 +8,13 @@ type UserBalanceProp = {
   isLoaded: boolean;
 };
 
-export default function UserBalance({ isLoaded }: UserBalanceProp) {
+export default function UserBalance() {
   const balance = useRecoilValue(balanceSelector);
 
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
   return (
     <Box
+      w="calc(100% - 42px - 42px)"
       sx={{
         width: "calc(100% - 42px - 42px)",
         background:
@@ -23,15 +25,15 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
       }}
       mb={2}
     >
-      <Typography
-        variant="h6"
+      <Text
+        fontSize="1.2rem"
         fontWeight={300}
         textAlign={"center"}
         pt={1}
         pb={1}
       >
         balance
-      </Typography>
+      </Text>
       <Box
         sx={{
           display: "inline-flex",
@@ -39,18 +41,12 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
           justifyContent: "center",
           alignItems: "start",
         }}
-        pb={1}
+        pb={4}
       >
-        <Typography sx={{ lineHeight: "3.1rem" }} variant="h3" fontWeight={500}>
-          {isLoaded ? budgetMain : <Skeleton width={100} />}
-        </Typography>
-        <Typography sx={{}} variant="h6" fontWeight={300}>
-          {isLoaded ? (
-            budgetKop.toString().padStart(2, "0")
-          ) : (
-            <Skeleton width={30} />
-          )}
-        </Typography>
+        <Text fontSize="3rem" fontWeight={600} lineHeight="2.5rem">
+          {budgetMain}
+        </Text>
+        <Text fontWeight={300}>{budgetKop.toString().padStart(2, "0")}</Text>
       </Box>
     </Box>
   );
