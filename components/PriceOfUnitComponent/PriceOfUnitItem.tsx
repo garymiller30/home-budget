@@ -20,6 +20,7 @@ const PriceOfUnitItem = () => {
         step="0.01"
         onChange={(e: any) => setPrice(Number(e.target.value))}
       ></Input>
+      <Text>/</Text>
       <Input
         width="100px"
         placeholder="Units"
