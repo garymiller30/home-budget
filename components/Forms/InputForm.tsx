@@ -64,7 +64,7 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
-            <Input type="number" id="amount" placeholder="Amount" />
+            <Input type="number" step="0.01" id="amount" placeholder="Amount" />
           </FormControl>
           <FormControl>
             <FormLabel>Comment</FormLabel>
