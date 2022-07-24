@@ -1,4 +1,4 @@
-import { Menu, MenuItem } from "@mui/material";
+// import { Menu, MenuItem } from "@mui/material";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 
@@ -8,15 +8,16 @@ type AppMenuProp = {
   anchor: any;
 };
 export default function AccountMenu({ open, close, anchor }: AppMenuProp) {
-  return (
-    <Menu open={open} anchorEl={anchor} onClose={close}>
-      <MenuItem
-        onClick={() => {
-          signOut({ callbackUrl: "/" });
-        }}
-      >
-        Logout
-      </MenuItem>
-    </Menu>
-  );
+  return <></>;
+  // return (
+  //   <Menu open={open} anchorEl={anchor} onClose={close}>
+  //     <MenuItem
+  //       onClick={() => {
+  //         signOut({ callbackUrl: "/" });
+  //       }}
+  //     >
+  //       Logout
+  //     </MenuItem>
+  //   </Menu>
+  // );
 }
