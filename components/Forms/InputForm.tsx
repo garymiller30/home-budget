@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import fetch from "isomorphic-unfetch";
 import Transaction from "../../model/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
-// import { Button, Container, FormControl, TextField } from "@mui/material";
-// import { LoadingButton } from "@mui/lab";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Button,
@@ -82,43 +79,6 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
             <Text>ADD</Text>
           </Button>
         </Stack>
-        {/* <FormControl sx={{ width: "100%" }}>
-
-           <TextField
-            ref={focusInput}
-            id="description"
-            type="text"
-            name="description"
-            label="Description"
-            required
-            autoFocus
-            sx={{ width: "100%", padding: "12px 0" }}
-          ></TextField>
-          <TextField
-            label="Comment"
-            id="comment"
-            type="text"
-            name="comment"
-            sx={{ width: "100%", padding: "12px 0" }}
-          ></TextField>
-          <TextField
-            id="amount"
-            type="number"
-            name="amount"
-            inputProps={{ step: "0.01" }}
-            label="₴"
-            required
-            sx={{ width: "100%", padding: "12px 0" }}
-          ></TextField>
-          <LoadingButton
-            variant="contained"
-            size="large"
-            loading={saving}
-            type="submit"
-          >
-            ADD
-          </LoadingButton> 
-        </FormControl>*/}
       </form>
     </Container>
   );
