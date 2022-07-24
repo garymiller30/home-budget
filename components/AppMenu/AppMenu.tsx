@@ -1,31 +1,34 @@
-// import { Menu, MenuItem } from "@mui/material";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import {
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import ModalInputForm from "../ModalInputForm/ModalInputForm";
 import PriceOfUnitComponent from "../PriceOfUnitComponent/PriceOfUnitComponent";
 
-type AppMenuProp = {
-  open: boolean;
-  close: () => void;
-  anchor: any;
-};
-
-export default function AppMenu({ open, close, anchor }: AppMenuProp) {
+export default function AppMenu() {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  return null;
-  //   (
-  //   <>
-  //     <Menu open={open} anchorEl={anchor} onClose={close}>
-  //       <MenuItem onClick={() => setOpenModal(true)}>Price of unit</MenuItem>
-  //     </Menu>
-  //     <ModalInputForm
-  //       show={openModal}
-  //       onClose={() => {
-  //         setOpenModal(false);
-  //       }}
-  //       title="Price of unit"
-  //     >
-  //       <PriceOfUnitComponent />
-  //     </ModalInputForm>
-  //   </>
-  // );
+  return (
+    <>
+      <Menu isLazy>
+        <MenuButton as={IconButton} icon={<HamburgerIcon />} bg="transparent" />
+        <MenuList>
+          <MenuItem onClick={() => setOpenModal(true)}>Price of unit</MenuItem>
+        </MenuList>
+      </Menu>
+      <ModalInputForm
+        show={openModal}
+        onClose={() => {
+          setOpenModal(false);
+        }}
+        title="Price of unit"
+      >
+        <PriceOfUnitComponent />
+      </ModalInputForm>
+    </>
+  );
 }

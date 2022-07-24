@@ -69,8 +69,9 @@ export default function UserLastTransactions() {
                 </Flex>
                 <Box>
                   <IconButton
-                    icon={<DeleteIcon />}
+                    icon={<DeleteIcon color="gray.500" />}
                     aria-label="delete"
+                    bg="transparent"
                     onClick={() => handleDelete(item)}
                   />
                 </Box>

@@ -1,5 +1,5 @@
 //import { Box, Divider, Typography } from "@mui/material";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Divider, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
@@ -53,7 +53,7 @@ export default function UserDebitCredit() {
           </Text>
         </Box>
       </Box>
-      {/* <Divider orientation="vertical" flexItem /> */}
+      <Divider orientation="vertical" />
       <Box sx={{ width: "50%" }}>
         <Text fontWeight={400} textAlign="center">
           credit:

@@ -1,4 +1,4 @@
-// import { Box, Button, List, ListItem } from "@mui/material";
+import { Button, List, ListItem, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import PriceOfUnitItem from "./PriceOfUnitItem";
 
@@ -15,25 +15,16 @@ const PriceOfUnitComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return null;
-  //   (
-  //   <Box
-  //     display="flex"
-  //     flexDirection="column"
-  //     alignItems="center"
-  //     justifyContent="center"
-  //     width="100%"
-  //   >
-  //     <List>
-  //       {units.map((unit: any, unitIndex: number) => (
-  //         <ListItem key={unitIndex}>{unit}</ListItem>
-  //       ))}
-  //     </List>
-  //     <Button variant="contained" onClick={handleAdd}>
-  //       Add
-  //     </Button>
-  //   </Box>
-  // );
+  return (
+    <VStack>
+      <List spacing={1}>
+        {units.map((unit: any, unitIndex: number) => (
+          <ListItem key={unitIndex}>{unit}</ListItem>
+        ))}
+      </List>
+      <Button onClick={handleAdd}>ADD ROW</Button>
+    </VStack>
+  );
 };
 
 export default PriceOfUnitComponent;

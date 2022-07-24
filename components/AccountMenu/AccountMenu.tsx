@@ -1,23 +1,31 @@
 // import { Menu, MenuItem } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
-import { useState } from "react";
 
-type AppMenuProp = {
-  open: boolean;
-  close: () => void;
-  anchor: any;
-};
-export default function AccountMenu({ open, close, anchor }: AppMenuProp) {
-  return <></>;
-  // return (
-  //   <Menu open={open} anchorEl={anchor} onClose={close}>
-  //     <MenuItem
-  //       onClick={() => {
-  //         signOut({ callbackUrl: "/" });
-  //       }}
-  //     >
-  //       Logout
-  //     </MenuItem>
-  //   </Menu>
-  // );
+export default function AccountMenu() {
+  return (
+    <Menu isLazy>
+      <MenuButton
+        as={IconButton}
+        icon={<Avatar size="sm" />}
+        bg="transparent"
+      />
+      <MenuList>
+        <MenuItem
+          onClick={() => {
+            signOut({ callbackUrl: "/" });
+          }}
+        >
+          Sign out
+        </MenuItem>
+      </MenuList>
+    </Menu>
+  );
 }

@@ -35,7 +35,7 @@ export default function ModalInputForm({
         </div>
 
         {title && (
-          <Text variant="h5" textAlign="center">
+          <Text fontSize="2xl" textAlign="center" pb={4}>
             {title}
           </Text>
         )}
