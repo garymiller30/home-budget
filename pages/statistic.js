@@ -3,8 +3,8 @@ import Router from "next/router";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { getSession } from "next-auth/react";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+// import Typography from "@mui/material/Typography";
+// import Button from "@mui/material/Button";
 import { getUser } from "../db/user";
 import { getTransactions } from "../db/transaction";
 import {
@@ -52,26 +52,27 @@ export default function statistic({ user, date, transactions = [] }) {
       },
     ],
   };
-  return (
-    <>
-      <div className={s.container}>
-        <Typography variant="h4" className={s.header}>
-          Statistics <span>{` ${date.month}-${date.year}`}</span>
-        </Typography>
-        <Typography variant="h5" className={s.subheader}>
-          Debit <span>₴ {debitTotal}</span>
-        </Typography>
-        <Bar data={dataD} />
-        <Typography variant="h5" className={s.subheader}>
-          Credit <span>₴ {creditTotal}</span>
-        </Typography>
-        <Bar data={dataC} />
-        <Button variant="contained" onClick={() => Router.back()}>
-          back
-        </Button>
-      </div>
-    </>
-  );
+  return null;
+  //   (
+  //   <>
+  //     <div className={s.container}>
+  //       <Typography variant="h4" className={s.header}>
+  //         Statistics <span>{` ${date.month}-${date.year}`}</span>
+  //       </Typography>
+  //       <Typography variant="h5" className={s.subheader}>
+  //         Debit <span>₴ {debitTotal}</span>
+  //       </Typography>
+  //       <Bar data={dataD} />
+  //       <Typography variant="h5" className={s.subheader}>
+  //         Credit <span>₴ {creditTotal}</span>
+  //       </Typography>
+  //       <Bar data={dataC} />
+  //       <Button variant="contained" onClick={() => Router.back()}>
+  //         back
+  //       </Button>
+  //     </div>
+  //   </>
+  // );
 }
 
 export async function getServerSideProps(context) {

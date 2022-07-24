@@ -1,7 +1,7 @@
 import s from "./Budget.module.css";
 //import { DateNavigator } from "..";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import Tooltip from "@mui/material/Tooltip";
+// import CreditCardIcon from "@mui/icons-material/CreditCard";
+// import Tooltip from "@mui/material/Tooltip";
 import BudgetNumber from "./BudgetNumber";
 import { iDate } from "../../interfaces/iDate";
 
@@ -28,12 +28,12 @@ export default function Budget({
           <span className={s.perDayValue}>{perDayInt}</span>
         </p>
       </div>
-      <Tooltip title="budget">
+      {/* <Tooltip title="budget">
         <div className={s.budget}>
           <CreditCardIcon />
           <BudgetNumber budget={budget} />
         </div>
-      </Tooltip>
+      </Tooltip> */}
     </section>
   );
 }

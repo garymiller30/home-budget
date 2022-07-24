@@ -7,7 +7,7 @@ import Head from "next/head";
 import s from "./[id].module.css";
 import { getUser } from "../../db/user";
 import { TRANSACTION_TYPE } from "../../vars/variables";
-import AppBar from "@mui/material/AppBar";
+// import AppBar from "@mui/material/AppBar";
 import { BottomNavigation, TransactionContainer } from "../../components";
 import { iDate } from "../../interfaces/iDate";
 import { GetServerSideProps } from "next";
@@ -102,49 +102,50 @@ export default function User({ user }: UserProps) {
   }
   if (!user) return <p>Unauthorized</p>;
 
-  return (
-    <>
-      <Head>
-        <title>Home budget | {user.name}</title>
-      </Head>
+  return null;
+  //   (
+  //   <>
+  //     <Head>
+  //       <title>Home budget | {user.name}</title>
+  //     </Head>
 
-      <div className={s.container}>
-        <AppBar position="static">
-          <DynamicUserMenu
-            user={user}
-            date={date}
-            onChangeDate={handleOnChangeDate}
-          />
-        </AppBar>
+  //     <div className={s.container}>
+  //       <AppBar position="static">
+  //         <DynamicUserMenu
+  //           user={user}
+  //           date={date}
+  //           onChangeDate={handleOnChangeDate}
+  //         />
+  //       </AppBar>
 
-        <main className={s.main}>
-          <TransactionContainer
-            transactions={trans}
-            date={date}
-            onChangeDate={handleOnChangeDate}
-            onDelete={handleonDelete}
-          />
-        </main>
-        <BottomNavigation
-          date={date}
-          OnClickDebit={handleOnClickDebit}
-          OnClickCredit={handleOnClickCredit}
-        />
-      </div>
-      {/* <DynamicModalInputForm
-        onClose={() => setShowModal(false)}
-        show={showModal}
-        title={`add ${inputType}`}
-      >
-        <DynamicInputForm
-          type={inputType}
-          userId={user._id}
-          onClose={handleOnClose}
-        />
-      </DynamicModalInputForm> */}
-      <div id="modal-root"></div>
-    </>
-  );
+  //       <main className={s.main}>
+  //         <TransactionContainer
+  //           transactions={trans}
+  //           date={date}
+  //           onChangeDate={handleOnChangeDate}
+  //           onDelete={handleonDelete}
+  //         />
+  //       </main>
+  //       <BottomNavigation
+  //         date={date}
+  //         OnClickDebit={handleOnClickDebit}
+  //         OnClickCredit={handleOnClickCredit}
+  //       />
+  //     </div>
+  //     {/* <DynamicModalInputForm
+  //       onClose={() => setShowModal(false)}
+  //       show={showModal}
+  //       title={`add ${inputType}`}
+  //     >
+  //       <DynamicInputForm
+  //         type={inputType}
+  //         userId={user._id}
+  //         onClose={handleOnClose}
+  //       />
+  //     </DynamicModalInputForm> */}
+  //     <div id="modal-root"></div>
+  //   </>
+  // );
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);

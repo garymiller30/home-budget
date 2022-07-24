@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getBudget, getPerDay, transactionSplitByType } from "../../../lib";
 import { Budget } from "../..";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+// import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { iTransaction } from "../../../interfaces/iTransaction";
 import { iDate } from "../../../interfaces/iDate";
 import dynamic from "next/dynamic";
@@ -38,26 +38,27 @@ export default function TransactionContainer({
     setPerDay(getPerDay(bdgt, date));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactions]);
-  return (
-    <>
-      <Budget
-        budget={budget}
-        perDay={perDay}
-        date={date}
-        onChangeDate={onChangeDate}
-      />
-      <DynamicTransactionTable
-        icon={ArrowUpwardIcon}
-        color="success"
-        transactions={debit}
-        onDelete={onDelete}
-      />
-      <DynamicTransactionTable
-        icon={ArrowDownwardIcon}
-        color="secondary"
-        transactions={credit}
-        onDelete={onDelete}
-      />
-    </>
-  );
+  return null;
+  //   (
+  //   <>
+  //     <Budget
+  //       budget={budget}
+  //       perDay={perDay}
+  //       date={date}
+  //       onChangeDate={onChangeDate}
+  //     />
+  //     <DynamicTransactionTable
+  //       icon={ArrowUpwardIcon}
+  //       color="success"
+  //       transactions={debit}
+  //       onDelete={onDelete}
+  //     />
+  //     <DynamicTransactionTable
+  //       icon={ArrowDownwardIcon}
+  //       color="secondary"
+  //       transactions={credit}
+  //       onDelete={onDelete}
+  //     />
+  //   </>
+  // );
 }
