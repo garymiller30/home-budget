@@ -23,7 +23,7 @@ export default function UserDebitCredit() {
       mb={3}
     >
       <Box sx={{ width: "50%" }}>
-        <Text variant="h6" fontWeight={400} textAlign="center">
+        <Text variant="h6" fontWeight={400} textAlign="center" color="black">
           debit:
         </Text>
         <Box
@@ -55,7 +55,7 @@ export default function UserDebitCredit() {
       </Box>
       <Divider orientation="vertical" />
       <Box sx={{ width: "50%" }}>
-        <Text fontWeight={400} textAlign="center">
+        <Text fontWeight={400} textAlign="center" color="black">
           credit:
         </Text>
         <Box

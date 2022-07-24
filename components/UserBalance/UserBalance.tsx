@@ -28,6 +28,7 @@ export default function UserBalance() {
         fontSize="1.2rem"
         fontWeight={300}
         textAlign={"center"}
+        color="black"
         pt={1}
         pb={1}
       >
@@ -42,10 +43,17 @@ export default function UserBalance() {
         }}
         pb={4}
       >
-        <Text fontSize="3rem" fontWeight={600} lineHeight="2.5rem">
+        <Text
+          fontSize="3rem"
+          color="black"
+          fontWeight={600}
+          lineHeight="2.5rem"
+        >
           {budgetMain}
         </Text>
-        <Text fontWeight={300}>{budgetKop.toString().padStart(2, "0")}</Text>
+        <Text fontWeight={300} color="black">
+          {budgetKop.toString().padStart(2, "0")}
+        </Text>
       </Box>
     </Box>
   );

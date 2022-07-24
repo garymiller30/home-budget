@@ -1,18 +1,10 @@
-// import {
-//   Box,
-//   IconButton,
-//   List,
-//   ListItem,
-//   ListItemText,
-//   Typography,
-// } from "@mui/material";
-// import DeleteIcon from "@mui/icons-material/Delete";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import { splitFloatNumber } from "../../lib";
 import {
   Box,
+  Divider,
   Flex,
   IconButton,
   List,
@@ -35,7 +27,7 @@ export default function UserLastTransactions() {
       <List>
         {revList.map((item) => {
           const color =
-            item.type === TRANSACTION_TYPE.DEBIT ? "green" : "darkMagenta";
+            item.type === TRANSACTION_TYPE.DEBIT ? "green" : "pink.500";
 
           const [m, k] = splitFloatNumber(item.amount);
 
@@ -43,7 +35,7 @@ export default function UserLastTransactions() {
           return (
             <ListItem w="100%" key={item._id.toString()}>
               <Flex alignItems="center">
-                <Box paddingRight={2}>
+                <Box paddingRight={2} pl={2}>
                   <Text fontWeight="600" fontSize="1rem">
                     {item.description}
                   </Text>
@@ -76,72 +68,8 @@ export default function UserLastTransactions() {
                   />
                 </Box>
               </Flex>
+              <Divider />
             </ListItem>
-            // <ListItem
-            //   key={item._id}
-            //   // secondaryAction={
-            //   //   <IconButton
-            //   //     edge="end"
-            //   //     aria-label="delete"
-            //   //     onClick={() => handleDelete(item)}
-            //   //   >
-            //   //     <DeleteIcon />
-            //   //   </IconButton>
-            //   // }
-            // >
-            //   <Text
-            //   // primary={item.description}
-            //   // secondary={`${item.date.day}.${item.date.month}.${item.date.year}`}
-            //   />
-            //   {item.description}
-            //   <Text
-            //   // primary={
-            //   // <Text textAlign={"left"}>{item.comment}</Text>
-            //   //}
-            //   />
-            //   <Text
-            //   // primary={
-            //   //   <Box
-            //   //     sx={{
-            //   //       display: "flex",
-            //   //       width: "100%",
-            //   //       justifyContent: "flex-end",
-            //   //       alignItems: "flex-start",
-            //   //     }}
-            //   //   >
-            //   //     <Text
-            //   //       color={color}
-            //   //       textAlign={"right"}
-            //   //       variant="h6"
-            //   //       sx={{ display: "inline", lineHeight: "1.6rem" }}
-            //   //       mr="0.2rem"
-            //   //     >
-            //   //       {sign}
-            //   //     </Text>
-            //   //     <Text
-            //   //       color={color}
-            //   //       textAlign={"right"}
-            //   //       variant="h6"
-            //   //       sx={{ display: "inline", lineHeight: "1.6rem" }}
-            //   //     >
-            //   //       {m}
-            //   //     </Text>
-            //   //     <Text
-            //   //       variant="h6"
-            //   //       color={color}
-            //   //       sx={{
-            //   //         display: "inline",
-            //   //         fontWeight: "300",
-            //   //         fontSize: "0.8rem",
-            //   //       }}
-            //   //       pl="0.1rem"
-            //   //     >
-            //   //       {k.toString().padStart(2, "0")}
-            //   //     </Text>
-            //   //   </Box>
-            //   // }
-            //   />
-            // </ListItem>
           );
         })}
       </List>

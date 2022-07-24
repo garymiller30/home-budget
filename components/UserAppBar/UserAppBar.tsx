@@ -1,12 +1,21 @@
 import AppMenu from "../AppMenu/AppMenu";
-import { Flex, Spacer, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  IconButton,
+  Spacer,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import AccountMenu from "../AccountMenu/AccountMenu";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function UserAppBar() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
       position="static"
-      bgColor="royalblue"
+      bgColor="blue.600"
       w="100%"
       h="3rem"
       alignItems="center"
@@ -23,6 +32,12 @@ export default function UserAppBar() {
         Home Budget
       </Text>
       <Spacer />
+      <IconButton
+        bg="transparent"
+        aria-label="toggle mode"
+        onClick={toggleColorMode}
+        icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+      ></IconButton>
       <AccountMenu />
     </Flex>
   );

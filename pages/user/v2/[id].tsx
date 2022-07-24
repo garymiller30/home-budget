@@ -66,6 +66,7 @@ export default function User({ user }: UserProps) {
         <title>Home Budget</title>
       </Head>
       <Flex
+        bg="whiteAlfa.50"
         w="100%"
         maxW="md"
         m="0 auto"
