@@ -30,11 +30,11 @@ export default function UserBottomButtons() {
   if (!user) return null;
   return (
     <Flex w="100%" h="3.5rem">
-      <Button w="50%" h="inherit" onClick={handleDebitBtn} bg="green">
-        <Text color="white">ADD DEBIT</Text>
+      <Button w="50%" h="inherit" onClick={handleDebitBtn} colorScheme="green">
+        ADD DEBIT
       </Button>
-      <Button w="50%" h="inherit" onClick={handleCreditBtn} bg="darkmagenta">
-        <Text color="white">ADD CREDIT</Text>
+      <Button w="50%" h="inherit" onClick={handleCreditBtn} colorScheme="pink">
+        ADD CREDIT
       </Button>
 
       <ModalInputForm

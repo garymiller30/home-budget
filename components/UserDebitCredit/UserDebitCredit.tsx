@@ -1,5 +1,5 @@
 //import { Box, Divider, Typography } from "@mui/material";
-import { Box, Divider, Text } from "@chakra-ui/react";
+import { Box, Divider, Text, useColorModeValue } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
@@ -8,22 +8,25 @@ export default function UserDebitCredit() {
   const { creditSum, debitSum } = useRecoilValue(debitCreditSumSelector);
   const [debM, debK] = splitFloatNumber(debitSum);
   const [credM, credK] = splitFloatNumber(creditSum);
+  const bg = useColorModeValue("white", "black");
+  const color = useColorModeValue("black", "white");
   return (
     <Box
+      bg={bg}
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       sx={{
         display: "flex",
         width: "calc(100% - 16px - 16px)",
         filter: "drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25))",
-        background: "white",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-        borderRadius: "20px",
+        borderRadius: "10px",
       }}
-      pt={1}
-      pb={1}
+      pt={2}
+      pb={2}
       mb={3}
+      mt={2}
     >
       <Box sx={{ width: "50%" }}>
-        <Text variant="h6" fontWeight={400} textAlign="center" color="black">
+        <Text variant="h6" fontWeight={400} textAlign="center" color={color}>
           debit:
         </Text>
         <Box
@@ -55,7 +58,7 @@ export default function UserDebitCredit() {
       </Box>
       <Divider orientation="vertical" />
       <Box sx={{ width: "50%" }}>
-        <Text fontWeight={400} textAlign="center" color="black">
+        <Text fontWeight={400} textAlign="center" color={color}>
           credit:
         </Text>
         <Box
@@ -70,15 +73,15 @@ export default function UserDebitCredit() {
             sx={{ fontSize: "1.5rem", lineHeight: "1.7rem" }}
             fontWeight={700}
             textAlign="center"
-            color={"darkmagenta"}
+            color="pink.500"
           >
             - {credM}
           </Text>
           <Text
-            sx={{ fontSize: "0.875rem" }}
+            color="pink.500"
+            fontSize="0.875rem"
             fontWeight={300}
             textAlign="center"
-            color={"darkmagenta"}
           >
             {credK.toString().padStart(2, "0")}
           </Text>

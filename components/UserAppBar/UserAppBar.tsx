@@ -1,12 +1,5 @@
 import AppMenu from "../AppMenu/AppMenu";
-import {
-  Button,
-  Flex,
-  IconButton,
-  Spacer,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Flex, IconButton, Spacer, Text, useColorMode } from "@chakra-ui/react";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 

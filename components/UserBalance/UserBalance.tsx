@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
@@ -11,24 +11,22 @@ export default function UserBalance() {
   const balance = useRecoilValue(balanceSelector);
 
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
+
+  const bg = useColorModeValue("white", "black");
+  const color = useColorModeValue("black", "white");
   return (
     <Box
       w="calc(100% - 42px - 42px)"
-      sx={{
-        width: "calc(100% - 42px - 42px)",
-        background:
-          "linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.37) 100%)",
-        backgroundColor: "white",
-        borderRadius: "20px",
-        filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-      }}
+      bg={bg}
+      borderRadius="20px"
+      filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))"
       mb={2}
     >
       <Text
         fontSize="1.2rem"
         fontWeight={300}
         textAlign={"center"}
-        color="black"
+        color={color}
         pt={1}
         pb={1}
       >
@@ -45,13 +43,13 @@ export default function UserBalance() {
       >
         <Text
           fontSize="3rem"
-          color="black"
+          color="{color}"
           fontWeight={600}
           lineHeight="2.5rem"
         >
           {budgetMain}
         </Text>
-        <Text fontWeight={300} color="black">
+        <Text fontWeight={300} color={color}>
           {budgetKop.toString().padStart(2, "0")}
         </Text>
       </Box>
