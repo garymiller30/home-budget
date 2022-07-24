@@ -8,7 +8,7 @@ export default function UserDebitCredit() {
   const { creditSum, debitSum } = useRecoilValue(debitCreditSumSelector);
   const [debM, debK] = splitFloatNumber(debitSum);
   const [credM, credK] = splitFloatNumber(creditSum);
-  const bg = useColorModeValue("white", "black");
+  const bg = useColorModeValue("white", "blackAlpha.700");
   const color = useColorModeValue("black", "white");
   return (
     <Box
@@ -26,7 +26,7 @@ export default function UserDebitCredit() {
       mt={2}
     >
       <Box sx={{ width: "50%" }}>
-        <Text variant="h6" fontWeight={400} textAlign="center" color={color}>
+        <Text fontWeight={400} textAlign="center" color={color}>
           debit:
         </Text>
         <Box

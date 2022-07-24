@@ -12,7 +12,7 @@ export default function UserBalance() {
 
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
 
-  const bg = useColorModeValue("white", "black");
+  const bg = useColorModeValue("white", "gray.700");
   const color = useColorModeValue("black", "white");
   return (
     <Box

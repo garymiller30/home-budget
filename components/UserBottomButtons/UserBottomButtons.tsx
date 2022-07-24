@@ -1,5 +1,5 @@
 //import { Box, Button } from "@mui/material";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../recoil/atoms/userAtom";
@@ -8,8 +8,9 @@ import InputForm from "../Forms/InputForm";
 import ModalInputForm from "../ModalInputForm/ModalInputForm";
 
 export default function UserBottomButtons() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useRecoilValue(userAtom);
-  const [showModal, setShowModal] = useState(false);
+
   const [title, setTitle] = useState<string>("credit");
   const [inputType, setInputType] = useState<TRANSACTION_TYPE>(
     TRANSACTION_TYPE.CREDIT
@@ -17,15 +18,15 @@ export default function UserBottomButtons() {
   const handleDebitBtn = () => {
     setTitle("ADD DEBIT");
     setInputType(TRANSACTION_TYPE.DEBIT);
-    setShowModal(true);
+    onOpen();
   };
   const handleCreditBtn = () => {
     setTitle("ADD CREDIT");
     setInputType(TRANSACTION_TYPE.CREDIT);
-    setShowModal(true);
+    onOpen();
   };
   const handleOnClose = () => {
-    setShowModal(false);
+    onClose();
   };
   if (!user) return null;
   return (
@@ -37,11 +38,7 @@ export default function UserBottomButtons() {
         ADD CREDIT
       </Button>
 
-      <ModalInputForm
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        title={title}
-      >
+      <ModalInputForm isOpen={isOpen} onClose={onClose} title={title}>
         <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
       </ModalInputForm>
     </Flex>

@@ -98,7 +98,6 @@ export default function User({ user }: UserProps) {
           <UserBottomButtons />
         </Box>
       </Flex>
-      <div id="modal-root"></div>
     </>
   );
   // return (
