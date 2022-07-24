@@ -12,18 +12,16 @@ const PriceOfUnitItem = () => {
   }, [price, units]);
 
   return (
-    <HStack>
+    <HStack w="100%">
       <Input
-        htmlSize={5}
-        width="auto"
+        width="100px"
         placeholder="Price"
         type="number"
         step="0.01"
         onChange={(e: any) => setPrice(Number(e.target.value))}
       ></Input>
       <Input
-        htmlSize={5}
-        width="auto"
+        width="100px"
         placeholder="Units"
         type="number"
         step="0.01"

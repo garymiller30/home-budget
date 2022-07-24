@@ -17,7 +17,7 @@ const PriceOfUnitComponent = () => {
 
   return (
     <VStack>
-      <List spacing={1}>
+      <List spacing={1} mb={4}>
         {units.map((unit: any, unitIndex: number) => (
           <ListItem key={unitIndex}>{unit}</ListItem>
         ))}
