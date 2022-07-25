@@ -15,7 +15,11 @@ export default function AppMenu() {
   return (
     <>
       <Menu isLazy>
-        <MenuButton as={IconButton} icon={<HamburgerIcon />} bg="transparent" />
+        <MenuButton
+          as={IconButton}
+          icon={<HamburgerIcon color="white" />}
+          bg="transparent"
+        />
         <MenuList>
           <MenuItem onClick={onOpen}>Price of unit</MenuItem>
         </MenuList>

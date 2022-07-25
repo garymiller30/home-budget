@@ -29,7 +29,7 @@ export default function UserAppBar() {
         bg="transparent"
         aria-label="toggle mode"
         onClick={toggleColorMode}
-        icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+        icon={colorMode === "light" ? <MoonIcon color="white" /> : <SunIcon />}
       ></IconButton>
       <AccountMenu />
     </Flex>
