@@ -53,18 +53,19 @@ export default function User({ user }: UserProps) {
     getTransactions();
     setUser(user);
 
-    const docEl = document as any;
-
-    if (docEl["requestFullscreen"]) {
-      docEl["requestFullscreen"]();
-    } else if (docEl["mozRequestFullScreen"]) {
-      docEl["mozRequestFullScreen"]();
-    } else if (docEl["webkitRequestFullscreen"]) {
-      docEl["webkitRequestFullscreen"]();
-    }
     //  хак для сафарі
     window.addEventListener("resize", appHeight);
     appHeight();
+    // const elem = document.documentElement as any;
+
+    // if (elem.requestFullscreen) {
+    //   elem.requestFullscreen();
+    // } else if (elem.webkitRequestFullscreen) {
+    //   elem.webkitRequestFullscreen();
+    // } else if (elem.msRequestFullscreen) {
+    //   elem.msRequestFullscreen();
+    // }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -74,6 +75,11 @@ export default function User({ user }: UserProps) {
     <>
       <Head>
         <title>Home Budget</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        ></meta>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Head>
       <Flex
         bg="whiteAlfa.50"
