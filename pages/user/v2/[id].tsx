@@ -53,7 +53,7 @@ export default function User({ user }: UserProps) {
     getTransactions();
     setUser(user);
 
-    const docEl = document.documentElement as any;
+    const docEl = document as any;
 
     if (docEl["requestFullscreen"]) {
       docEl["requestFullscreen"]();
