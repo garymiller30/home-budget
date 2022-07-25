@@ -20,6 +20,7 @@ import { userAtom } from "@/recoil/atoms/userAtom";
 import { appHeight } from "@/utils/appHeight";
 import s from "./[id].module.css";
 import UserLastTransactions from "@/components/UserLastTransactions/UserLastTransactions";
+import { useRouter } from "next/router";
 interface UserProps {
   user: iUser;
 }
@@ -29,6 +30,7 @@ export default function User({ user }: UserProps) {
   const setUser = useSetRecoilState(userAtom);
   const autobalance = useAutoTransferBalance();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     async function getTransactions() {
@@ -43,6 +45,8 @@ export default function User({ user }: UserProps) {
           );
           setTransList(t);
           setIsLoaded(true);
+        } else {
+          router.push("/");
         }
       } catch (error) {
         //return null;
@@ -52,19 +56,10 @@ export default function User({ user }: UserProps) {
 
     getTransactions();
     setUser(user);
-    window.scrollTo(0, 1);
+
     //  хак для сафарі
     window.addEventListener("resize", appHeight);
     appHeight();
-    // const elem = document.documentElement as any;
-
-    // if (elem.requestFullscreen) {
-    //   elem.requestFullscreen();
-    // } else if (elem.webkitRequestFullscreen) {
-    //   elem.webkitRequestFullscreen();
-    // } else if (elem.msRequestFullscreen) {
-    //   elem.msRequestFullscreen();
-    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
