@@ -52,6 +52,16 @@ export default function User({ user }: UserProps) {
 
     getTransactions();
     setUser(user);
+
+    const docEl = document.documentElement as any;
+
+    if (docEl["requestFullscreen"]) {
+      docEl["requestFullscreen"]();
+    } else if (docEl["mozRequestFullScreen"]) {
+      docEl["mozRequestFullScreen"]();
+    } else if (docEl["webkitRequestFullscreen"]) {
+      docEl["webkitRequestFullscreen"]();
+    }
     //  хак для сафарі
     window.addEventListener("resize", appHeight);
     appHeight();
