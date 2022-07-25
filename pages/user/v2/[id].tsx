@@ -88,7 +88,7 @@ export default function User({ user }: UserProps) {
             className={s.back}
           >
             <UserMonth />
-            <UserBalance />
+            <UserBalance isLoaded={isLoaded} />
             <UserDebitCredit />
           </Flex>
         </Flex>
