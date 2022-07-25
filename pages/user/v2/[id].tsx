@@ -75,12 +75,6 @@ export default function User({ user }: UserProps) {
     <>
       <Head>
         <title>Home Budget</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        ></meta>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
       </Head>
       <Flex
         bg="whiteAlfa.50"
