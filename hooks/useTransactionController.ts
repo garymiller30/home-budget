@@ -1,3 +1,4 @@
+import { fetchTransactions } from "@/db/transaction/fetchTransactions";
 import { useRecoilState } from "recoil"
 import { iTransaction } from "../interfaces/iTransaction"
 import Transaction from "../model/transaction";
@@ -37,8 +38,23 @@ export function useTransactionController() {
         return revList;
     }
 
+    const refresh = async (userId: string) => {
+
+        try {
+            const date = new Date();
+            const t = await fetchTransactions(
+                userId,
+                date.getFullYear(),
+                date.getMonth() + 1
+            );
+            setList(t);
+
+        } catch (error) {
+
+        }
+    }
     return {
         add,
-        remove, getAll, getAllDesc
+        remove, getAll, getAllDesc, refresh
     }
 }

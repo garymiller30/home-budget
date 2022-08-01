@@ -1,4 +1,13 @@
-import { Box, Skeleton, Text, useColorModeValue } from "@chakra-ui/react";
+import { useTransactionController } from "@/hooks/useTransactionController";
+import { userAtom } from "@/recoil/atoms/userAtom";
+import { RepeatIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  IconButton,
+  Skeleton,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
@@ -9,6 +18,8 @@ type UserBalanceProp = {
 
 export default function UserBalance({ isLoaded }: UserBalanceProp) {
   const balance = useRecoilValue(balanceSelector);
+  const user = useRecoilValue(userAtom);
+  const transController = useTransactionController();
 
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
 
@@ -16,6 +27,7 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
   const color = useColorModeValue("black", "white");
   return (
     <Box
+      position="relative"
       w="calc(100% - 42px - 42px)"
       bg={bg}
       borderRadius="20px"
@@ -63,6 +75,25 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
           </Text>
         </Box>
       </Skeleton>
+      <IconButton
+        icon={<RepeatIcon />}
+        aria-label="refresh"
+        position="absolute"
+        bg="transparent"
+        top={0}
+        right="0"
+        _hover={{
+          bg: "transparent",
+          transform: "rotate(180deg)",
+        }}
+        _active={{
+          bg: "transparent",
+          transform: "rotate(360deg)",
+        }}
+        onClick={() => {
+          if (user?._id) transController.refresh(user?._id);
+        }}
+      ></IconButton>
     </Box>
   );
 }

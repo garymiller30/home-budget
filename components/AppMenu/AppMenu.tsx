@@ -19,6 +19,8 @@ export default function AppMenu() {
           as={IconButton}
           icon={<HamburgerIcon color="white" />}
           bg="transparent"
+          _hover={{ bg: "transparent" }}
+          _active={{ bg: "transparent" }}
         />
         <MenuList>
           <MenuItem onClick={onOpen}>Price of unit</MenuItem>

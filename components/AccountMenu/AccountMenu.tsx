@@ -15,6 +15,8 @@ export default function AccountMenu() {
         as={IconButton}
         icon={<Avatar size="sm" />}
         bg="transparent"
+        _hover={{ bg: "transparent" }}
+        _active={{ bg: "transparent" }}
       />
       <MenuList>
         <MenuItem

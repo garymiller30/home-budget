@@ -106,50 +106,6 @@ export default function User({ user }: UserProps) {
       </Flex>
     </>
   );
-  // return (
-  //   <>
-  //     <Head>
-  //       <title>Home Budget</title>
-  //     </Head>
-  //     <Box sx={{ maxWidth: "md", margin: "0 auto" }}>
-  //       <Box
-  //         sx={{
-  //           display: "flex",
-  //           flexDirection: "column",
-  //           width: "100%",
-  //         }}
-  //         className={`${s.box}`}
-  //       >
-  //         <UserAppBar />
-  //         <Box sx={{ display: "flex", width: "100%" }} pb={2}>
-  //           <Box
-  //             sx={{
-  //               display: "flex",
-  //               width: "100%",
-  //               flexDirection: "column",
-  //               alignItems: "center",
-  //               flexWrap: "wrap",
-  //               position: "relative",
-  //               left: 0,
-  //               top: 0,
-  //             }}
-  //             className={`${s.back}`}
-  //           >
-  //             <UserMonth />
-  //             <UserBalance isLoaded={isLoaded} />
-  //             <UserDebitCredit />
-  //           </Box>
-  //         </Box>
-  //         <UserLastTransactions />
-  //         <Box>
-  //           {/* <UserGoToReport /> */}
-  //           <UserBottomButtons />
-  //         </Box>
-  //       </Box>
-  //       <div id="modal-root"></div>
-  //     </Box>
-  //   </>
-  // );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

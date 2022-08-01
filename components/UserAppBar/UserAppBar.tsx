@@ -30,6 +30,8 @@ export default function UserAppBar() {
         aria-label="toggle mode"
         onClick={toggleColorMode}
         icon={colorMode === "light" ? <MoonIcon color="white" /> : <SunIcon />}
+        _hover={{ bg: "transparent", transform: "rotate(270deg)" }}
+        _active={{ bg: "transparent" }}
       ></IconButton>
       <AccountMenu />
     </Flex>
