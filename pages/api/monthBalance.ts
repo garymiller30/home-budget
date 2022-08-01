@@ -28,7 +28,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
         const monthBalance = await getMonthBalance(+year, +month, +curYear, +curMonth);
         if (!monthBalance.isPreviousMonthMoved) {
             const prevDate = new Date(+year, +month);
-            prevDate.setMonth(prevDate.getMonth() - 1);
+            prevDate.setMonth(prevDate.getMonth());
             const [prevYear, prevMonth] = [prevDate.getFullYear(), prevDate.getMonth()];
             const prevTransactions = await getTransactions(userId as string, {
                 year: prevYear,
