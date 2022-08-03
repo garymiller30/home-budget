@@ -3,6 +3,7 @@ import { userAtom } from "@/recoil/atoms/userAtom";
 import { RepeatIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Icon,
   IconButton,
   Skeleton,
   Text,
@@ -11,6 +12,8 @@ import {
 import { useRecoilValue } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
+import { AiFillPieChart } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 type UserBalanceProp = {
   isLoaded: boolean;
@@ -20,7 +23,7 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
   const balance = useRecoilValue(balanceSelector);
   const user = useRecoilValue(userAtom);
   const transController = useTransactionController();
-
+  const router = useRouter();
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
 
   const bg = useColorModeValue("white", "gray.700");
@@ -90,9 +93,25 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
           bg: "transparent",
           transform: "rotate(360deg)",
         }}
-        onClick={() => {
-          if (user?._id) transController.refresh(user?._id);
+        onClick={async () => {
+          if (user?._id) await transController.refresh(user?._id);
         }}
+      ></IconButton>
+      <IconButton
+        aria-label="chart"
+        position="absolute"
+        left="0"
+        top="0"
+        isRound={true}
+        icon={<Icon as={AiFillPieChart} />}
+        bg="transparent"
+        _hover={{ bg: "transparent", transform: "rotate(270deg)" }}
+        _active={{ bg: "transparent" }}
+        onClick={() =>
+          router.push(`${router.asPath}/statistic`, undefined, {
+            shallow: true,
+          })
+        }
       ></IconButton>
     </Box>
   );

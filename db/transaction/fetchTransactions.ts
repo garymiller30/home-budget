@@ -1,4 +1,6 @@
-export async function fetchTransactions(userId: string, year: number, month: number) {
+import { iTransaction } from "@/interfaces/iTransaction";
+
+export async function fetchTransactions(userId: string, year: number, month: number): Promise<iTransaction[]> {
   if (!userId || !year || !month) return [];
 
   const response = await fetch(
