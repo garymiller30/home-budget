@@ -10,7 +10,8 @@ import { iUser } from "../interfaces/iUser";
 import { GetServerSideProps } from "next";
 //import { useEffect } from "react";
 import { signIn } from "next-auth/react";
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
+import PaperCutEffect from "@/components/PaperCutEffect/PaperCutEffect";
 
 interface HomeProps {
   user: iUser;
@@ -34,20 +35,34 @@ export default function Home() {
     );
   } else if (status === "unauthenticated") {
     return (
-      <div className={`${s.container} ${s.bg}`}>
-        <HStack spacing={5}>
-          <Text variant="h2">Home budget</Text>
+      <Box
+        display="flex"
+        flexDirection="column"
+        bg="linear-gradient(120deg, #3b6fc8 0%, #a044ff 100%)"
+        h="100vh"
+      >
+        <VStack
+          spacing={5}
+          flexGrow="1"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box border="white 4px dashed" p={5} borderRadius={15}>
+            <PaperCutEffect text="HOME" />
+            <PaperCutEffect text="BUDGET" />
+          </Box>
           <Button
             onClick={() => {
               signIn("google", { callbackUrl: "/" });
             }}
-            variant="contained"
             size="large"
+            p={3}
           >
             Sign in with Google
           </Button>
-        </HStack>
-      </div>
+        </VStack>
+      </Box>
     );
   }
 }

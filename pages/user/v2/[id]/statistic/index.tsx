@@ -1,7 +1,12 @@
 import ReportList from "@/components/ReportList/ReportList";
 import { iTransaction } from "@/interfaces/iTransaction";
 import { transactionsAtom } from "@/recoil/atoms/transactionsAtom";
-import { ArrowBackIcon, CalendarIcon } from "@chakra-ui/icons";
+import {
+  ArrowBackIcon,
+  CalendarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
 import {
   Flex,
   IconButton,
@@ -31,6 +36,11 @@ export default function Statistic() {
   const router = useRouter();
 
   const monthName = date.toLocaleString("default", { month: "long" });
+  const isCurDate = getDateId(date) === getDateId(new Date());
+
+  function getDateId(date: Date) {
+    return date.getFullYear() * 12 + date.getMonth();
+  }
 
   useEffect(() => {
     setList(curMonthList);
@@ -65,10 +75,25 @@ export default function Statistic() {
           onClick={() => router.back()}
         ></IconButton>
         <Spacer />
+        <IconButton
+          aria-label="prev month"
+          bg="transparent"
+          icon={<ChevronLeftIcon />}
+          onClick={() => setDate(new Date(date.setMonth(date.getMonth() - 1)))}
+        ></IconButton>
         <Text>
           {monthName} {date.getFullYear()}
         </Text>
-
+        <IconButton
+          visibility={isCurDate ? "hidden" : "visible"}
+          aria-label="next month"
+          bg="transparent"
+          icon={<ChevronRightIcon />}
+          onClick={() => {
+            if (!isCurDate)
+              setDate(new Date(date.setMonth(date.getMonth() + 1)));
+          }}
+        ></IconButton>
         <Spacer />
 
         <DatePicker
