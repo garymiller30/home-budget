@@ -11,6 +11,7 @@ export default function PaperCutEffect({
     <Box display="flex">
       {text.split("").map((char, i) => (
         <Box
+          key={i}
           position="relative"
           fontWeight="extrabold"
           fontSize="4rem"
