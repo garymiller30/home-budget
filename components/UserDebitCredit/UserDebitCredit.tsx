@@ -1,13 +1,16 @@
-//import { Box, Divider, Typography } from "@mui/material";
+import { transactionsFilterAtom } from "@/recoil/atoms/transactionsFilterAtom";
+import { TRANSACTIONS_FILTER_ENUM } from "@/recoil/transactionsFilterEnum";
 import { Box, Divider, Text, useColorModeValue } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { debitCreditSumSelector } from "../../recoil/selectors/debitCreditSumSelector";
 
 export default function UserDebitCredit() {
   const { creditSum, debitSum } = useRecoilValue(debitCreditSumSelector);
+  const setFilter = useSetRecoilState(transactionsFilterAtom);
   const [debM, debK] = splitFloatNumber(debitSum);
   const [credM, credK] = splitFloatNumber(creditSum);
+
   const bg = useColorModeValue("white", "blackAlpha.700");
   const color = useColorModeValue("black", "white");
   return (
@@ -43,6 +46,8 @@ export default function UserDebitCredit() {
             fontWeight={700}
             textAlign="center"
             color={"green"}
+            onClick={() => setFilter(TRANSACTIONS_FILTER_ENUM.DEBIT)}
+            cursor="pointer"
           >
             + {debM}
           </Text>
@@ -74,6 +79,8 @@ export default function UserDebitCredit() {
             fontWeight={700}
             textAlign="center"
             color="pink.500"
+            onClick={() => setFilter(TRANSACTIONS_FILTER_ENUM.CREDIT)}
+            cursor="pointer"
           >
             - {credM}
           </Text>

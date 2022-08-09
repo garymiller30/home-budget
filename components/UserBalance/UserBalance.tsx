@@ -9,11 +9,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
 import { AiFillPieChart } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { transactionsFilterAtom } from "@/recoil/atoms/transactionsFilterAtom";
+import { TRANSACTIONS_FILTER_ENUM } from "@/recoil/transactionsFilterEnum";
 
 type UserBalanceProp = {
   isLoaded: boolean;
@@ -23,6 +25,7 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
   const balance = useRecoilValue(balanceSelector);
   const user = useRecoilValue(userAtom);
   const transController = useTransactionController();
+  const setFilter = useSetRecoilState(transactionsFilterAtom);
   const router = useRouter();
   const [budgetMain, budgetKop] = splitFloatNumber(balance);
 
@@ -70,6 +73,8 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
             color="{color}"
             fontWeight={600}
             lineHeight="2.8rem"
+            cursor="pointer"
+            onClick={() => setFilter(TRANSACTIONS_FILTER_ENUM.ALL)}
           >
             {budgetMain}
           </Text>
