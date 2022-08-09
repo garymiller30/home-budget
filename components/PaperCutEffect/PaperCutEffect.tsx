@@ -15,6 +15,7 @@ export default function PaperCutEffect({
           position="relative"
           fontWeight="extrabold"
           fontSize="4rem"
+          //@ts-ignore
           style={{ "--delay": `${i * 0.1}s` }}
         >
           <Box as="span" className={s.source}>
