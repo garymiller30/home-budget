@@ -8,12 +8,13 @@ export default function PaperCutEffect({
   text = "HELLO",
 }: PaperCutEffectProps) {
   return (
-    <Box display="flex">
+    <Box display="flex" textTransform="full-width">
       {text.split("").map((char, i) => (
         <Box
           key={i}
           position="relative"
-          fontWeight="extrabold"
+          fontFamily="Roboto"
+          fontWeight="900"
           fontSize="4rem"
           //@ts-ignore
           style={{ "--delay": `${i * 0.1}s` }}
