@@ -1,30 +1,18 @@
-import ReportList from "@/components/ReportList/ReportList";
 import { iTransaction } from "@/interfaces/iTransaction";
 import { transactionsAtom } from "@/recoil/atoms/transactionsAtom";
+import { ArrowBackIcon, CalendarIcon } from "@chakra-ui/icons";
 import {
-  ArrowBackIcon,
-  CalendarIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
-import {
+  Box,
   Flex,
   IconButton,
-  Spacer,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  Text,
 } from "@chakra-ui/react";
-import {
-  getBudget,
-  getSum,
-  splitFloatNumber,
-  transactionSplitByType,
-} from "lib";
-import groupByDescription from "lib/groupByDescription";
+import { transactionSplitByType } from "lib";
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -32,8 +20,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { fetchTransactions } from "@/db/transaction/fetchTransactions";
 import { userAtom } from "@/recoil/atoms/userAtom";
-import UserStatisticBudget from "UserStatistic/UserStatisticBudget";
-import UserStatisticTabHeader from "UserStatistic/UserStatisticTabHeader";
+
+import UserStatisticMonth from "@/components/UserStatistic/UserStatisticMonth";
+import UserStatisticYear from "@/components/UserStatistic/UserStatisticYear";
 
 export default function Statistic() {
   const curMonthList = useRecoilValue(transactionsAtom);
@@ -42,13 +31,6 @@ export default function Statistic() {
   const [date, setDate] = useState<Date>(new Date());
   const router = useRouter();
 
-  const monthName = date.toLocaleString("default", { month: "long" });
-  const isCurDate = getDateId(date) === getDateId(new Date());
-
-  function getDateId(date: Date) {
-    return date.getFullYear() * 12 + date.getMonth();
-  }
-
   useEffect(() => {
     setList(curMonthList);
   }, []);
@@ -56,7 +38,7 @@ export default function Statistic() {
   useEffect(() => {
     async function loadTrans() {
       if (!user) return;
-      console.log("loadTrans");
+
       const trans = await fetchTransactions(
         user._id,
         date.getFullYear(),
@@ -69,40 +51,25 @@ export default function Statistic() {
   }, [date]);
 
   const { debit, credit } = transactionSplitByType(list);
-  const budget = getBudget(debit, credit);
-  const debitGroup = groupByDescription(debit);
-  const creditGroup = groupByDescription(credit);
-  const [budgetMain, budgetKop] = splitFloatNumber(budget);
-  return (
-    <Flex maxW="md" m="0 auto" flexDirection="column">
-      <Flex w="100%" alignItems="center">
-        <IconButton
-          aria-label="back"
-          icon={<ArrowBackIcon />}
-          onClick={() => router.back()}
-        ></IconButton>
-        <Spacer />
-        <IconButton
-          aria-label="prev month"
-          bg="transparent"
-          icon={<ChevronLeftIcon />}
-          onClick={() => setDate(new Date(date.setMonth(date.getMonth() - 1)))}
-        ></IconButton>
-        <Text>
-          {monthName} {date.getFullYear()}
-        </Text>
-        <IconButton
-          visibility={isCurDate ? "hidden" : "visible"}
-          aria-label="next month"
-          bg="transparent"
-          icon={<ChevronRightIcon />}
-          onClick={() => {
-            if (!isCurDate)
-              setDate(new Date(date.setMonth(date.getMonth() + 1)));
-          }}
-        ></IconButton>
-        <Spacer />
 
+  return (
+    <Flex
+      maxW="md"
+      m="0 auto"
+      flexDirection="column"
+      position="relative"
+      top="0"
+      left="0"
+    >
+      <IconButton
+        position="absolute"
+        top="0"
+        left="0"
+        aria-label="back"
+        icon={<ArrowBackIcon />}
+        onClick={() => router.back()}
+      ></IconButton>
+      <Box position="absolute" top="0" right="0">
         <DatePicker
           selected={date}
           maxDate={new Date()}
@@ -112,34 +79,35 @@ export default function Statistic() {
           }}
           showMonthYearPicker
           customInput={
-            <IconButton aria-label="back" icon={<CalendarIcon />}></IconButton>
+            <IconButton
+              aria-label="select month"
+              icon={<CalendarIcon />}
+            ></IconButton>
           }
           withPortal
           portalId="root-portal"
         />
-      </Flex>
-      <UserStatisticBudget budget={budget} style={{ mt: 6, mb: 5 }} />
-      <Flex w="100%" grow="1" overflow="hidden">
-        <Tabs isFitted w="inherit">
-          <TabList>
-            <Tab>
-              <UserStatisticTabHeader title="debit" amount={getSum(debit)} />
-            </Tab>
-            <Tab>
-              <UserStatisticTabHeader title="credit" amount={getSum(credit)} />
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <ReportList list={debitGroup} />
-            </TabPanel>
-            <TabPanel>
-              <ReportList list={creditGroup} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Flex>
-      <div id="root-portal" />
+      </Box>
+
+      <Tabs>
+        <TabList justifyContent="center">
+          <Tab>month</Tab>
+          <Tab>year</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <UserStatisticMonth
+              date={date}
+              onDateChange={setDate}
+              debitList={debit}
+              creditList={credit}
+            />
+          </TabPanel>
+          <TabPanel>
+            <UserStatisticYear />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </Flex>
   );
 }
