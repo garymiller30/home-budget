@@ -18,7 +18,12 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { getBudget, getSum, transactionSplitByType } from "lib";
+import {
+  getBudget,
+  getSum,
+  splitFloatNumber,
+  transactionSplitByType,
+} from "lib";
 import groupByDescription from "lib/groupByDescription";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -27,6 +32,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { fetchTransactions } from "@/db/transaction/fetchTransactions";
 import { userAtom } from "@/recoil/atoms/userAtom";
+import UserStatisticBudget from "UserStatistic/UserStatisticBudget";
+import UserStatisticTabHeader from "UserStatistic/UserStatisticTabHeader";
 
 export default function Statistic() {
   const curMonthList = useRecoilValue(transactionsAtom);
@@ -65,7 +72,7 @@ export default function Statistic() {
   const budget = getBudget(debit, credit);
   const debitGroup = groupByDescription(debit);
   const creditGroup = groupByDescription(credit);
-
+  const [budgetMain, budgetKop] = splitFloatNumber(budget);
   return (
     <Flex maxW="md" m="0 auto" flexDirection="column">
       <Flex w="100%" alignItems="center">
@@ -111,25 +118,15 @@ export default function Statistic() {
           portalId="root-portal"
         />
       </Flex>
-      <Flex w="100%" justifyContent="center">
-        <Text fontWeight="bold" fontSize="2rem">
-          {budget.toFixed(2)}
-        </Text>
-      </Flex>
+      <UserStatisticBudget budget={budget} style={{ mt: 6, mb: 5 }} />
       <Flex w="100%" grow="1" overflow="hidden">
         <Tabs isFitted w="inherit">
           <TabList>
             <Tab>
-              <Flex flexDirection="column">
-                <Text>debit</Text>
-                <Text fontWeight="bold">{getSum(debit)}</Text>
-              </Flex>
+              <UserStatisticTabHeader title="debit" amount={getSum(debit)} />
             </Tab>
             <Tab>
-              <Flex flexDirection="column">
-                <Text>credit</Text>
-                <Text fontWeight="bold">{getSum(credit)}</Text>
-              </Flex>
+              <UserStatisticTabHeader title="credit" amount={getSum(credit)} />
             </Tab>
           </TabList>
           <TabPanels>
