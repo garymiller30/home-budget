@@ -113,7 +113,7 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
         _hover={{ bg: "transparent", transform: "rotate(270deg)" }}
         _active={{ bg: "transparent" }}
         onClick={() => {
-          router.push(`${router.asPath}/statistic`);
+          router.push(`/user/v2/${user?._id}/statistic`);
         }}
       ></IconButton>
     </Box>
