@@ -40,7 +40,7 @@ export default function UserStatisticMonth({
 
   return (
     <>
-      <Flex w="100%" alignItems="center" justifyItems="center">
+      <Flex w="100%" alignItems="center" justifyContent="center">
         <IconButton
           aria-label="prev month"
           bg="transparent"
@@ -63,7 +63,7 @@ export default function UserStatisticMonth({
           }}
         ></IconButton>
       </Flex>
-      <UserStatisticBudget budget={budget} style={{ mt: 6, mb: 5 }} />
+      <UserStatisticBudget budget={budget} style={{ mt: 3, mb: 3 }} />
       <Flex w="100%" grow="1" overflow="hidden">
         <Tabs isFitted w="inherit">
           <TabList>
