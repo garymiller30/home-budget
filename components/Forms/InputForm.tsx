@@ -24,6 +24,7 @@ interface InputFormProps {
 export default function InputForm({ type, userId, onClose }: InputFormProps) {
   const contoller = useTransactionController();
   const [saving, setSaving] = useState<boolean>(false);
+
   const onSubmit = async (event: any) => {
     event.preventDefault();
     setSaving(true);
@@ -38,6 +39,7 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
 
     try {
       await contoller.add(transaction);
+
       onClose();
     } catch (err) {
       //TODO: show error
