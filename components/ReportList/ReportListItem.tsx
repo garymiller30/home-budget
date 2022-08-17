@@ -1,5 +1,5 @@
 import { iReportListItem } from "@/interfaces/iReportListItem";
-import { Box, Divider, Flex, ListItem, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, ListItem, Spacer, Text } from "@chakra-ui/react";
 import { splitFloatNumber } from "lib";
 interface ReportListItemProps {
   item: iReportListItem;
