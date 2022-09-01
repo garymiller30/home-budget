@@ -45,7 +45,7 @@ export default function UserLastTransactionsItem({
         <Spacer />
         <Flex>
           <Text fontWeight="700" color={color} pr={1}>
-            {sign}
+            {m >= 0 ? sign : ""}
           </Text>
           <Text fontWeight="700" fontSize="1.2rem" color={color}>
             {m}
