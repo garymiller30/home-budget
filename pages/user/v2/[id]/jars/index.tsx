@@ -7,9 +7,9 @@ import { useRecoilValue } from "recoil";
 
 export default function Jars() {
   const user = useRecoilValue(userAtom);
-
-  if (!user) return <p>Unauthorized</p>;
   useEffect(() => {}, []);
+  if (!user) return <p>Unauthorized</p>;
+
   return (
     <>
       <Head>
