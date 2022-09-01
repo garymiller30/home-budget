@@ -13,6 +13,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { splitFloatNumber } from "../../lib";
 import { balanceSelector } from "../../recoil/selectors/balanceSelector";
 import { AiFillPieChart } from "react-icons/ai";
+import { GiMasonJar } from "react-icons/gi";
 import { useRouter } from "next/router";
 import { transactionsFilterAtom } from "@/recoil/atoms/transactionsFilterAtom";
 import { TRANSACTIONS_FILTER_ENUM } from "@/recoil/transactionsFilterEnum";
@@ -110,10 +111,24 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
         isRound={true}
         icon={<Icon as={AiFillPieChart} />}
         bg="transparent"
-        _hover={{ bg: "transparent", transform: "rotate(270deg)" }}
+        _hover={{ bg: "transparent", transform: "scale(1.5)" }}
         _active={{ bg: "transparent" }}
         onClick={() => {
           router.push(`/user/v2/${user?._id}/statistic`);
+        }}
+      ></IconButton>
+      <IconButton
+        aria-label="chart"
+        position="absolute"
+        left="0"
+        bottom="0"
+        isRound={true}
+        icon={<Icon as={GiMasonJar} />}
+        bg="transparent"
+        _hover={{ bg: "transparent", transform: "scale(1.5)" }}
+        _active={{ bg: "transparent" }}
+        onClick={() => {
+          router.push(`/user/v2/${user?._id}/jars`);
         }}
       ></IconButton>
     </Box>

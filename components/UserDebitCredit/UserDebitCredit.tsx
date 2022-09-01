@@ -49,7 +49,7 @@ export default function UserDebitCredit() {
             onClick={() => setFilter(TRANSACTIONS_FILTER_ENUM.DEBIT)}
             cursor="pointer"
           >
-            + {debM}
+            {debM}
           </Text>
           <Text
             fontSize="0.875rem"

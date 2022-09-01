@@ -51,7 +51,7 @@ export default function UserLastTransactionsItem({
             {m}
           </Text>
           <Text color={color} fontSize="0.8rem">
-            {Math.abs(k).toString().padStart(2, "0")}
+            {k.toString().padStart(2, "0")}
           </Text>
         </Flex>
         <Box>
