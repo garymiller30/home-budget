@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -7,23 +8,34 @@ export default function JarEmpty() {
   return (
     <Box
       position="relative"
+      bottom="17px"
       onMouseEnter={() => setStyle({ display: "block" })}
       onMouseLeave={() => setStyle({ display: "none" })}
     >
-      <Image src="/jar-empty@2x.png" width="150px" height="170px" />
+      <Image
+        src="/jar-empty@2x.png"
+        width="100px"
+        height="150px"
+        layout="fixed"
+      />
       <Flex
         position="absolute"
-        top={10}
+        top={0}
         left={0}
         width="100%"
-        height="75px"
+        height="100%"
         p={2}
         justifyContent="center"
         alignItems="center"
       >
-        <Button rounded="full" size="lg" colorScheme="blue" sx={style}>
-          Add
-        </Button>
+        <IconButton
+          aria-label="add"
+          isRound
+          size="lg"
+          colorScheme="blue"
+          icon={<AddIcon />}
+          sx={style}
+        ></IconButton>
       </Flex>
     </Box>
   );

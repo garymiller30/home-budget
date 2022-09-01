@@ -11,9 +11,9 @@ export default function JarShelfWithJars() {
         <Spacer />
         <JarEmpty />
         <Spacer />
-        <Jar />
+        <JarEmpty />
         <Spacer />
-        <Jar />
+        <JarEmpty />
         <Spacer />
       </Flex>
     </Box>
