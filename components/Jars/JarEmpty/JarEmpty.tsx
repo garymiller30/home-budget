@@ -15,7 +15,7 @@ export default function JarEmpty() {
       <Image
         src="/jar-empty@2x.png"
         width="100px"
-        height="150px"
+        height="130px"
         layout="fixed"
       />
       <Flex
