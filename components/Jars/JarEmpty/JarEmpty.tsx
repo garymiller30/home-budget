@@ -1,9 +1,10 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function JarEmpty() {
+type Props = { idx: number };
+export default function JarEmpty({ idx }: Props) {
   const [style, setStyle] = useState<any>({ display: "none" });
   return (
     <Box
@@ -14,7 +15,7 @@ export default function JarEmpty() {
     >
       <Image
         src="/jar-empty@2x.png"
-        width="100px"
+        width="90px"
         height="110px"
         layout="fixed"
       />
@@ -36,6 +37,15 @@ export default function JarEmpty() {
           icon={<AddIcon />}
           sx={style}
         ></IconButton>
+        <Badge
+          variant="solid"
+          rounded="full"
+          position="absolute"
+          right="0"
+          top="0"
+        >
+          #{idx}
+        </Badge>
       </Flex>
     </Box>
   );

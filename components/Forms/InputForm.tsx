@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Transaction from "../../model/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
-import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Button,

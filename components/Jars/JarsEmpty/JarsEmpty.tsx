@@ -15,13 +15,13 @@ export default function JarsEmpty() {
       <Spacer />
       <Spacer />
       <Spacer />
-      <JarShelfWithJars />
+      <JarShelfWithJars start={1} count={3} />
       <Spacer />
       <Spacer />
-      <JarShelfWithJars />
+      <JarShelfWithJars start={4} count={3} />
       <Spacer />
       <Spacer />
-      <JarShelfWithJars />
+      <JarShelfWithJars start={7} count={3} />
       <Spacer />
     </Flex>
   );
