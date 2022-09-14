@@ -1,9 +1,8 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
-import Image from "next/image";
-import JarShelf from "../JarShelf/JarShelf";
+import { Flex, Spacer } from "@chakra-ui/react";
+
 import JarShelfWithJars from "../JarShelfWithJars/JarShelfWithJars";
 
-export default function JarsEmpty() {
+export default function JarList() {
   return (
     <Flex
       height="100vh"

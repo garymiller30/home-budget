@@ -35,11 +35,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
                 month: prevMonth,
             });
             const { debit, credit } = transactionSplitByType(prevTransactions);
-            const bdgt = getBudget(debit, credit);
+            let bdgt = getBudget(debit, credit);
+            const transactionType = bdgt >= 0 ? TRANSACTION_TYPE.DEBIT : TRANSACTION_TYPE.CREDIT;
+            bdgt = Math.abs(bdgt);
             //потрібно додати транзакцію
             const transaction = new Transaction();
             transaction.ownerId = userId as string;
-            transaction.type = TRANSACTION_TYPE.DEBIT;
+            transaction.type = transactionType;
             transaction.description = "prev month";
             transaction.comment = "auto";
             transaction.amount = bdgt;

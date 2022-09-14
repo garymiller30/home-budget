@@ -1,13 +1,12 @@
-import JarsEmpty from "@/components/Jars/JarsEmpty/JarsEmpty";
+import JarList from "@/components/Jars/JarList/JarList";
 import { userAtom } from "@/recoil/atoms/userAtom";
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
-import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 export default function Jars() {
   const user = useRecoilValue(userAtom);
-  useEffect(() => {}, []);
+
   if (!user) return <p>Unauthorized</p>;
 
   return (
@@ -16,7 +15,7 @@ export default function Jars() {
         <title>Home budget | Jars</title>
       </Head>
       <Flex h="100vh" w="100%">
-        <JarsEmpty />
+        <JarList />
       </Flex>
     </>
   );

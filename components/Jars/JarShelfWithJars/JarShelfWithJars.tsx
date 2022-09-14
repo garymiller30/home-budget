@@ -1,5 +1,5 @@
-import { Box, Flex, Image, Spacer, Text } from "@chakra-ui/react";
-import Jar from "../Jar/Jar";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
+
 import JarEmpty from "../JarEmpty/JarEmpty";
 import JarShelf from "../JarShelf/JarShelf";
 
