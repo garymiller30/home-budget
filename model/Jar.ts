@@ -10,6 +10,7 @@ export default class Jar implements iJar {
     ownerId: string = "";
     title: string = "";
     transactions: iTransaction[] = [];
+    goal: number | null = null;
     get amount(): number {
 
         const { debit, credit } = transactionSplitByType(this.transactions);
