@@ -13,9 +13,11 @@ export default function ReportListDetail({ list = [] }: ReportListProps) {
   return (
     <List>
       {keys.map((key, idx) => {
+        //@ts-ignore
+        const item = group[key];
         return (
           <ListItem key={idx} w="100%">
-            <ReportListDetailItem title={key} item={group[key]} />
+            <ReportListDetailItem title={key} item={item} />
           </ListItem>
         );
       })}
