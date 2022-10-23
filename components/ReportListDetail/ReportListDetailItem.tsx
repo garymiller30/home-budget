@@ -86,8 +86,8 @@ function GroupItem({ title, trans }) {
           </AccordionButton>
           <AccordionPanel>
             <List>
-              {trans.map((t) => (
-                <ListItem>
+              {trans.map((t, idx) => (
+                <ListItem key={idx}>
                   <Flex w="100%">
                     <Text>
                       {t.date.day}.{t.date.month}.{t.date.year}
