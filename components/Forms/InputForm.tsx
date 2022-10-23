@@ -46,28 +46,23 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
     }
   };
 
-  const focusInput = useRef(null);
-
-  useEffect(() => {
-    if (focusInput.current) (focusInput.current as any).focus();
-  }, []);
-
   return (
     <Container sx={{ padding: "6px 0" }}>
       <form onSubmit={onSubmit}>
         <Stack spacing={2}>
           <FormControl isRequired>
             <FormLabel>Description</FormLabel>
-            <Input placeholder="Description" id="description" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Amount</FormLabel>
-            <Input type="number" step="0.01" id="amount" placeholder="Amount" />
+            <Input placeholder="Description" id="description" autoFocus />
           </FormControl>
           <FormControl>
             <FormLabel>Comment</FormLabel>
             <Input placeholder="Comment" id="comment" />
           </FormControl>
+          <FormControl isRequired>
+            <FormLabel>Amount</FormLabel>
+            <Input type="number" step="0.01" id="amount" placeholder="Amount" />
+          </FormControl>
+
           <Spacer />
           <Button w="100%" type="submit">
             {saving && (

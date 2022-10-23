@@ -9,7 +9,7 @@ export default function JarShelfWithJars({ start, count }: Props) {
   const jars = [];
   jars.push(<Spacer />);
   for (let index = 0; index < count; index++) {
-    const jar = <JarEmpty idx={start + index} />;
+    const jar = <JarEmpty key={index} idx={start + index} />;
     jars.push(jar);
     jars.push(<Spacer />);
   }

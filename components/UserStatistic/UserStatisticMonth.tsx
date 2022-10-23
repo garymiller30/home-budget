@@ -16,6 +16,7 @@ import { getBudget, getSum } from "lib";
 import { getDateId } from "lib/getDateId";
 import groupByDescription from "lib/groupByDescription";
 import ReportList from "../ReportList/ReportList";
+import ReportListDetail from "../ReportListDetail/ReportListDetail";
 import UserStatisticBudget from "./UserStatisticBudget";
 import UserStatisticTabHeader from "./UserStatisticTabHeader";
 
@@ -82,10 +83,12 @@ export default function UserStatisticMonth({
           </TabList>
           <TabPanels>
             <TabPanel>
-              <ReportList list={debitGroup} />
+              <ReportListDetail list={debitList} />
+              {/* <ReportList list={debitGroup} /> */}
             </TabPanel>
             <TabPanel>
-              <ReportList list={creditGroup} />
+              <ReportListDetail list={creditList} />
+              {/* <ReportList list={creditGroup} /> */}
             </TabPanel>
           </TabPanels>
         </Tabs>

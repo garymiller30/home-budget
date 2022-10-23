@@ -34,8 +34,9 @@ export default function JarEmpty({ idx }: Props) {
           isRound
           size="lg"
           colorScheme="blue"
-          icon={<AddIcon />}
+          icon={<AddIcon onClick={(e) => e.preventDefault()} />}
           sx={style}
+          onClick={(e) => e.preventDefault()}
         ></IconButton>
         <Badge
           variant="solid"
