@@ -115,13 +115,7 @@ export default function ReportListDetailItem({ title, item }) {
     items.push(<SingleItem title={title} tran={item.getSingleTrans()} />);
   } else {
     items.push(<GroupList title={title} item={item} />);
-    // for (const [key, value] of Object.entries(item)) {
-    //   console.log("title=", title, "key=", key);
-    //   items.push(<GroupItem key={key} title={title} trans={value} />);
-    // }
   }
-
-  const amount = item.getDescriptionTotal();
 
   return <Accordion allowMultiple>{items}</Accordion>;
 }
