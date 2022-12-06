@@ -37,6 +37,16 @@ export default function UserBottomButtons() {
     });
   };
 
+  const handleOnError = () => {
+    toast({
+      position: "top",
+      description: "Something wrong",
+      status: "error",
+      duration: 1000,
+      isClosable: false,
+    });
+  };
+
   const handleCloseFromBtn = () => {
     onClose();
   };
@@ -56,7 +66,12 @@ export default function UserBottomButtons() {
         onClose={handleCloseFromBtn}
         title={title}
       >
-        <InputForm type={inputType} userId={user._id} onClose={handleOnClose} />
+        <InputForm
+          type={inputType}
+          userId={user._id}
+          onClose={handleOnClose}
+          onError={handleOnError}
+        />
       </ModalInputForm>
     </Flex>
   );

@@ -21,9 +21,15 @@ interface InputFormProps {
   type: TRANSACTION_TYPE;
   userId: string;
   onClose: () => void;
+  onError: () => void;
 }
 
-export default function InputForm({ type, userId, onClose }: InputFormProps) {
+export default function InputForm({
+  type,
+  userId,
+  onClose,
+  onError,
+}: InputFormProps) {
   const contoller = useTransactionController();
   const [saving, setSaving] = useState<boolean>(false);
 
@@ -49,6 +55,7 @@ export default function InputForm({ type, userId, onClose }: InputFormProps) {
     } catch (err) {
       //TODO: show error
       setSaving(false);
+      onError();
     }
   };
 
