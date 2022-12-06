@@ -36,8 +36,6 @@ export default function UserStatisticMonth({
   const isCurDate = getDateId(date) === getDateId(new Date());
 
   const budget = getBudget(debitList, creditList);
-  const debitGroup = groupByDescription(debitList);
-  const creditGroup = groupByDescription(creditList);
 
   return (
     <>
@@ -84,11 +82,9 @@ export default function UserStatisticMonth({
           <TabPanels>
             <TabPanel>
               <ReportListDetail list={debitList} />
-              {/* <ReportList list={debitGroup} /> */}
             </TabPanel>
             <TabPanel>
               <ReportListDetail list={creditList} />
-              {/* <ReportList list={creditGroup} /> */}
             </TabPanel>
           </TabPanels>
         </Tabs>
