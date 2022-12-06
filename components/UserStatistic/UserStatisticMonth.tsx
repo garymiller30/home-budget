@@ -4,7 +4,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Flex,
   IconButton,
-  Spacer,
   Tab,
   TabList,
   TabPanel,
@@ -14,8 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { getBudget, getSum } from "lib";
 import { getDateId } from "lib/getDateId";
-import groupByDescription from "lib/groupByDescription";
-import ReportList from "../ReportList/ReportList";
 import ReportListDetail from "../ReportListDetail/ReportListDetail";
 import UserStatisticBudget from "./UserStatisticBudget";
 import UserStatisticTabHeader from "./UserStatisticTabHeader";
