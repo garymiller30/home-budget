@@ -11,6 +11,8 @@ import {
   FormLabel,
   IconButton,
   Input,
+  NumberInput,
+  NumberInputField,
   Spacer,
   Stack,
   Text,
@@ -87,13 +89,16 @@ export default function InputForm({
           </Flex>
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
-            <Input
+            <NumberInput ref={amountRef} step={0.01} id="amount">
+              <NumberInputField />
+            </NumberInput>
+            {/* <Input
               ref={amountRef}
               type="number"
               step="0.01"
               id="amount"
               placeholder="Amount"
-            />
+            /> */}
           </FormControl>
 
           <Spacer />
