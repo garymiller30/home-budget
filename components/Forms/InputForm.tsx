@@ -89,7 +89,12 @@ export default function InputForm({
           </Flex>
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
-            <NumberInput step={0.01} id="amount" pattern="[0-9]*([.,][0-9]+)?">
+            <NumberInput
+              step={0.01}
+              id="amount"
+              pattern="[0-9]*([.,][0-9]+)?"
+              isValidCharacter={(value: string) => true}
+            >
               <NumberInputField type="number" ref={amountRef} />
             </NumberInput>
             {/* <Input
