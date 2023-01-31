@@ -89,8 +89,8 @@ export default function InputForm({
           </Flex>
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
-            <NumberInput ref={amountRef} step={0.01} id="amount">
-              <NumberInputField />
+            <NumberInput step={0.01} id="amount">
+              <NumberInputField ref={amountRef} />
             </NumberInput>
             {/* <Input
               ref={amountRef}
