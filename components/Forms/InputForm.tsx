@@ -90,7 +90,7 @@ export default function InputForm({
           <FormControl isRequired>
             <FormLabel>Amount</FormLabel>
             <NumberInput step={0.01} id="amount">
-              <NumberInputField ref={amountRef} />
+              <NumberInputField type="number" ref={amountRef} />
             </NumberInput>
             {/* <Input
               ref={amountRef}
