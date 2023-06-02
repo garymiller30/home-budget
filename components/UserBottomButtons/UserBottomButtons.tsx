@@ -11,6 +11,7 @@ export default function UserBottomButtons() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useRecoilValue(userAtom);
   const [title, setTitle] = useState<string>("credit");
+  const [colorScheme, setColorScheme] = useState<string>("pink");
   const toast = useToast();
 
   const [inputType, setInputType] = useState<TRANSACTION_TYPE>(
@@ -18,11 +19,13 @@ export default function UserBottomButtons() {
   );
   const handleDebitBtn = () => {
     setTitle("ADD DEBIT");
+    setColorScheme("green");
     setInputType(TRANSACTION_TYPE.DEBIT);
     onOpen();
   };
   const handleCreditBtn = () => {
     setTitle("ADD CREDIT");
+    setColorScheme("pink");
     setInputType(TRANSACTION_TYPE.CREDIT);
     onOpen();
   };
@@ -65,6 +68,7 @@ export default function UserBottomButtons() {
         isOpen={isOpen}
         onClose={handleCloseFromBtn}
         title={title}
+        colorScheme={colorScheme}
       >
         <InputForm
           type={inputType}

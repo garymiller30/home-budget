@@ -1,4 +1,5 @@
 import {
+  Box,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,19 +12,23 @@ type ModalInputFormProps = {
   children?: any;
   title: string;
   isOpen: boolean;
+  colorScheme?: string;
   onClose: () => void;
 };
 export default function ModalInputForm({
   children,
   title,
   isOpen,
+  colorScheme,
   onClose,
 }: ModalInputFormProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{title}</ModalHeader>
+        <ModalHeader>
+          <Box textColor={colorScheme}>{title}</Box>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>{children}</ModalBody>
       </ModalContent>
