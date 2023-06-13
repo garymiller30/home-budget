@@ -1,5 +1,5 @@
 //import { Box, Button } from "@mui/material";
-import { Button, Flex, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { Button, Flex, useDisclosure, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../recoil/atoms/userAtom";
