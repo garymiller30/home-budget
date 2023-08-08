@@ -1,4 +1,11 @@
-import { Button, Flex, useDisclosure, useToast } from "@chakra-ui/react";
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import {
+  Button,
+  Flex,
+  IconButton,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../recoil/atoms/userAtom";
@@ -56,12 +63,23 @@ export default function UserBottomButtons() {
   if (!user) return null;
   return (
     <Flex w="100%" h="3.5rem">
-      <Button w="50%" h="inherit" onClick={handleDebitBtn} colorScheme="green">
-        ADD DEBIT
-      </Button>
-      <Button w="50%" h="inherit" onClick={handleCreditBtn} colorScheme="pink">
-        ADD CREDIT
-      </Button>
+      <IconButton
+        w="50%"
+        h="inherit"
+        onClick={handleDebitBtn}
+        colorScheme="green"
+        aria-label="add transaction"
+        icon={<AddIcon boxSize={8} />}
+      />
+
+      <IconButton
+        w="50%"
+        h="inherit"
+        onClick={handleCreditBtn}
+        colorScheme="pink"
+        aria-label="delete transaction"
+        icon={<MinusIcon boxSize={8} />}
+      />
 
       <ModalInputForm
         isOpen={isOpen}

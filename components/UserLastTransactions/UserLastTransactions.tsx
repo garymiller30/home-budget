@@ -2,7 +2,6 @@ import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Box,
-  Button,
   List,
   Modal,
   ModalCloseButton,
@@ -16,12 +15,19 @@ import UserLastTransactionsItem from "./UserLastTransactionsItem";
 import { useRecoilValue } from "recoil";
 import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useState } from "react";
+import { Button } from "@chakra-ui/react";
 
 export default function UserLastTransactions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenEdit,
+    onOpen: onOpenEdit,
+    onClose: onCloseEdit,
+  } = useDisclosure();
   const [deletingTransaction, setdeletingTransaction] = useState<
     iTransaction | undefined
   >(undefined);
+
   const controller = useTransactionController();
   const transactions = useRecoilValue(filteredTransactions);
 
@@ -60,6 +66,13 @@ export default function UserLastTransactions() {
               Yes!
             </Button>
           </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isOpenEdit} onClose={onCloseEdit} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit</ModalHeader>
+          <ModalCloseButton />
         </ModalContent>
       </Modal>
     </Box>
