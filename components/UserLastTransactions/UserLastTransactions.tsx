@@ -3,7 +3,6 @@ import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Box,
   Button,
-  IconButton,
   List,
   Modal,
   ModalCloseButton,
@@ -17,7 +16,6 @@ import UserLastTransactionsItem from "./UserLastTransactionsItem";
 import { useRecoilValue } from "recoil";
 import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useState } from "react";
-import { CloseIcon } from "@chakra-ui/icons";
 
 export default function UserLastTransactions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
