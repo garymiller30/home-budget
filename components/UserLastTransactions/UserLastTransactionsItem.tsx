@@ -1,7 +1,8 @@
 import { iTransaction } from "@/interfaces/iTransaction";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, CloseIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Divider,
   Flex,
   IconButton,
@@ -10,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { splitFloatNumber } from "lib";
+import { useState } from "react";
 import { TRANSACTION_TYPE } from "vars/variables";
 
 type UserLastTransactionsItemProp = {
