@@ -1,3 +1,5 @@
+//@ts-ignore
+import { useLongPress } from "@uidotdev/usehooks";
 import { iTransaction } from "@/interfaces/iTransaction";
 import { DeleteIcon, CloseIcon } from "@chakra-ui/icons";
 import {
@@ -17,20 +19,26 @@ import { TRANSACTION_TYPE } from "vars/variables";
 type UserLastTransactionsItemProp = {
   item: iTransaction;
   onDelete?: (t: iTransaction) => void;
+  onEdit?: (t: iTransaction) => void;
   percent?: string;
 };
 export default function UserLastTransactionsItem({
   item,
   onDelete,
+  onEdit,
   percent,
 }: UserLastTransactionsItemProp) {
+  const attrs = useLongPress(() => {
+    if (onEdit) onEdit(item);
+  });
+
   const color = item.type === TRANSACTION_TYPE.DEBIT ? "green" : "pink.500";
 
   const [m, k] = splitFloatNumber(item.amount);
 
   const sign = item.type === TRANSACTION_TYPE.DEBIT ? "+" : "-";
   return (
-    <ListItem w="100%" key={item._id.toString()}>
+    <ListItem w="100%" key={item._id.toString()} {...attrs}>
       <Flex alignItems="center">
         <Box paddingRight={2} pl={2}>
           <Text fontWeight="600" fontSize="1rem">

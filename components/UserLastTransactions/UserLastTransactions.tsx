@@ -28,6 +28,10 @@ export default function UserLastTransactions() {
     iTransaction | undefined
   >(undefined);
 
+  const [editingTransaction, seteditingTransaction] = useState<
+    iTransaction | undefined
+  >(undefined);
+
   const controller = useTransactionController();
   const transactions = useRecoilValue(filteredTransactions);
 
@@ -46,6 +50,9 @@ export default function UserLastTransactions() {
               onDelete={(t) => {
                 setdeletingTransaction(t);
                 onOpen();
+              }}
+              onEdit={(t) => {
+                onOpenEdit();
               }}
             />
           );
