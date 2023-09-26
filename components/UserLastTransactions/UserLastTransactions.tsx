@@ -21,7 +21,7 @@ import { useRecoilValue } from "recoil";
 import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useState } from "react";
 import { Button } from "@chakra-ui/react";
-import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import InputElement from "../Forms/InputElement";
 
 export default function UserLastTransactions() {
@@ -46,7 +46,7 @@ export default function UserLastTransactions() {
     //if (t !== undefined) await controller.edit(t);
   };
 
-  function onSubmit() {}
+  function onSubmit(e: any) {}
 
   return (
     <Box sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}>
@@ -115,7 +115,7 @@ export default function UserLastTransactions() {
               w="50%"
               aria-label="add"
               icon={<EditIcon />}
-              onClick={() => handleEdit()}
+              // onClick={}
             />
           </ModalFooter>
         </ModalContent>

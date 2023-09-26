@@ -1,3 +1,4 @@
+import { iTransaction } from "@/interfaces/iTransaction";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Flex,
@@ -10,7 +11,11 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
-export default function InputElement() {
+interface Props {
+  transaction?: iTransaction;
+}
+
+export default function InputElement({ transaction }: Props) {
   const commentRef = useRef<HTMLInputElement>(null);
   const amountRef = useRef<HTMLInputElement>(null);
   return (
