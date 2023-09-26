@@ -2,6 +2,7 @@ import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Box,
+  IconButton,
   List,
   Modal,
   ModalCloseButton,
@@ -16,6 +17,7 @@ import { useRecoilValue } from "recoil";
 import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useState } from "react";
 import { Button } from "@chakra-ui/react";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 export default function UserLastTransactions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,19 +26,19 @@ export default function UserLastTransactions() {
     onOpen: onOpenEdit,
     onClose: onCloseEdit,
   } = useDisclosure();
-  const [deletingTransaction, setdeletingTransaction] = useState<
-    iTransaction | undefined
-  >(undefined);
-
-  const [editingTransaction, seteditingTransaction] = useState<
-    iTransaction | undefined
-  >(undefined);
+  const [transaction, setTransaction] = useState<iTransaction | undefined>(
+    undefined
+  );
 
   const controller = useTransactionController();
   const transactions = useRecoilValue(filteredTransactions);
 
   const handleDelete = async (t: iTransaction | undefined) => {
     if (t !== undefined) await controller.remove(t);
+  };
+
+  const handleEdit = async () => {
+    //if (t !== undefined) await controller.edit(t);
   };
 
   return (
@@ -48,10 +50,12 @@ export default function UserLastTransactions() {
               key={item._id}
               item={item}
               onDelete={(t) => {
-                setdeletingTransaction(t);
+                setTransaction(t);
+                onCloseEdit();
                 onOpen();
               }}
               onEdit={(t) => {
+                setTransaction(t);
                 onOpenEdit();
               }}
             />
@@ -66,7 +70,7 @@ export default function UserLastTransactions() {
           <ModalFooter>
             <Button
               onClick={() => {
-                handleDelete(deletingTransaction);
+                handleDelete(transaction);
                 onClose();
               }}
             >
@@ -75,11 +79,30 @@ export default function UserLastTransactions() {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
       <Modal isOpen={isOpenEdit} onClose={onCloseEdit} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Edit</ModalHeader>
           <ModalCloseButton />
+          <ModalFooter>
+            <IconButton
+              w="50%"
+              ml={5}
+              mr={5}
+              aria-label="delete"
+              icon={<DeleteIcon />}
+              onClick={onOpen}
+            />
+            <IconButton
+              ml={5}
+              mr={5}
+              w="50%"
+              aria-label="add"
+              icon={<EditIcon />}
+              onClick={() => handleEdit()}
+            />
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Box>

@@ -69,7 +69,6 @@ export default function UserBottomButtons() {
         onClick={handleDebitBtn}
         colorScheme="green"
         aria-label="add transaction"
-        icon={<AddIcon boxSize={8} />}
       />
 
       <IconButton
@@ -78,7 +77,6 @@ export default function UserBottomButtons() {
         onClick={handleCreditBtn}
         colorScheme="pink"
         aria-label="delete transaction"
-        icon={<MinusIcon boxSize={8} />}
       />
 
       <ModalInputForm

@@ -1,7 +1,7 @@
 //@ts-ignore
 import { useLongPress } from "@uidotdev/usehooks";
 import { iTransaction } from "@/interfaces/iTransaction";
-import { DeleteIcon, CloseIcon } from "@chakra-ui/icons";
+import { AiOutlineMore } from "react-icons/ai";
 import {
   Box,
   Button,
@@ -13,7 +13,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { splitFloatNumber } from "lib";
-import { useState } from "react";
 import { TRANSACTION_TYPE } from "vars/variables";
 
 type UserLastTransactionsItemProp = {
@@ -28,17 +27,13 @@ export default function UserLastTransactionsItem({
   onEdit,
   percent,
 }: UserLastTransactionsItemProp) {
-  const attrs = useLongPress(() => {
-    if (onEdit) onEdit(item);
-  });
-
   const color = item.type === TRANSACTION_TYPE.DEBIT ? "green" : "pink.500";
 
   const [m, k] = splitFloatNumber(item.amount);
 
   const sign = item.type === TRANSACTION_TYPE.DEBIT ? "+" : "-";
   return (
-    <ListItem w="100%" key={item._id.toString()} {...attrs}>
+    <ListItem w="100%" key={item._id.toString()}>
       <Flex alignItems="center">
         <Box paddingRight={2} pl={2}>
           <Text fontWeight="600" fontSize="1rem">
@@ -66,12 +61,11 @@ export default function UserLastTransactionsItem({
         </Flex>
         <Box>
           <IconButton
-            display={onDelete ? "block" : "none"}
-            icon={<DeleteIcon color="gray.500" />}
+            icon={<AiOutlineMore color="gray.500" />}
             aria-label="delete"
             bg="transparent"
             onClick={() => {
-              if (onDelete) onDelete(item);
+              if (onEdit) onEdit(item);
             }}
           />
           <Text

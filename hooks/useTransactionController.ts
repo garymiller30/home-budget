@@ -16,6 +16,8 @@ export function useTransactionController() {
         setList([...list, t]);
     }
 
+    const edit = async (transaction: iTransaction) => { }
+
     const remove = async (transaction: iTransaction) => {
         const response = await fetch("/api/transaction", {
             method: "DELETE",
@@ -55,6 +57,6 @@ export function useTransactionController() {
     }
     return {
         add,
-        remove, getAll, getAllDesc, refresh
+        remove, getAll, getAllDesc, refresh, edit
     }
 }

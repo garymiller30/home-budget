@@ -97,13 +97,6 @@ export default function InputForm({
             >
               <NumberInputField type="number" ref={amountRef} />
             </NumberInput>
-            {/* <Input
-              ref={amountRef}
-              type="number"
-              step="0.01"
-              id="amount"
-              placeholder="Amount"
-            /> */}
           </FormControl>
 
           <Spacer />
