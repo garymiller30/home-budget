@@ -2,14 +2,18 @@ import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Box,
+  CircularProgress,
   IconButton,
   List,
   Modal,
+  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
+  Stack,
   useDisclosure,
 } from "@chakra-ui/react";
 import UserLastTransactionsItem from "./UserLastTransactionsItem";
@@ -18,6 +22,7 @@ import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import InputElement from "../Forms/InputElement";
 
 export default function UserLastTransactions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,6 +45,8 @@ export default function UserLastTransactions() {
   const handleEdit = async () => {
     //if (t !== undefined) await controller.edit(t);
   };
+
+  function onSubmit() {}
 
   return (
     <Box sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}>
@@ -85,6 +92,14 @@ export default function UserLastTransactions() {
         <ModalContent>
           <ModalHeader>Edit</ModalHeader>
           <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={onSubmit}>
+              <Stack spacing={2}>
+                <InputElement />
+                <Spacer />
+              </Stack>
+            </form>
+          </ModalBody>
           <ModalFooter>
             <IconButton
               w="50%"
