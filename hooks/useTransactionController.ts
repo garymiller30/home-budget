@@ -4,6 +4,11 @@ import { iTransaction } from "../interfaces/iTransaction"
 import Transaction from "../model/transaction";
 import { transactionsAtom } from "../recoil/atoms/transactionsAtom"
 
+export interface IEditTransaction {
+    description: string,
+    amount: number,
+    comment: string
+}
 export function useTransactionController() {
     const [list, setList] = useRecoilState(transactionsAtom);
 
@@ -16,7 +21,22 @@ export function useTransactionController() {
         setList([...list, t]);
     }
 
-    const edit = async (transaction: iTransaction) => { }
+
+    const edit = async (id: string, edit: IEditTransaction) => {
+        const response = await fetch("/api/transaction", {
+            method: "PUT",
+            body: JSON.stringify({ _id: id, ...edit })
+        });
+        const r = await response.json();
+        if (r) {
+            setList(list.map(x => x._id === id ? r : x));
+        }
+        else {
+            //TODO: show error
+
+
+        }
+    }
 
     const remove = async (transaction: iTransaction) => {
         const response = await fetch("/api/transaction", {

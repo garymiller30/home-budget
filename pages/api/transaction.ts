@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { deleteTransaction, getTransactions as getTrans, createTransaction } from "../../db/transaction";
+import { deleteTransaction, getTransactions as getTrans, createTransaction, updateTransaction as updateTrans } from "../../db/transaction";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
@@ -11,6 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     case "DELETE": {
       return await delTransaction(req, res);
+    }
+    case "PUT": {
+      return await updateTransaction(req, res);
     }
   }
   return res.status(404)
@@ -28,6 +31,15 @@ async function delTransaction(req: NextApiRequest, res: NextApiResponse) {
     return res.json(transaction);
   }
   return res.status(404).json(null);
+}
+
+async function updateTransaction(req: NextApiRequest, res: NextApiResponse) {
+  const trans = JSON.parse(req.body);
+  const updatedTransaction = await updateTrans(trans);
+  if (updatedTransaction) {
+    return res.json(updatedTransaction);
+  }
+  return res.status(404)
 }
 
 async function getTransactions(req: NextApiRequest, res: NextApiResponse) {

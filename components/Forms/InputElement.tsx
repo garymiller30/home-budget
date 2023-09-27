@@ -9,13 +9,21 @@ import {
   NumberInput,
   NumberInputField,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import Transaction from "model/transaction";
+import { useRef, useState } from "react";
+
+interface ReturnProps {
+  comment: string;
+  description: string;
+  amount: number;
+}
 
 interface Props {
   transaction?: iTransaction;
+  getData?: () => ReturnProps;
 }
 
-export default function InputElement({ transaction }: Props) {
+export default function InputElement({ transaction, getData }: Props) {
   const commentRef = useRef<HTMLInputElement>(null);
   const amountRef = useRef<HTMLInputElement>(null);
   return (
@@ -23,7 +31,12 @@ export default function InputElement({ transaction }: Props) {
       <Flex alignItems="end">
         <FormControl isRequired>
           <FormLabel>Description</FormLabel>
-          <Input placeholder="Description" id="description" autoFocus />
+          <Input
+            placeholder="Description"
+            id="description"
+            defaultValue={transaction?.description}
+            autoFocus
+          />
         </FormControl>
         <IconButton
           aria-label="next"
@@ -34,7 +47,12 @@ export default function InputElement({ transaction }: Props) {
       <Flex alignItems="end">
         <FormControl>
           <FormLabel>Comment</FormLabel>
-          <Input ref={commentRef} placeholder="Comment" id="comment" />
+          <Input
+            ref={commentRef}
+            placeholder="Comment"
+            defaultValue={transaction?.comment}
+            id="comment"
+          />
         </FormControl>
         <IconButton
           aria-label="next"
@@ -49,6 +67,7 @@ export default function InputElement({ transaction }: Props) {
           id="amount"
           pattern="[0-9]*([.,][0-9]+)?"
           isValidCharacter={(value: string) => true}
+          defaultValue={transaction?.amount}
         >
           <NumberInputField type="number" ref={amountRef} />
         </NumberInput>
