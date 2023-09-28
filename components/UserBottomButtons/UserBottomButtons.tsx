@@ -1,17 +1,12 @@
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import {
-  Button,
-  Flex,
-  IconButton,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
+import { Flex, IconButton, useDisclosure, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../recoil/atoms/userAtom";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import InputForm from "../Forms/InputForm";
 import ModalInputForm from "../ModalInputForm/ModalInputForm";
+import { BsArrowRight } from "react-icons/bs";
+import { TfiWallet } from "react-icons/tfi";
 
 export default function UserBottomButtons() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,6 +64,13 @@ export default function UserBottomButtons() {
         onClick={handleDebitBtn}
         colorScheme="green"
         aria-label="add transaction"
+        size="lg"
+        icon={
+          <>
+            <BsArrowRight />
+            <TfiWallet />
+          </>
+        }
       />
 
       <IconButton
@@ -77,8 +79,14 @@ export default function UserBottomButtons() {
         onClick={handleCreditBtn}
         colorScheme="pink"
         aria-label="delete transaction"
+        size="lg"
+        icon={
+          <>
+            <TfiWallet />
+            <BsArrowRight />
+          </>
+        }
       />
-
       <ModalInputForm
         isOpen={isOpen}
         onClose={handleCloseFromBtn}
