@@ -1,10 +1,8 @@
 //@ts-ignore
-import { useLongPress } from "@uidotdev/usehooks";
 import { iTransaction } from "@/interfaces/iTransaction";
 import { AiOutlineMore } from "react-icons/ai";
 import {
   Box,
-  Button,
   Divider,
   Flex,
   IconButton,
@@ -17,13 +15,12 @@ import { TRANSACTION_TYPE } from "vars/variables";
 
 type UserLastTransactionsItemProp = {
   item: iTransaction;
-  onDelete?: (t: iTransaction) => void;
+
   onEdit?: (t: iTransaction) => void;
   percent?: string;
 };
 export default function UserLastTransactionsItem({
   item,
-  onDelete,
   onEdit,
   percent,
 }: UserLastTransactionsItemProp) {
@@ -39,10 +36,6 @@ export default function UserLastTransactionsItem({
           <Text fontWeight="600" fontSize="1rem">
             {item.description}
           </Text>
-          <Text
-            color="gray"
-            fontWeight="0.9rem"
-          >{`${item.date.day}.${item.date.month}.${item.date.year}`}</Text>
         </Box>
         <Box>
           <Text>{item.comment}</Text>
@@ -68,14 +61,6 @@ export default function UserLastTransactionsItem({
               if (onEdit) onEdit(item);
             }}
           />
-          <Text
-            ml={3}
-            fontWeight="300"
-            fontSize="0.8rem"
-            display={onDelete ? "none" : "block"}
-          >
-            {percent}%
-          </Text>
         </Box>
       </Flex>
       <Divider />

@@ -2,9 +2,7 @@ import { iTransaction } from "../../interfaces/iTransaction";
 import { useTransactionController } from "../../hooks/useTransactionController";
 import {
   Box,
-  CircularProgress,
   IconButton,
-  List,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,21 +14,17 @@ import {
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import UserLastTransactionsItem from "./UserLastTransactionsItem";
 import { useRecoilValue } from "recoil";
 import { filteredTransactions } from "@/recoil/selectors/filteredTransactions";
 import { useRef, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import InputElement from "../Forms/InputElement";
+import UserLastTransactionList from "./UserLastTransactionList";
 
 export default function UserLastTransactions() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenEdit,
-    onOpen: onOpenEdit,
-    onClose: onCloseEdit,
-  } = useDisclosure();
+  const delDisclosure = useDisclosure();
+  const editDisclosure = useDisclosure();
   const [transaction, setTransaction] = useState<iTransaction | undefined>(
     undefined
   );
@@ -39,6 +33,11 @@ export default function UserLastTransactions() {
   const transactions = useRecoilValue(filteredTransactions);
 
   const inputRef = useRef(null);
+
+  function onEditHandle(t: iTransaction) {
+    setTransaction(t);
+    editDisclosure.onOpen();
+  }
 
   const handleDelete = async (t: iTransaction | undefined) => {
     if (t !== undefined) await controller.remove(t);
@@ -55,32 +54,21 @@ export default function UserLastTransactions() {
         amount: e.target.amount.value,
         comment: e.target.comment.value.trim(),
       });
-      onCloseEdit();
+      editDisclosure.onClose();
     } catch (err) {}
   }
 
   return (
     <Box sx={{ flexGrow: 1, height: "100%", overflowY: "scroll" }}>
-      <List>
-        {transactions.map((item) => {
-          return (
-            <UserLastTransactionsItem
-              key={item._id}
-              item={item}
-              onDelete={(t) => {
-                setTransaction(t);
-                onCloseEdit();
-                onOpen();
-              }}
-              onEdit={(t) => {
-                setTransaction(t);
-                onOpenEdit();
-              }}
-            />
-          );
-        })}
-      </List>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <UserLastTransactionList
+        transactions={transactions}
+        onEdit={onEditHandle}
+      />
+      <Modal
+        isOpen={delDisclosure.isOpen}
+        onClose={delDisclosure.onClose}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Delete?</ModalHeader>
@@ -89,7 +77,7 @@ export default function UserLastTransactions() {
             <Button
               onClick={() => {
                 handleDelete(transaction);
-                onClose();
+                delDisclosure.onClose();
               }}
             >
               Yes!
@@ -98,7 +86,11 @@ export default function UserLastTransactions() {
         </ModalContent>
       </Modal>
 
-      <Modal isOpen={isOpenEdit} onClose={onCloseEdit} isCentered>
+      <Modal
+        isOpen={editDisclosure.isOpen}
+        onClose={editDisclosure.onClose}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Edit</ModalHeader>
@@ -118,7 +110,7 @@ export default function UserLastTransactions() {
               mr={5}
               aria-label="delete"
               icon={<DeleteIcon />}
-              onClick={onOpen}
+              onClick={delDisclosure.onOpen}
             />
             <IconButton
               ml={5}
