@@ -22,7 +22,6 @@ type UserLastTransactionsItemProp = {
 export default function UserLastTransactionsItem({
   item,
   onEdit,
-  percent,
 }: UserLastTransactionsItemProp) {
   const color = item.type === TRANSACTION_TYPE.DEBIT ? "green" : "pink.500";
 

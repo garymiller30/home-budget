@@ -1,5 +1,14 @@
 import { iTransaction } from "@/interfaces/iTransaction";
-import { List, Text } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  List,
+  Text,
+} from "@chakra-ui/react";
 import UserLastTransactionsItem from "./UserLastTransactionsItem";
 
 export default function UserLastTransactionList({
@@ -20,17 +29,28 @@ export default function UserLastTransactionList({
   }, {});
 
   return (
-    <List>
+    <Accordion defaultIndex={[0]} allowMultiple>
       {Object.keys(groupByDate).map((x: any) => (
-        <>
-          <Text fontSize={12} textAlign={"center"}>
-            {x}
-          </Text>
-          {groupByDate[x].map((i: iTransaction) => (
-            <UserLastTransactionsItem key={i._id} item={i} onEdit={onEdit} />
-          ))}
-        </>
+        <AccordionItem>
+          <AccordionButton>
+            <Box as="span" flex="1" textAlign="left">
+              {x}
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel>
+            <List>
+              {groupByDate[x].map((i: iTransaction) => (
+                <UserLastTransactionsItem
+                  key={i._id}
+                  item={i}
+                  onEdit={onEdit}
+                />
+              ))}
+            </List>
+          </AccordionPanel>
+        </AccordionItem>
       ))}
-    </List>
+    </Accordion>
   );
 }
