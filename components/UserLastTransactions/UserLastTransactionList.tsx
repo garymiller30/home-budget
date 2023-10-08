@@ -29,9 +29,9 @@ export default function UserLastTransactionList({
   }, {});
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple>
+    <Accordion defaultIndex={[0]} allowMultiple allowToggle>
       {Object.keys(groupByDate).map((x: any) => (
-        <AccordionItem>
+        <AccordionItem key={x}>
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
               {x}
