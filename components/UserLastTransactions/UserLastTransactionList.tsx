@@ -102,17 +102,17 @@ function AccordionTitle({
           fontWeight={"semibold"}
           as="span"
           color={"green.600"}
-        >{`+${dayResult.debit},`}</Text>
+        >{`+${dayResult.debit.toFixed(2)},`}</Text>
         <Text
           fontWeight={"semibold"}
           as="span"
           color={"pink.500"}
-        >{` -${dayResult.credit},`}</Text>
+        >{` -${dayResult.credit.toFixed(2)},`}</Text>
         <Text
           fontWeight={"semibold"}
           as="span"
           color={"black.500"}
-        >{` ${dayResult.budget}`}</Text>
+        >{` ${dayResult.budget.toFixed(2)}`}</Text>
         ]
       </Text>
     </Stack>
