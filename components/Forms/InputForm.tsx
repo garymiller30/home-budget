@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Transaction from "../../model/transaction";
 import { TRANSACTION_TYPE } from "../../vars/variables";
 import { useTransactionController } from "../../hooks/useTransactionController";
@@ -6,18 +6,10 @@ import {
   Button,
   CircularProgress,
   Container,
-  Flex,
-  FormControl,
-  FormLabel,
-  IconButton,
-  Input,
-  NumberInput,
-  NumberInputField,
   Spacer,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import InputElement from "./InputElement";
 
 interface InputFormProps {

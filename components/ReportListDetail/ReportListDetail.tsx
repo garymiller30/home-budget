@@ -10,11 +10,18 @@ export default function ReportListDetail({ list = [] }: ReportListProps) {
   const group = groupByDescriptionAndComment(list);
 
   const keys = Object.keys(group);
+
+  const sortedKeys = keys.sort((a, b) => {
+    //@ts-ignore
+    return group[b].getDescriptionTotal() - group[a].getDescriptionTotal();
+  });
+
   return (
     <List>
-      {keys.map((key, idx) => {
+      {sortedKeys.map((key, idx) => {
         //@ts-ignore
         const item = group[key];
+
         return (
           <ListItem key={idx} w="100%">
             <ReportListDetailItem title={key} item={item} />

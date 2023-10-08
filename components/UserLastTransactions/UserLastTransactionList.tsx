@@ -7,7 +7,6 @@ import {
   AccordionPanel,
   Box,
   List,
-  Text,
 } from "@chakra-ui/react";
 import UserLastTransactionsItem from "./UserLastTransactionsItem";
 

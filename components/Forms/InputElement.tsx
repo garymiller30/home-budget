@@ -9,8 +9,7 @@ import {
   NumberInput,
   NumberInputField,
 } from "@chakra-ui/react";
-import Transaction from "model/transaction";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 interface ReturnProps {
   comment: string;
