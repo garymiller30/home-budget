@@ -8,6 +8,12 @@ import {
   Box,
   List,
   Stack,
+  Stat,
+  StatArrow,
+  StatGroup,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
   Text,
 } from "@chakra-ui/react";
 import { PieController } from "chart.js";
@@ -95,26 +101,35 @@ function AccordionTitle({
   dayResult: iDayResult;
 }) {
   return (
-    <Stack>
-      <Text fontWeight={"bold"} fontSize={14}>
-        {title} [
-        <Text
-          fontWeight={"semibold"}
-          as="span"
-          color={"green.600"}
-        >{`+${dayResult.debit.toFixed(2)},`}</Text>
-        <Text
-          fontWeight={"semibold"}
-          as="span"
-          color={"pink.500"}
-        >{` -${dayResult.credit.toFixed(2)},`}</Text>
-        <Text
-          fontWeight={"semibold"}
-          as="span"
-          color={"black.500"}
-        >{` ${dayResult.budget.toFixed(2)}`}</Text>
-        ]
+    <Box>
+      <Text
+        fontWeight={"bold"}
+        fontSize={14}
+        textAlign="center"
+        decoration="underline"
+        pb={2}
+      >
+        {title}
       </Text>
-    </Stack>
+      <StatGroup>
+        <Stat>
+          <StatHelpText>
+            <StatArrow type="increase" />
+            {dayResult.debit.toFixed(2)}
+          </StatHelpText>
+        </Stat>
+        <Stat>
+          <StatHelpText>
+            <StatArrow type="decrease" />-{dayResult.credit.toFixed(2)}
+          </StatHelpText>
+        </Stat>
+        <Stat>
+          <StatHelpText>
+            <StatArrow type={dayResult.budget >= 0 ? "increase" : "decrease"} />
+            {dayResult.budget.toFixed(2)}
+          </StatHelpText>
+        </Stat>
+      </StatGroup>
+    </Box>
   );
 }
