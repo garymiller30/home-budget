@@ -113,17 +113,20 @@ function AccordionTitle({
       </Text>
       <StatGroup>
         <Stat>
+          <StatLabel>debit</StatLabel>
           <StatHelpText>
             <StatArrow type="increase" />
             {dayResult.debit.toFixed(2)}
           </StatHelpText>
         </Stat>
         <Stat>
+          <StatLabel>credit</StatLabel>
           <StatHelpText>
             <StatArrow type="decrease" />-{dayResult.credit.toFixed(2)}
           </StatHelpText>
         </Stat>
         <Stat>
+          <StatLabel>balance</StatLabel>
           <StatHelpText>
             <StatArrow type={dayResult.budget >= 0 ? "increase" : "decrease"} />
             {dayResult.budget.toFixed(2)}
