@@ -1,6 +1,6 @@
 import { useTransactionController } from "@/hooks/useTransactionController";
 import { userAtom } from "@/recoil/atoms/userAtom";
-import { RepeatIcon } from "@chakra-ui/icons";
+import { AddIcon, PlusSquareIcon, RepeatIcon } from "@chakra-ui/icons";
 import {
   Box,
   Icon,
@@ -17,6 +17,7 @@ import { GiMasonJar } from "react-icons/gi";
 import { useRouter } from "next/router";
 import { transactionsFilterAtom } from "@/recoil/atoms/transactionsFilterAtom";
 import { TRANSACTIONS_FILTER_ENUM } from "@/recoil/transactionsFilterEnum";
+import { useState } from "react";
 
 type UserBalanceProp = {
   isLoaded: boolean;
@@ -124,6 +125,20 @@ export default function UserBalance({ isLoaded }: UserBalanceProp) {
         bottom="0"
         isRound={true}
         icon={<Icon as={GiMasonJar} />}
+        bg="transparent"
+        _hover={{ bg: "transparent", transform: "scale(1.5)" }}
+        _active={{ bg: "transparent" }}
+        onClick={() => {
+          router.push(`/user/v2/${user?._id}/jars`);
+        }}
+      ></IconButton>
+      <IconButton
+        aria-label="chart"
+        position="absolute"
+        right="0"
+        bottom="0"
+        isRound={true}
+        icon={<Icon as={AddIcon} />}
         bg="transparent"
         _hover={{ bg: "transparent", transform: "scale(1.5)" }}
         _active={{ bg: "transparent" }}

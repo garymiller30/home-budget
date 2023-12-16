@@ -1,5 +1,5 @@
 .box {
-  height: var(--app-height);
+  height: 100svh;
   position: relative;
   top: 0;
   left: 0;
@@ -9,6 +9,7 @@
 .back {
   display: flex;
 }
+
 .back::before {
   content: "";
   display: block;
