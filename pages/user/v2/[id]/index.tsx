@@ -14,7 +14,6 @@ import { useAutoTransferBalance } from "@/hooks/useAutoTransferBalance";
 import { iUser } from "@/interfaces/iUser";
 import { iUserResponse } from "@/interfaces/iUserResponse";
 import { userAtom } from "@/recoil/atoms/userAtom";
-//import { appHeight } from "@/utils/appHeight";
 import s from "./index.module.css";
 import UserLastTransactions from "@/components/UserLastTransactions/UserLastTransactions";
 import { useRouter } from "next/router";
@@ -45,13 +44,8 @@ export default function User({ user }: UserProps) {
       }
       //return null;
     }
-
     getTransactions();
     setUser(user);
-
-    //  хак для сафарі
-    //window.addEventListener("resize", appHeight);
-    //appHeight();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

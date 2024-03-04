@@ -64,7 +64,12 @@ export default function UserLastTransactionList({
   }
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple>
+    <Accordion
+      defaultIndex={[0]}
+      allowMultiple
+      bg={"blackAlpha.200"}
+      borderRadius={25}
+    >
       {Object.keys(groupByDate).map((x: any) => (
         <AccordionItem key={x}>
           <AccordionButton>

@@ -62,7 +62,6 @@ export default function UserLastTransactionsItem({
           />
         </Box>
       </Flex>
-      <Divider />
     </ListItem>
   );
 }
