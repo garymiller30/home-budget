@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Flex,
   List,
   Stack,
   Stat,
@@ -67,7 +68,8 @@ export default function UserLastTransactionList({
     <Accordion
       defaultIndex={[0]}
       allowMultiple
-      bg={"blackAlpha.200"}
+      bg={"gray.600"}
+      m={3}
       borderRadius={25}
     >
       {Object.keys(groupByDate).map((x: any) => (
@@ -106,38 +108,34 @@ function AccordionTitle({
   dayResult: iDayResult;
 }) {
   return (
-    <Box>
-      <Text
-        fontWeight={"bold"}
-        fontSize={14}
-        textAlign="center"
-        decoration="underline"
-        pb={2}
-      >
-        {title}
-      </Text>
-      <StatGroup>
-        <Stat>
-          <StatLabel>debit</StatLabel>
-          <StatHelpText>
-            <StatArrow type="increase" />
-            {dayResult.debit.toFixed(2)}
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>credit</StatLabel>
-          <StatHelpText>
-            <StatArrow type="decrease" />-{dayResult.credit.toFixed(2)}
-          </StatHelpText>
-        </Stat>
-        <Stat>
-          <StatLabel>balance</StatLabel>
-          <StatHelpText>
-            <StatArrow type={dayResult.budget >= 0 ? "increase" : "decrease"} />
-            {dayResult.budget.toFixed(2)}
-          </StatHelpText>
-        </Stat>
-      </StatGroup>
+    <Box borderRadius={20}>
+      <Flex alignItems={"baseline"} justifyItems="space-between">
+        <Text
+          display={"block"}
+          fontWeight={500}
+          fontSize={18}
+          textAlign="left"
+          pl={3}
+          pr={3}
+          pb={1}
+          pt={1}
+          bg="gray.800"
+          borderRadius={10}
+        >
+          {title}
+        </Text>
+        <Box m="0 auto"></Box>
+        <Box>
+          <Stat>
+            <StatHelpText>
+              <StatArrow
+                type={dayResult.budget >= 0 ? "increase" : "decrease"}
+              />
+              {dayResult.budget.toFixed(2)}
+            </StatHelpText>
+          </Stat>
+        </Box>
+      </Flex>
     </Box>
   );
 }
