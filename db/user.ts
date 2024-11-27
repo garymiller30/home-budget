@@ -3,12 +3,12 @@ import { ObjectId } from "mongodb";
 import { getCollection } from "./getCollection";
 import { iUser } from "../interfaces/iUser";
 
-interface getUserProps {
-  email?: string | null | undefined;
-  name?: string | null | undefined;
-  image?: string | null | undefined;
+interface GetUserProps {
+  email?: string | null;
+  name?: string | null;
+  image?: string | null;
 }
-export async function getUser(user: getUserProps): Promise<iUser> {
+export async function getUser(user: GetUserProps): Promise<iUser> {
   const collection = await getCollection("user");
   let dbUser = await collection.findOne({ email: user.email });
 
